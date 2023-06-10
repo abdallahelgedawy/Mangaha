@@ -39,18 +39,19 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func setupNavigationBar(){
+        let customOrange = UIColor(hex: 0xFF7466)
         let settingBarBtn = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(moveToSettings))
-        let cartBarBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill.badge.minus"), style: .plain, target: self, action: #selector(moveToCart))
-        settingBarBtn.tintColor = UIColor.white
-        cartBarBtn.tintColor = UIColor.white
+        let cartBarBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(moveToCart))
+        settingBarBtn.tintColor = customOrange
+        cartBarBtn.tintColor = customOrange
         let logOutBtn = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logOut))
-        logOutBtn.tintColor = UIColor.white
+        logOutBtn.tintColor = customOrange
         navigationItem.leftBarButtonItem = logOutBtn
         navigationItem.rightBarButtonItems = [cartBarBtn,settingBarBtn]
         let apperance = UINavigationBarAppearance()
         apperance.configureWithTransparentBackground()
-        apperance.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
-        apperance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.standardAppearance = apperance
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false

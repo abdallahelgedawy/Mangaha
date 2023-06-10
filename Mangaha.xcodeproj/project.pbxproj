@@ -83,6 +83,7 @@
 		B83F5B6C2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */; };
 		B84083112A338FA8008AB117 /* ReviewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840830F2A338FA8008AB117 /* ReviewsCollectionViewCell.swift */; };
 		B84083122A338FA8008AB117 /* ReviewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84083102A338FA8008AB117 /* ReviewsCollectionViewCell.xib */; };
+		B87F637B2A34979F00C2C6DF /* UiColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCollectionViewCell.xib; sourceTree = "<group>"; };
 		B840830F2A338FA8008AB117 /* ReviewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B84083102A338FA8008AB117 /* ReviewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewsCollectionViewCell.xib; sourceTree = "<group>"; };
+		B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor + Hex.swift"; sourceTree = "<group>"; };
 		E0EB9E4B003702FD3F96023E /* Pods_MangahaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MangahaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -453,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				B80DE7D32A348F8500C2F995 /* UIView+RoundedCorners.swift */,
+				B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -929,6 +932,7 @@
 				B80DE7CF2A348EDF00C2F995 /* MEViewController.swift in Sources */,
 				B83F5B6B2A3104D200B3F3B1 /* FavoriteCollectionViewCell.swift in Sources */,
 				B83E1A072A33D97400D046AD /* MoreReviewsTableViewCell.swift in Sources */,
+				B87F637B2A34979F00C2C6DF /* UiColor + Hex.swift in Sources */,
 				B84083112A338FA8008AB117 /* ReviewsCollectionViewCell.swift in Sources */,
 				B829A4A02A30770400A0A4D0 /* Mangaha.xcdatamodeld in Sources */,
 				44787E312A316978008C0CBB /* CategoryViewController.swift in Sources */,

@@ -19,6 +19,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationController()
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -113,6 +114,26 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         }
         
     }
+    func setupNavigationController(){
+        navigationItem.setHidesBackButton(true, animated: true)
+        let customOrange = UIColor(hex: 0xFF7466)
+        let backBarBtn = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action: #selector(popView))
+        backBarBtn.tintColor = customOrange
+        navigationItem.leftBarButtonItem = backBarBtn
+       
+        let apperance = UINavigationBarAppearance()
+        apperance.configureWithTransparentBackground()
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationItem.standardAppearance = apperance
+        navigationItem.scrollEdgeAppearance = apperance
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "Product Details"
+    }
+    
+    @objc func popView(){
+        navigationController?.popViewController(animated: true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section{
@@ -180,13 +201,6 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         }
     }
 }
-extension UIColor {
-    convenience init(hex: UInt32, alpha: CGFloat = 1.0) {
-        let red = CGFloat((hex & 0xFF0000) >> 16) / 255.0
-        let green = CGFloat((hex & 0x00FF00) >> 8) / 255.0
-        let blue = CGFloat(hex & 0x0000FF) / 255.0
 
-        self.init(red: red, green: green, blue: blue, alpha: alpha)
-    }
     
-}
+

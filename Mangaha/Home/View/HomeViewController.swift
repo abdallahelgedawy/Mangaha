@@ -35,7 +35,32 @@ class HomeViewController: UIViewController {
         
         
         pageControl.numberOfPages = adsImages.count
-       
+       setupNavigationController()
+    }
+    func setupNavigationController(){
+        let customOrange = UIColor(hex: 0xFF7466)
+        let apperance = UINavigationBarAppearance()
+        apperance.configureWithTransparentBackground()
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationItem.standardAppearance = apperance
+        navigationItem.scrollEdgeAppearance = apperance
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "Home"
+        let CartBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(goToCart))
+        CartBtn.tintColor = customOrange
+        let favBtn = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(goToFav))
+        favBtn.tintColor = customOrange
+        navigationItem.rightBarButtonItems = [CartBtn , favBtn]
+    }
+    
+    @objc func goToCart(){
+        let cart = CartViewController(nibName: "CartViewController", bundle: nil)
+        navigationController?.pushViewController(cart, animated: true)
+    }
+    @objc func goToFav(){
+        let fav = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
+        navigationController?.pushViewController(fav, animated: true)
     }
     
     func startTimer(){
@@ -52,13 +77,7 @@ class HomeViewController: UIViewController {
         pageControl.currentPage = currentIndex
     }
 
-    @IBAction func favoriteBtn(_ sender: Any) {
-    
-    }
-    
-    @IBAction func shoppingCartBtn(_ sender: Any) {
-    
-    }
+  
 }
 
 extension HomeViewController : UICollectionViewDelegate{
