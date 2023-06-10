@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="favCell" id="gTV-IL-0wX" customClass="FavoriteCollectionViewCell" customModule="Mangaha" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="191" height="285"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="191" height="285"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKf-Nk-ErL">
+                        <rect key="frame" x="0.0" y="0.0" width="191" height="285"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="test" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N5d-a3-abD">
+                                <rect key="frame" x="10" y="5" width="171" height="170"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warm Zipper" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhK-SJ-3Xu">
+                                <rect key="frame" x="20" y="196" width="151" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$300.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4Q-aa-mp2">
+                                <rect key="frame" x="20" y="240" width="151" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XeO-tk-6rF">
+                                <rect key="frame" x="120" y="15" width="46" height="15"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="favBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="P5v-zx-kav"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XeO-tk-6rF" firstAttribute="top" secondItem="gKf-Nk-ErL" secondAttribute="top" constant="15" id="4Zg-Pd-skF"/>
+                            <constraint firstAttribute="bottom" secondItem="l4Q-aa-mp2" secondAttribute="bottom" constant="24" id="7aw-Go-dST"/>
+                            <constraint firstItem="XeO-tk-6rF" firstAttribute="leading" secondItem="gKf-Nk-ErL" secondAttribute="leading" constant="120" id="E7B-ea-LKQ"/>
+                            <constraint firstItem="l4Q-aa-mp2" firstAttribute="top" secondItem="RhK-SJ-3Xu" secondAttribute="bottom" constant="23" id="GHk-pC-FGe"/>
+                            <constraint firstItem="l4Q-aa-mp2" firstAttribute="leading" secondItem="gKf-Nk-ErL" secondAttribute="leading" constant="20" id="GZ2-UR-fcg"/>
+                            <constraint firstAttribute="trailing" secondItem="l4Q-aa-mp2" secondAttribute="trailing" constant="20" id="Otv-vU-vq1"/>
+                            <constraint firstItem="N5d-a3-abD" firstAttribute="top" secondItem="gKf-Nk-ErL" secondAttribute="top" constant="5" id="PAF-Wb-tKQ"/>
+                            <constraint firstAttribute="bottom" secondItem="XeO-tk-6rF" secondAttribute="bottom" constant="255" placeholder="YES" id="R8q-9o-BNu"/>
+                            <constraint firstItem="N5d-a3-abD" firstAttribute="leading" secondItem="gKf-Nk-ErL" secondAttribute="leading" constant="10" id="Sgj-Yw-HYb"/>
+                            <constraint firstAttribute="trailing" secondItem="RhK-SJ-3Xu" secondAttribute="trailing" constant="20" id="Txu-fl-0SL"/>
+                            <constraint firstItem="RhK-SJ-3Xu" firstAttribute="leading" secondItem="gKf-Nk-ErL" secondAttribute="leading" constant="20" id="aUH-yo-N32"/>
+                            <constraint firstAttribute="trailing" secondItem="N5d-a3-abD" secondAttribute="trailing" constant="10" id="flS-Dm-Js7"/>
+                            <constraint firstAttribute="trailing" secondItem="XeO-tk-6rF" secondAttribute="trailing" constant="25" id="ogf-oc-utg"/>
+                            <constraint firstItem="RhK-SJ-3Xu" firstAttribute="top" secondItem="N5d-a3-abD" secondAttribute="bottom" constant="21" id="ueZ-CF-5xd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="gKf-Nk-ErL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KuA-CN-Y9S"/>
+                <constraint firstAttribute="trailing" secondItem="gKf-Nk-ErL" secondAttribute="trailing" id="QkK-e8-4Ii"/>
+                <constraint firstItem="gKf-Nk-ErL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="drG-8k-qbD"/>
+                <constraint firstAttribute="bottom" secondItem="gKf-Nk-ErL" secondAttribute="bottom" id="qDE-kN-hST"/>
+            </constraints>
+            <size key="customSize" width="191" height="285"/>
+            <connections>
+                <outlet property="favImage" destination="N5d-a3-abD" id="xlG-yJ-YmC"/>
+                <outlet property="myFavBtn" destination="XeO-tk-6rF" id="nuL-sz-paD"/>
+            </connections>
+            <point key="canvasLocation" x="202.29007633587784" y="-63.028169014084511"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="test" width="478" height="557"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

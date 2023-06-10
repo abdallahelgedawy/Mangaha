@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartViewController" customModule="Mangaha" customModuleProvider="target">
+            <connections>
+                <outlet property="cartTable" destination="E8L-cX-fGL" id="NSY-ju-VCv"/>
+                <outlet property="checkOutBtn" destination="0bo-dC-sT5" id="5FC-TX-t4D"/>
+                <outlet property="subTotalLabel" destination="3XU-P4-gfF" id="njp-Rg-RRf"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E8L-cX-fGL">
+                    <rect key="frame" x="0.0" y="59" width="393" height="426"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sub Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l75-zQ-pEQ">
+                    <rect key="frame" x="25" y="620.66666666666663" width="92" height="27.666666666666629"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5698" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3XU-P4-gfF">
+                    <rect key="frame" x="272.66666666666669" y="620.66666666666663" width="70.333333333333314" height="27.666666666666629"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-dC-sT5">
+                    <rect key="frame" x="35" y="688.33333333333337" width="323" height="59.666666666666629"/>
+                    <color key="backgroundColor" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Checkout">
+                        <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="checkOut:" destination="-1" eventType="touchUpInside" id="OUW-40-lla"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0bo-dC-sT5" secondAttribute="bottom" constant="70" id="005-d3-py5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="E8L-cX-fGL" secondAttribute="trailing" id="5rG-xc-oKw"/>
+                <constraint firstItem="0bo-dC-sT5" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="JD5-6Y-2kk"/>
+                <constraint firstItem="0bo-dC-sT5" firstAttribute="top" secondItem="l75-zQ-pEQ" secondAttribute="bottom" constant="40" id="Jg6-eK-Gfm"/>
+                <constraint firstItem="l75-zQ-pEQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="Ujl-hZ-5d0"/>
+                <constraint firstItem="E8L-cX-fGL" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="Zw5-oi-yhg"/>
+                <constraint firstItem="E8L-cX-fGL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eLz-kE-2OB"/>
+                <constraint firstItem="0bo-dC-sT5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="35" id="hgm-0L-k8o"/>
+                <constraint firstItem="0bo-dC-sT5" firstAttribute="top" secondItem="3XU-P4-gfF" secondAttribute="bottom" constant="40" id="hw0-dO-K6T"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3XU-P4-gfF" secondAttribute="trailing" constant="50" id="sLH-Kb-Ot1"/>
+                <constraint firstItem="E8L-cX-fGL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="txl-6m-EHS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0bo-dC-sT5" secondAttribute="trailing" constant="35" id="uJT-67-vcf"/>
+            </constraints>
+            <point key="canvasLocation" x="-16.030534351145036" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

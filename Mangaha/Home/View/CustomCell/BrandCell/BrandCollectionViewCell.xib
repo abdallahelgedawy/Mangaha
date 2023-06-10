@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="brandCell" id="gTV-IL-0wX" customClass="BrandCollectionViewCell" customModule="Mangaha" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="334" height="331"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="334" height="331"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNX-2u-sJ6">
+                        <rect key="frame" x="20" y="20" width="294" height="291"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ijx-Eh-jv2">
+                                <rect key="frame" x="0.0" y="0.0" width="294" height="206"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgg-AO-rKp">
+                                <rect key="frame" x="44" y="223" width="206" height="46"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ijx-Eh-jv2" firstAttribute="leading" secondItem="QNX-2u-sJ6" secondAttribute="leading" id="CyF-ef-PQi"/>
+                            <constraint firstItem="Jgg-AO-rKp" firstAttribute="height" secondItem="QNX-2u-sJ6" secondAttribute="height" multiplier="0.158076" id="Fdv-Ss-RFW"/>
+                            <constraint firstAttribute="trailing" secondItem="Ijx-Eh-jv2" secondAttribute="trailing" id="GtE-Qu-s7B"/>
+                            <constraint firstItem="Jgg-AO-rKp" firstAttribute="width" secondItem="QNX-2u-sJ6" secondAttribute="width" multiplier="0.7" id="LVO-cK-hjw"/>
+                            <constraint firstItem="Ijx-Eh-jv2" firstAttribute="top" secondItem="QNX-2u-sJ6" secondAttribute="top" id="NQr-Mo-r5Y"/>
+                            <constraint firstItem="Jgg-AO-rKp" firstAttribute="centerX" secondItem="Ijx-Eh-jv2" secondAttribute="centerX" id="bC9-uk-Mfj"/>
+                            <constraint firstItem="Ijx-Eh-jv2" firstAttribute="height" secondItem="QNX-2u-sJ6" secondAttribute="height" multiplier="0.707904" id="fij-SK-WtE"/>
+                            <constraint firstItem="Jgg-AO-rKp" firstAttribute="top" secondItem="Ijx-Eh-jv2" secondAttribute="bottom" constant="17" id="kJc-un-H1p"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="QNX-2u-sJ6" secondAttribute="trailing" constant="20" id="Nx1-gZ-pDm"/>
+                <constraint firstItem="QNX-2u-sJ6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Opj-R1-2ba"/>
+                <constraint firstAttribute="bottom" secondItem="QNX-2u-sJ6" secondAttribute="bottom" constant="20" id="fHn-TW-ZLh"/>
+                <constraint firstItem="QNX-2u-sJ6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="tfX-FQ-cAa"/>
+            </constraints>
+            <size key="customSize" width="334" height="331"/>
+            <connections>
+                <outlet property="brandImg" destination="Ijx-Eh-jv2" id="UNm-LH-Iej"/>
+                <outlet property="brandName" destination="Jgg-AO-rKp" id="8Zh-f0-K8F"/>
+                <outlet property="brandView" destination="QNX-2u-sJ6" id="M31-cn-CDW"/>
+            </connections>
+            <point key="canvasLocation" x="253.43511450381678" y="87.676056338028175"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
