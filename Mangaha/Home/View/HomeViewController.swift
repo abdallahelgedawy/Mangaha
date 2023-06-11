@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeViewController: UIViewController {
 
@@ -13,14 +14,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var brandSearch: UISearchBar!
     @IBOutlet weak var brandsCollection: UICollectionView!
     @IBOutlet weak var adsCollection: UICollectionView!
+    var homeViewModel : HomeViewModel?
     var adsImages = [UIImage(named: "sale1"),UIImage(named: "sale2"),UIImage(named: "sale3")]
-    var brands = [brand(name: "adidas", image: UIImage(named: "tshirt")!),brand(name: "zara", image: UIImage(named: "tshirt")!),brand(name: "breshka", image: UIImage(named: "tshirt")!),brand(name: "pull", image: UIImage(named: "shoes")!
-                                                                                                                                                                                              )]
+    var brands : [Smart_collections]?
     var timer : Timer?
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        homeViewModel = HomeViewModel()
+        homeViewModel?.getBrands()
         adsCollection.register(UINib(nibName: "AdsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "adsCell")
         
         brandsCollection.register(UINib(nibName: "BrandCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "brandCell")
@@ -32,6 +34,13 @@ class HomeViewController: UIViewController {
         brandsCollection.dataSource = self
         
         startTimer()
+        
+        homeViewModel?.bindBrandsListToHomeVC = {
+            DispatchQueue.main.async {
+                self.brands = self.homeViewModel?.bransList
+                self.brandsCollection.reloadData()
+            }
+        }
         
         
         pageControl.numberOfPages = adsImages.count
@@ -97,7 +106,7 @@ extension HomeViewController : UICollectionViewDataSource{
         if collectionView == adsCollection {
             return adsImages.count
         }else if collectionView == brandsCollection {
-            return brands.count
+            return brands?.count ?? 0
         }
         return 0
     }
@@ -109,8 +118,10 @@ extension HomeViewController : UICollectionViewDataSource{
             return cell
         }
         let cell = brandsCollection.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! BrandCollectionViewCell
-        let data = brands[indexPath.row]
-        cell.setupCell(name: data.name, image: data.image)
+        let data = brands?[indexPath.row]
+        cell.brandName.text = data?.title
+        cell.brandImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
+
         return cell
        
     }
@@ -130,7 +141,4 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout{
         return 10
     }
 }
-struct brand {
-    var name : String
-    var image : UIImage
-}
+

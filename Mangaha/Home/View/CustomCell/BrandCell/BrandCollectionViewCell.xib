@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="294" height="206"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgg-AO-rKp">
-                                <rect key="frame" x="44" y="223" width="206" height="46"/>
+                                <rect key="frame" x="14.666666666666657" y="223" width="264.66666666666674" height="46"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                             <constraint firstItem="Ijx-Eh-jv2" firstAttribute="leading" secondItem="QNX-2u-sJ6" secondAttribute="leading" id="CyF-ef-PQi"/>
                             <constraint firstItem="Jgg-AO-rKp" firstAttribute="height" secondItem="QNX-2u-sJ6" secondAttribute="height" multiplier="0.158076" id="Fdv-Ss-RFW"/>
                             <constraint firstAttribute="trailing" secondItem="Ijx-Eh-jv2" secondAttribute="trailing" id="GtE-Qu-s7B"/>
-                            <constraint firstItem="Jgg-AO-rKp" firstAttribute="width" secondItem="QNX-2u-sJ6" secondAttribute="width" multiplier="0.7" id="LVO-cK-hjw"/>
+                            <constraint firstItem="Jgg-AO-rKp" firstAttribute="width" secondItem="QNX-2u-sJ6" secondAttribute="width" multiplier="0.9" id="LVO-cK-hjw"/>
                             <constraint firstItem="Ijx-Eh-jv2" firstAttribute="top" secondItem="QNX-2u-sJ6" secondAttribute="top" id="NQr-Mo-r5Y"/>
                             <constraint firstItem="Jgg-AO-rKp" firstAttribute="centerX" secondItem="Ijx-Eh-jv2" secondAttribute="centerX" id="bC9-uk-Mfj"/>
                             <constraint firstItem="Ijx-Eh-jv2" firstAttribute="height" secondItem="QNX-2u-sJ6" secondAttribute="height" multiplier="0.707904" id="fij-SK-WtE"/>
