@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
         
         homeViewModel?.bindBrandsListToHomeVC = {
             DispatchQueue.main.async {
-                self.brands = self.homeViewModel?.bransList
+                self.brands = self.homeViewModel?.barndsList
                 self.brandsCollection.reloadData()
             }
         }
