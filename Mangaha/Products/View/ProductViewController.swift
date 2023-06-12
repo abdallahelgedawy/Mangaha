@@ -27,6 +27,8 @@ class ProductViewController: UIViewController {
        
         productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         
+        filterProduct.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        
         productViewModel?.bindproductListToProductVC = {
             DispatchQueue.main.async {
                 self.productCollection.reloadData()
@@ -34,6 +36,17 @@ class ProductViewController: UIViewController {
         }
         
     }
+    
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 1 {
+         
+        }else if sender.selectedSegmentIndex == 2 {
+           
+        }else{
+            productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+        }
+    }
+
     func setupNavigationController(){
         navigationItem.setHidesBackButton(true, animated: true)
         let customOrange = UIColor(hex: 0xFF7466)
@@ -97,7 +110,7 @@ extension ProductViewController : UICollectionViewDataSource{
 }
 extension ProductViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 200)
+        return CGSize(width: 170, height: 300)
     }
 }
 

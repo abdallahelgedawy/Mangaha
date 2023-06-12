@@ -26,4 +26,10 @@ class Constant{
         return baseUrl + "/products.json?collection_id=\(category_ID)"
     }
     
+    static func mainCategory(category_ID: Int,filterType:String) -> String {
+         return baseUrl + "/products.json?collection_id=\(category_ID)&product_type=\(filterType)"
+     }
+    
+ 
+    
 }

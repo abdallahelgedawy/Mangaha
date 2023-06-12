@@ -488,8 +488,8 @@
 			children = (
 				B80DE7B52A348EA700C2F995 /* AddingAdressViewController.swift */,
 				B80DE7B42A348EA700C2F995 /* AddingAdressViewController.xib */,
-				B80DE7B62A348EA700C2F995 /* AdressesCell.swift */,
 				B80DE7B72A348EA700C2F995 /* AdressesCell.xib */,
+				B80DE7B62A348EA700C2F995 /* AdressesCell.swift */,
 				B80DE7B92A348EA700C2F995 /* AdressesListViewController.swift */,
 				B80DE7B82A348EA700C2F995 /* AdressesListViewController.xib */,
 			);

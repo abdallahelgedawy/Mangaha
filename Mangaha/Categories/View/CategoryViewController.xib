@@ -29,18 +29,19 @@
                         <outlet property="delegate" destination="-1" id="b5u-wA-dfM"/>
                     </connections>
                 </searchBar>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="UsX-QE-Cdw">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UsX-QE-Cdw">
                     <rect key="frame" x="0.0" y="170" width="393" height="32"/>
                     <segments>
+                        <segment title="All"/>
                         <segment title="Women"/>
-                        <segment title="KED"/>
+                        <segment title="KID"/>
                         <segment title="Men"/>
                         <segment title="Sale"/>
                     </segments>
                     <color key="selectedSegmentTintColor" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6CG-AC-ppg">
-                    <rect key="frame" x="0.0" y="219" width="393" height="633"/>
+                    <rect key="frame" x="0.0" y="219" width="393" height="552"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="COQ-QJ-mxJ">
                         <size key="itemSize" width="128" height="128"/>
@@ -53,16 +54,16 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="6CG-AC-ppg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0no-QO-TgU"/>
-                <constraint firstAttribute="bottom" secondItem="6CG-AC-ppg" secondAttribute="bottom" id="447-aO-gaw"/>
-                <constraint firstItem="6CG-AC-ppg" firstAttribute="top" secondItem="UsX-QE-Cdw" secondAttribute="bottom" constant="18" id="6jG-ND-zzT"/>
                 <constraint firstItem="hQt-MB-XU9" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="D9x-jy-V37"/>
                 <constraint firstItem="UsX-QE-Cdw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NIo-dy-kyu"/>
                 <constraint firstItem="hQt-MB-XU9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Nde-3O-zFW"/>
                 <constraint firstItem="hQt-MB-XU9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="PCm-8k-h5m"/>
+                <constraint firstItem="6CG-AC-ppg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Q11-j6-bgO"/>
                 <constraint firstItem="UsX-QE-Cdw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="aFu-bq-tfx"/>
                 <constraint firstItem="UsX-QE-Cdw" firstAttribute="top" secondItem="hQt-MB-XU9" secondAttribute="bottom" constant="14" id="cKp-nw-bfG"/>
-                <constraint firstItem="6CG-AC-ppg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="nM5-j7-GB5"/>
+                <constraint firstItem="6CG-AC-ppg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="gt1-JC-q5O"/>
+                <constraint firstItem="6CG-AC-ppg" firstAttribute="top" secondItem="UsX-QE-Cdw" secondAttribute="bottom" constant="18" id="j9l-zt-Zvu"/>
+                <constraint firstAttribute="bottom" secondItem="6CG-AC-ppg" secondAttribute="bottom" constant="81" id="u8e-Xp-EzJ"/>
             </constraints>
             <point key="canvasLocation" x="54.198473282442748" y="-11.267605633802818"/>
         </view>

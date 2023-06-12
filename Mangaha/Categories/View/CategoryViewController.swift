@@ -87,18 +87,20 @@ class CategoryViewController: UIViewController {
        
     }
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+        if sender.selectedSegmentIndex == 1 {
            mainCategoryId = 448684261661
             categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
-        }else if sender.selectedSegmentIndex == 1 {
+        }else if sender.selectedSegmentIndex == 2 {
             mainCategoryId = 448684294429
             categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
-        }else if sender.selectedSegmentIndex == 2 {
+        }else if sender.selectedSegmentIndex == 3 {
             mainCategoryId = 448684196125
             categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
-        }else{
+        }else if sender.selectedSegmentIndex == 4 {
             mainCategoryId = 448684327197
             categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+        }else{
+            categoryViewModel?.getProducts(baseUrl: allProductsUrl)
         }
     }
 
@@ -142,18 +144,15 @@ class CategoryViewController: UIViewController {
     }
     
     @objc private func filterAcc(){
-        self.allProductsUrl =  self.allProductsUrl + "&product_type=ACCESSORIES"
-        categoryViewModel?.getProducts(baseUrl:  self.allProductsUrl )
+        categoryViewModel?.getProducts(baseUrl:  Constant.mainCategory(category_ID: mainCategoryId ?? 0, filterType: "ACCESSORIES"))
     }
     
     @objc private func filterShoes(){
-        self.allProductsUrl =  self.allProductsUrl + "&product_type=SHOES"
-        categoryViewModel?.getProducts(baseUrl:  self.allProductsUrl )
+        categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0, filterType: "SHOES"))
     }
     
     @objc private func filterTshirts(){
-        self.allProductsUrl =  self.allProductsUrl + "&product_type=T-SHIRTS"
-        categoryViewModel?.getProducts(baseUrl:  self.allProductsUrl )
+        categoryViewModel?.getProducts(baseUrl:Constant.mainCategory(category_ID: mainCategoryId ?? 0, filterType: "T-SHIRTS"))
     }
     
     @objc private func didTapBtn(){

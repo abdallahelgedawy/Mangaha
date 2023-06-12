@@ -10,6 +10,7 @@ import SDWebImage
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var brandsLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var brandSearch: UISearchBar!
     @IBOutlet weak var brandsCollection: UICollectionView!
@@ -22,7 +23,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeViewModel = HomeViewModel()
-      
+        brandsLabel.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
+        brandsLabel.layer.masksToBounds = true
+        
         adsCollection.register(UINib(nibName: "AdsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "adsCell")
         
         brandsCollection.register(UINib(nibName: "BrandCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "brandCell")
