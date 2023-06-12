@@ -49,5 +49,39 @@ class NetworkServices{
         task.resume()
 
     }
+    
+   static func convertCurency(amount:String,completionHandler: @escaping (Double?) -> Void ){
+       let currency = getCurrency()
+       let url : URL?
+       if currency == "EGP"{
+           url = URL(string: Constant.currencyConverterUrl("EGP", "Eur", amount))
+       }else{
+           url = URL(string: Constant.currencyConverterUrl("Eur", "EGP", amount))
+       }
+        guard let url = url else{
+            return
+        }
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request){ data,response , error in
+            do{
+                let result = try JSONDecoder().decode(CurrencyConverter.self, from: data!)
+                completionHandler(result.result)
+                
+            }catch let error{
+                print(error.localizedDescription)
+                completionHandler(nil)
+            }
+        
+        }
+        task.resume()
+    }
+    
+    static func getCurrency()->String{
+        if let currency =  UserDefaults.standard.object(forKey: Constant.currencyKey) as? String{
+            return currency
+        }
+        return "Eur"
+    }
 
 }

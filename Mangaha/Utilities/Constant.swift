@@ -29,7 +29,10 @@ class Constant{
     static func mainCategory(category_ID: Int,filterType:String) -> String {
          return baseUrl + "/products.json?collection_id=\(category_ID)&product_type=\(filterType)"
      }
+    static func currencyConverterUrl(_ to:String , _ from:String , _ amount:String)->String{
+       return  "https://api.apilayer.com/currency_data/convert?to=\(to)&from=\(from)&amount=\(amount)&apikey=ua1Jj5ov1dJIT2EAWdNVFLAqlshzKCax"
+    }
     
- 
+    static let currencyKey = "Currency"
     
 }

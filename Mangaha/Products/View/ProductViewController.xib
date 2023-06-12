@@ -30,7 +30,7 @@
                     <rect key="frame" x="0.0" y="170" width="393" height="32"/>
                     <segments>
                         <segment title="All"/>
-                        <segment title="Price : H To L"/>
+                        <segment title="Price : L To H"/>
                         <segment title="Price : H To L"/>
                     </segments>
                     <color key="selectedSegmentTintColor" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>

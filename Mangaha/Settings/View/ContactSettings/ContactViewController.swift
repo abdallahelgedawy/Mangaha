@@ -16,11 +16,12 @@ class ContactViewController: UIViewController {
     @IBOutlet var countryNameLabel: UILabel!
     @IBOutlet var cityNameLabel: UILabel!
     @IBOutlet var streetAdressLabel: UILabel!
-    
+    let settingsVM = SettingsViwewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewsCorners()
         setupNavigationBar()
+        curencyLabel.text = getUserCurrency()
     }
 
 
@@ -58,15 +59,20 @@ class ContactViewController: UIViewController {
         adressView.changeCornerRadius(corner: [.topLeft,.bottomRight], radius: 30)
         curencyView.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
     }
+    func getUserCurrency()->String{
+        return settingsVM.getCurrencyFromDefaults()
+    }
     
     func showChooseCurrencyAlert(){
         let currencyAlert = UIAlertController(title: "Change Currency", message: "Choose your Currncy", preferredStyle: .alert)
-        let egyAction = UIAlertAction(title: "EGY", style: .default){_ in
-            self.curencyLabel.text = "EGY"
+        let egyAction = UIAlertAction(title: "EGP", style: .default){_ in
+            self.curencyLabel.text = "EGP"
+            self.settingsVM.addCurrencyToDefaults(currency: "EGP")
 
         }
-        let dollarAction = UIAlertAction(title: "Dollar", style: .default){_ in
-            self.curencyLabel.text = "Dollar"
+        let dollarAction = UIAlertAction(title: "Eur", style: .default){_ in
+            self.curencyLabel.text = "Eur"
+            self.settingsVM.addCurrencyToDefaults(currency: "Eur")
         }
         currencyAlert.addAction(egyAction)
         currencyAlert.addAction(dollarAction)
