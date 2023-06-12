@@ -16,13 +16,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var adsCollection: UICollectionView!
     var homeViewModel : HomeViewModel?
     var adsImages = [UIImage(named: "sale1"),UIImage(named: "sale2"),UIImage(named: "sale3")]
-    var brands : [Smart_collections]?
+   
     var timer : Timer?
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         homeViewModel = HomeViewModel()
-        homeViewModel?.getBrands()
+      
         adsCollection.register(UINib(nibName: "AdsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "adsCell")
         
         brandsCollection.register(UINib(nibName: "BrandCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "brandCell")
@@ -35,9 +35,9 @@ class HomeViewController: UIViewController {
         
         startTimer()
         
+        homeViewModel?.getBrands(baseUrl: Constant.allBrands())
         homeViewModel?.bindBrandsListToHomeVC = {
             DispatchQueue.main.async {
-                self.brands = self.homeViewModel?.barndsList
                 self.brandsCollection.reloadData()
             }
         }
@@ -95,6 +95,7 @@ extension HomeViewController : UICollectionViewDelegate{
            
         }else if collectionView == brandsCollection {
             let productVC = ProductViewController(nibName: "ProductViewController", bundle: nil)
+            productVC.productViewModel = homeViewModel?.inistintiateProductViewModel(index: indexPath.row)
             self.navigationController?.pushViewController(productVC, animated: true)
         }
     }
@@ -106,7 +107,7 @@ extension HomeViewController : UICollectionViewDataSource{
         if collectionView == adsCollection {
             return adsImages.count
         }else if collectionView == brandsCollection {
-            return brands?.count ?? 0
+            return homeViewModel?.getBrandsCount() ?? 0
         }
         return 0
     }
@@ -118,7 +119,7 @@ extension HomeViewController : UICollectionViewDataSource{
             return cell
         }
         let cell = brandsCollection.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! BrandCollectionViewCell
-        let data = brands?[indexPath.row]
+        let data = homeViewModel?.getBrandsAtIndex(index: indexPath.row)
         cell.brandName.text = data?.title
         cell.brandImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
 

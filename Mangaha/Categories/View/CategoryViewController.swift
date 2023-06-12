@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CategoryViewController: UIViewController {
 
@@ -13,12 +14,13 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var searchCategory: UISearchBar!
     @IBOutlet weak var categoryCollection: UICollectionView!
     @IBOutlet weak var filterCategory: UISegmentedControl!
-    
+    var categoryViewModel : CategoryViewModel?
     let button1 = UIButton()
     let button2 = UIButton()
     let button3 = UIButton()
-    var categories = [category(name: "cat1", image: UIImage(named: "bag")!),category(name: "cat2", image: UIImage(named: "shoes")!),category(name: "cat3", image: UIImage(named: "tshirt")!),category(name: "cat4", image: UIImage(named: "bag")!)]
-   
+    var mainCategoryId : Int?
+    
+    var allProductsUrl = Constant.allProducts()
     private let floatingBtn : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         button.layer.masksToBounds = true
@@ -37,13 +39,23 @@ class CategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        categoryViewModel = CategoryViewModel()
         setupNavigationController()
         view.addSubview(floatingBtn)
-
-        categoryCollection.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "categoryCell")
+        
+        
+        categoryCollection.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "productCell")
 
         categoryCollection.delegate = self
         categoryCollection.dataSource = self
+        
+        filterCategory.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+        categoryViewModel?.bindCategoryListToCategoryVC = {
+            DispatchQueue.main.async {
+                self.categoryCollection.reloadData()
+            }
+        }
         
         floatingBtn.addTarget(self, action: #selector(didTapBtn), for: .touchUpInside)
         
@@ -71,8 +83,25 @@ class CategoryViewController: UIViewController {
         button3.layer.masksToBounds = true
         view.addSubview(button3)
     
+        
        
     }
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+           mainCategoryId = 448684261661
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+        }else if sender.selectedSegmentIndex == 1 {
+            mainCategoryId = 448684294429
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+        }else if sender.selectedSegmentIndex == 2 {
+            mainCategoryId = 448684196125
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+        }else{
+            mainCategoryId = 448684327197
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+        }
+    }
+
     func setupNavigationController(){
         let customOrange = UIColor(hex: 0xFF7466)
         let apperance = UINavigationBarAppearance()
@@ -103,10 +132,28 @@ class CategoryViewController: UIViewController {
         floatingBtn.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 150, width: 60, height: 60)
         
         button1.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 220, width: 60, height: 60)
+        button1.addTarget(self, action: #selector(filterAcc), for: .touchUpInside)
 
         button2.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 290, width: 60, height: 60)
+        button2.addTarget(self, action: #selector(filterShoes), for: .touchUpInside)
         
         button3.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 360, width: 60, height: 60)
+        button3.addTarget(self, action: #selector(filterTshirts), for: .touchUpInside)
+    }
+    
+    @objc private func filterAcc(){
+        self.allProductsUrl =  self.allProductsUrl + "&product_type=ACCESSORIES"
+        categoryViewModel?.getProducts(baseUrl:  self.allProductsUrl )
+    }
+    
+    @objc private func filterShoes(){
+        self.allProductsUrl =  self.allProductsUrl + "&product_type=SHOES"
+        categoryViewModel?.getProducts(baseUrl:  self.allProductsUrl )
+    }
+    
+    @objc private func filterTshirts(){
+        self.allProductsUrl =  self.allProductsUrl + "&product_type=T-SHIRTS"
+        categoryViewModel?.getProducts(baseUrl:  self.allProductsUrl )
     }
     
     @objc private func didTapBtn(){
@@ -120,31 +167,26 @@ class CategoryViewController: UIViewController {
 
     }
 
-    @IBAction func favoriteBtn(_ sender: Any) {
-        
-    }
-    @IBAction func shoppingCartBtn(_ sender: Any) {
-        
-    }
-    
 }
 
 extension CategoryViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let productVC = ProductViewController(nibName: "ProductViewController", bundle: nil)
-        self.navigationController?.pushViewController(productVC, animated: true)
+        
     }
 }
 
 extension CategoryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories.count
+        return categoryViewModel?.getProductsCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCollectionViewCell
-        let data = categories[indexPath.row]
-        cell.setupCell(name: data.name, image: data.image)
+        let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
+        let data = categoryViewModel?.getProductsAtIndex(index: indexPath.row)
+        cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
+        cell.productName.text = data?.title
+        cell.productPrice.text = data?.variants?[0].price
+        cell.productCurrency.text = "EGP"
         return cell
     }
     
@@ -152,10 +194,8 @@ extension CategoryViewController : UICollectionViewDataSource {
 
 extension CategoryViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 200)
+        return CGSize(width: 170, height: 300)
+        
     }
 }
-struct category {
-    var name : String
-    var image : UIImage
-}
+
