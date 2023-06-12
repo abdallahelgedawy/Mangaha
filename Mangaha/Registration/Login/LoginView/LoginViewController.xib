@@ -10,7 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Mangaha" customModuleProvider="target">
             <connections>
+                <outlet property="emailTF" destination="b0P-ZO-FXL" id="nSH-YB-Vn3"/>
                 <outlet property="loginBtn" destination="MeE-jv-oGs" id="vbc-rY-7eh"/>
+                <outlet property="passwordTF" destination="lNm-gb-AHi" id="89p-dB-owj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
