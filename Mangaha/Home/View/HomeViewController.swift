@@ -27,7 +27,6 @@ class HomeViewController: UIViewController {
         brandsLabel.layer.masksToBounds = true
         
         adsCollection.register(UINib(nibName: "AdsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "adsCell")
-        
         brandsCollection.register(UINib(nibName: "BrandCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "brandCell")
         
         adsCollection.delegate = self
