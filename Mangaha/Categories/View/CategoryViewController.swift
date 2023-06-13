@@ -15,22 +15,20 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var categoryCollection: UICollectionView!
     @IBOutlet weak var filterCategory: UISegmentedControl!
     var categoryViewModel : CategoryViewModel?
+    var networkIndecator : UIActivityIndicatorView!
     let button1 = UIButton()
     let button2 = UIButton()
     let button3 = UIButton()
-    var mainCategoryId : Int?
+    var mainCategoryId : Int = 0
     
     var allProductsUrl = Constant.allProducts()
     private let floatingBtn : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 30
-        let redValue: CGFloat = 255.0
-        let greenValue: CGFloat = 116.0
-        let blueValue: CGFloat = 102.0
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0.3
-        button.backgroundColor = UIColor(red: (redValue/255.0), green: (greenValue/255.0), blue: (blueValue/255.0), alpha: 1.0)
+        button.backgroundColor = UIColor(hex: 0xFF7466)
         button.setImage(UIImage(systemName: "rectangle.split.2x2.fill"), for: .normal)
         button.tintColor = .white
         
@@ -43,6 +41,11 @@ class CategoryViewController: UIViewController {
         setupNavigationController()
         view.addSubview(floatingBtn)
         
+        networkIndecator = UIActivityIndicatorView(style: .large)
+        networkIndecator.color =  UIColor(hex: 0xFF7466)
+        networkIndecator.center = view.center
+        networkIndecator.startAnimating()
+        view.addSubview(networkIndecator)
         
         categoryCollection.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "productCell")
 
@@ -54,6 +57,7 @@ class CategoryViewController: UIViewController {
         categoryViewModel?.bindCategoryListToCategoryVC = {
             DispatchQueue.main.async {
                 self.categoryCollection.reloadData()
+                self.networkIndecator.stopAnimating()
             }
         }
         
@@ -61,7 +65,7 @@ class CategoryViewController: UIViewController {
         
        
         button1.setImage(UIImage(named: "bag"), for: .normal)
-        button1.backgroundColor = UIColor(red: (255.0/255.0), green: (116.0/255.0), blue: (102.0/255.0), alpha: 1.0)
+        button1.backgroundColor = UIColor(hex: 0xFF7466)
         button1.isHidden = true
         button1.layer.cornerRadius = 30
         button1.layer.masksToBounds = true
@@ -69,7 +73,7 @@ class CategoryViewController: UIViewController {
 
                
         button2.setImage(UIImage(named: "shoes"), for: .normal)
-        button2.backgroundColor = UIColor(red: (255.0/255.0), green: (116.0/255.0), blue: (102.0/255.0), alpha: 1.0)
+        button2.backgroundColor = UIColor(hex: 0xFF7466)
         button2.isHidden = true
         button2.layer.cornerRadius = 30
         button2.layer.masksToBounds = true
@@ -77,7 +81,7 @@ class CategoryViewController: UIViewController {
         
         
         button3.setImage(UIImage(named: "tshirt"), for: .normal)
-        button3.backgroundColor = UIColor(red: (255.0/255.0), green: (116.0/255.0), blue: (102.0/255.0), alpha: 1.0)
+        button3.backgroundColor = UIColor(hex: 0xFF7466)
         button3.isHidden = true
         button3.layer.cornerRadius = 30
         button3.layer.masksToBounds = true
@@ -89,17 +93,18 @@ class CategoryViewController: UIViewController {
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
            mainCategoryId = 448684261661
-            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ))
         }else if sender.selectedSegmentIndex == 2 {
             mainCategoryId = 448684294429
-            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ))
         }else if sender.selectedSegmentIndex == 3 {
             mainCategoryId = 448684196125
-            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ))
         }else if sender.selectedSegmentIndex == 4 {
             mainCategoryId = 448684327197
-            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0))
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ))
         }else{
+            mainCategoryId = 0
             categoryViewModel?.getProducts(baseUrl: allProductsUrl)
         }
     }
@@ -144,15 +149,30 @@ class CategoryViewController: UIViewController {
     }
     
     @objc private func filterAcc(){
-        categoryViewModel?.getProducts(baseUrl:  Constant.mainCategory(category_ID: mainCategoryId ?? 0, filterType: "ACCESSORIES"))
+        if mainCategoryId == 0 {
+           allProductsUrl = allProductsUrl + "&product_type=ACCESSORIES"
+            categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+        }else{
+            categoryViewModel?.getProducts(baseUrl:  Constant.mainCategory(category_ID: mainCategoryId , filterType: "ACCESSORIES"))
+        }
     }
     
     @objc private func filterShoes(){
-        categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId ?? 0, filterType: "SHOES"))
+        if mainCategoryId == 0 {
+           allProductsUrl = allProductsUrl + "&product_type=SHOES"
+            categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+        }else{
+            categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId , filterType: "SHOES"))
+        }
     }
     
     @objc private func filterTshirts(){
-        categoryViewModel?.getProducts(baseUrl:Constant.mainCategory(category_ID: mainCategoryId ?? 0, filterType: "T-SHIRTS"))
+        if mainCategoryId == 0 {
+           allProductsUrl = allProductsUrl + "&product_type=T-SHIRTS"
+            categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+        }else{
+            categoryViewModel?.getProducts(baseUrl:Constant.mainCategory(category_ID: mainCategoryId , filterType: "T-SHIRTS"))
+        }
     }
     
     @objc private func didTapBtn(){
@@ -176,7 +196,13 @@ extension CategoryViewController : UICollectionViewDelegate{
 
 extension CategoryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryViewModel?.getProductsCount() ?? 0
+        var list = categoryViewModel?.getProductsCount() ?? 0
+        if list == 0 {
+            categoryCollection.isHidden = true
+        }else{
+            categoryCollection.isHidden = false
+        }
+        return list
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -184,6 +210,7 @@ extension CategoryViewController : UICollectionViewDataSource {
         let data = categoryViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
+        var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")
         cell.productPrice.text = data?.variants?[0].price
         cell.productCurrency.text = "EGP"
         return cell

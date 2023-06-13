@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var brandsCollection: UICollectionView!
     @IBOutlet weak var adsCollection: UICollectionView!
     var homeViewModel : HomeViewModel?
+    var networkIndecator : UIActivityIndicatorView!
     var adsImages = [UIImage(named: "sale1"),UIImage(named: "sale2"),UIImage(named: "sale3")]
    
     var timer : Timer?
@@ -23,6 +24,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeViewModel = HomeViewModel()
+        networkIndecator = UIActivityIndicatorView(style: .large)
+        networkIndecator.color =  UIColor(hex: 0xFF7466)
+        networkIndecator.center = view.center
+        networkIndecator.startAnimating()
+        view.addSubview(networkIndecator)
+        
         brandsLabel.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
         brandsLabel.layer.masksToBounds = true
         
@@ -41,6 +48,7 @@ class HomeViewController: UIViewController {
         homeViewModel?.bindBrandsListToHomeVC = {
             DispatchQueue.main.async {
                 self.brandsCollection.reloadData()
+                self.networkIndecator.stopAnimating()
             }
         }
         

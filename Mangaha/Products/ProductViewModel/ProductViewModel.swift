@@ -32,4 +32,12 @@ class ProductViewModel{
     func  getProductsCount()->Int{
         return productList?.count ?? 0
     }
+    
+    func filterProductFromLowToHigh(){
+        self.productList?.sort{($0.variants![0].price! as NSString).doubleValue < ($1.variants![0].price! as NSString).doubleValue}
+    }
+    
+    func filterProductFromHighToLow(){
+        self.productList?.sort{($0.variants![0].price! as NSString).doubleValue > ($1.variants![0].price! as NSString).doubleValue}
+    }
 }
