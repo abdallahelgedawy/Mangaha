@@ -83,5 +83,21 @@ class NetworkServices{
         }
         return "Eur"
     }
+    static func getProductInfo( baseUrl : String , completionHandler : @escaping (myProduct?)->Void){
+        guard let url = URL(string: baseUrl) else{return}
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request) { data, response, error in
+            do {
+                guard let data = data else{return}
+                let jsonData = try JSONDecoder().decode(myProduct.self, from: data)
+                completionHandler(jsonData)
+            }catch{
+                print(error.localizedDescription)
+                completionHandler(nil)
+            }
+        }
+        task.resume()
+    }
 
 }

@@ -9,6 +9,9 @@ import Foundation
 struct Product : Codable {
     let products : [Products]?
 }
+struct myProduct : Codable{
+    let product : Products
+}
 struct Products : Codable {
     let id : Int?
     let title : String?

@@ -13,6 +13,9 @@ class Constant{
     static func allBrands() -> String{
         return baseUrl + "smart_collections.json"
     }
+    static func productInfo(productId : Int)->String{
+        return baseUrl + "products/\(productId).json"
+    }
     
     static func produts(Brand_ID: Int) -> String{
         return baseUrl + "products.json?collection_id=\(Brand_ID)"

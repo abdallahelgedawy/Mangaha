@@ -93,6 +93,7 @@ class ProductViewController: UIViewController {
 extension ProductViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+        productDetails.productDetailsViewModel =  productViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
         navigationController?.pushViewController(productDetails, animated: true)
     }
 }

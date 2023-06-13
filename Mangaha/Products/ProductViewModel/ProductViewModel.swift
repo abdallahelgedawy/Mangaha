@@ -40,4 +40,9 @@ class ProductViewModel{
     func filterProductFromHighToLow(){
         self.productList?.sort{($0.variants![0].price! as NSString).doubleValue > ($1.variants![0].price! as NSString).doubleValue}
     }
+    func instantiateProductDetailsViewModel(index : Int)->ProductDetailsViewModel{
+        let productDetailsViewModel = ProductDetailsViewModel()
+        productDetailsViewModel.productId = productList?[index].id
+        return productDetailsViewModel
+    }
 }

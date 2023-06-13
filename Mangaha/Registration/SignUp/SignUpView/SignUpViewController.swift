@@ -35,14 +35,15 @@ class SignUpViewController: UIViewController {
             }else{
                 let alertController = UIAlertController(title: "Alert", message: "Registration Sucessfully", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                    let loginVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                    self.navigationController?.pushViewController(loginVc, animated: true)
                 }
                 
                 alertController.addAction(okAction)
                 
                 self.present(alertController, animated: true, completion: nil)
             
-                let loginVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
-                self.navigationController?.pushViewController(loginVc, animated: true)
+              
             }
         }
     }

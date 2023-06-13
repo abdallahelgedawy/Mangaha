@@ -11,6 +11,7 @@ import Lottie
 
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var myView: UIView!
     @IBOutlet weak var passwordTF: UITextField!
     let animationView = LottieAnimationView()
     @IBOutlet weak var emailTF: UITextField!
@@ -48,21 +49,21 @@ class LoginViewController: UIViewController {
     }
     func setupAnimation(){
         animationView.animation = LottieAnimation.named("signin")
-        animationView.contentMode = .scaleAspectFill
+        animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()
         animationView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(animationView)
+        myView.addSubview(animationView)
         // Center the animation view horizontally
         NSLayoutConstraint.activate([
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        
+        /*
         // Center the animation view vertically
         NSLayoutConstraint.activate([
             animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
-        
+        */
         
     }
 }
