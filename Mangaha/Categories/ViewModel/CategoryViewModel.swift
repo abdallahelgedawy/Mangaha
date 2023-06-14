@@ -36,10 +36,11 @@ class CategoryViewModel{
         return categoriesList?.count ?? 0
     }
     
-    func getCurrency(amount:String){
+ /*   func getCurrency(amount:String){
         NetworkServices.convertCurency(amount: amount){
             [weak self] result in
             self?.currency = result
         }
     }
+  */
 }

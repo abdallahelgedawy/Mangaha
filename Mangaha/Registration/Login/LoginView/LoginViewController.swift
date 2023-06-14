@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     var username : String? = nil
     var db = Firestore.firestore()
     var id : Int? = nil
+    var loginViewModel = LoginViewModel()
     let animationView = LottieAnimationView()
     @IBOutlet weak var emailTF: UITextField!
     override func viewDidLoad() {
@@ -25,9 +26,7 @@ class LoginViewController: UIViewController {
         setupAnimation()
         
         loginBtn.layer.cornerRadius = 10
-        if let email = email , let id = id , let username = username{
-            db.collection("users").addDocument(data: ["id" : id , "email" : email , "username" : username])
-        }
+       
     }
     @IBOutlet weak var loginBtn: UIButton!
     @IBAction func myLoginBtn(_ sender: UIButton) {
@@ -38,11 +37,12 @@ class LoginViewController: UIViewController {
                 let alertController = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
                 }
-                
+               
                 alertController.addAction(okAction)
                 
                 self.present(alertController, animated: true, completion: nil)
             }else{
+                self.loginViewModel.retrieveUserData(email: email)
                 self.navigationController?.pushViewController(TabBar(), animated: true)
             }
             

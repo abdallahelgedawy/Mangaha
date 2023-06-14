@@ -231,7 +231,7 @@ extension CategoryViewController : UICollectionViewDataSource {
         let data = categoryViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
-        var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")
+       // var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")
         cell.productPrice.text = data?.variants?[0].price
         cell.productCurrency.text = "EGP"
         return cell

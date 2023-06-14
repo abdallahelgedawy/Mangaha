@@ -10,7 +10,7 @@ struct Product : Codable {
     var products : [Products]?
 }
 struct myProduct : Codable{
-    let product : Products
+    var product : Products
 }
 struct Products : Codable {
     var id : Int?

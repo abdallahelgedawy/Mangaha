@@ -32,7 +32,7 @@ class Constant{
          return baseUrl + "/products.json?collection_id=\(category_ID)&product_type=\(filterType)"
      }
     static func currencyConverterUrl(_ to:String , _ from:String , _ amount:String)->String{
-       return  "https://api.apilayer.com/currency_data/convert?to=\(to)&from=\(from)&amount=\(amount)&apikey=ua1Jj5ov1dJIT2EAWdNVFLAqlshzKCax"
+       return  "https://api.apilayer.com/currency_data/convert?to=\(to)&from=\(from)&amount=\(amount)&apikey=X2YSo1hFAvNfMpL1p21dhkHyc0qIfzXC"
     }
     
     static let currencyKey = "Currency"
@@ -40,4 +40,11 @@ class Constant{
         return baseUrl + "customers.json"
     }
     
+        
+        static func isEuroCurrency()->Bool{
+               return  UserDefaults.standard.object(forKey: Constant.currencyKey) as? String == "Eur"
+
+        }
+    static let currentUserName = "CurrentUserName"
+    static let currentUserId = "CurrentUserId"
 }

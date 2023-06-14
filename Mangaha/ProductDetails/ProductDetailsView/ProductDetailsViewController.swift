@@ -15,10 +15,14 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     @IBOutlet weak var favBtn: UIButton!
     
     @IBOutlet weak var bagBtn: UIButton!
+    var price = "0.0"
     
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+     /*   productDetailsViewModel?.bindedResultPrice = {
+            self.myProductDetailsCollection.reloadData()
+        }
         setupNavigationController()
         productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
         
@@ -26,7 +30,8 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             DispatchQueue.main.async {
                 self.myProductDetailsCollection.reloadData()
             }
-        }
+        }*/
+       
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -53,6 +58,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         myProductDetailsCollection.setCollectionViewLayout(layout, animated: true)
         myProductDetailsCollection.contentInsetAdjustmentBehavior = .never
     }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
@@ -78,6 +84,22 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         
         return section
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        productDetailsViewModel?.bindedResultPrice = {
+            self.myProductDetailsCollection.reloadData()
+        }
+        setupNavigationController()
+        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+        
+        productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+            DispatchQueue.main.async {
+                self.myProductDetailsCollection.reloadData()
+            }
+        }
+    }
+    
+    
     func drawTopSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -158,7 +180,8 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "reviews", for: indexPath) as! ReviewsCollectionViewCell
             let data = productDetailsViewModel?.getProductAtIndex(index: indexPath.row)
             cell.nameLabel.text = data?.product.title
-            cell.priceLabel.text = data?.product.variants?[0].price
+                cell.priceLabel.text = data?.product.variants?[0].price
+           
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
             return cell
