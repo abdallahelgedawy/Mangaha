@@ -31,8 +31,13 @@
 		44EDE5AF2A35318C002704E0 /* Brands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE5AE2A35318C002704E0 /* Brands.swift */; };
 		44EDE5B22A353466002704E0 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE5B12A353466002704E0 /* NetworkServices.swift */; };
 		708F135E2AF2B685E0F93766 /* Pods_Mangaha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CEB5B7D1495BE6BDB9AB6E /* Pods_Mangaha.framework */; };
+		8C392D322A37ACB6004CCE92 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C392D312A37ACB6004CCE92 /* DropDownMenu.swift */; };
+		8C392D342A37BAD1004CCE92 /* NewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C392D332A37BAD1004CCE92 /* NewAddressViewModel.swift */; };
 		8C3BD5E12A373BE3002A354E /* CurrencyCoverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3BD5E02A373BE3002A354E /* CurrencyCoverter.swift */; };
 		8C3BD5E42A3741D5002A354E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3BD5E32A3741D5002A354E /* SettingsViewModel.swift */; };
+		8C3BD5E72A376053002A354E /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3BD5E62A376053002A354E /* AddressModel.swift */; };
+		8CB0FE9D2A38E502002FAF5F /* AddressesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB0FE9C2A38E502002FAF5F /* AddressesListViewModel.swift */; };
+		8CB52A9B2A38EDF70073CC09 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB52A9A2A38EDF70073CC09 /* Toast.swift */; };
 		8CFED8B12A30BF35007CE610 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFED8B02A30BF35007CE610 /* TabBar.swift */; };
 		B6B543371C5BE158071AE229 /* Pods_MangahaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0EB9E4B003702FD3F96023E /* Pods_MangahaTests.framework */; };
 		B80DE7A32A348E1000C2F995 /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80DE79F2A348E1000C2F995 /* CartCell.xib */; };
@@ -140,8 +145,13 @@
 		503BF43223B9931207132D2F /* Pods-Mangaha-MangahaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mangaha-MangahaUITests.release.xcconfig"; path = "Target Support Files/Pods-Mangaha-MangahaUITests/Pods-Mangaha-MangahaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		56CEB5B7D1495BE6BDB9AB6E /* Pods_Mangaha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mangaha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		708F7A7479A1CC9596E70449 /* Pods-Mangaha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mangaha.debug.xcconfig"; path = "Target Support Files/Pods-Mangaha/Pods-Mangaha.debug.xcconfig"; sourceTree = "<group>"; };
+		8C392D312A37ACB6004CCE92 /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
+		8C392D332A37BAD1004CCE92 /* NewAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddressViewModel.swift; sourceTree = "<group>"; };
 		8C3BD5E02A373BE3002A354E /* CurrencyCoverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCoverter.swift; sourceTree = "<group>"; };
 		8C3BD5E32A3741D5002A354E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8C3BD5E62A376053002A354E /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		8CB0FE9C2A38E502002FAF5F /* AddressesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesListViewModel.swift; sourceTree = "<group>"; };
+		8CB52A9A2A38EDF70073CC09 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8CFED8B02A30BF35007CE610 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		9D68FAF0B179B6679B21F481 /* Pods-MangahaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangahaTests.release.xcconfig"; path = "Target Support Files/Pods-MangahaTests/Pods-MangahaTests.release.xcconfig"; sourceTree = "<group>"; };
 		B2D03EB4DF556C96A8904B22 /* Pods-Mangaha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mangaha.release.xcconfig"; path = "Target Support Files/Pods-Mangaha/Pods-Mangaha.release.xcconfig"; sourceTree = "<group>"; };
@@ -425,6 +435,7 @@
 		8C3BD5DE2A373A81002A354E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8C3BD5E52A376038002A354E /* AdressModel */,
 				8C3BD5DF2A373BC5002A354E /* CurrencyModel */,
 			);
 			path = Model;
@@ -442,8 +453,18 @@
 			isa = PBXGroup;
 			children = (
 				8C3BD5E32A3741D5002A354E /* SettingsViewModel.swift */,
+				8C392D332A37BAD1004CCE92 /* NewAddressViewModel.swift */,
+				8CB0FE9C2A38E502002FAF5F /* AddressesListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8C3BD5E52A376038002A354E /* AdressModel */ = {
+			isa = PBXGroup;
+			children = (
+				8C3BD5E62A376053002A354E /* AddressModel.swift */,
+			);
+			path = AdressModel;
 			sourceTree = "<group>";
 		};
 		B80DE79C2A348DB800C2F995 /* Cart */ = {
@@ -554,6 +575,8 @@
 				B80DE7D32A348F8500C2F995 /* UIView+RoundedCorners.swift */,
 				B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */,
 				44DD23D82A35401200D03294 /* Constant.swift */,
+				8C392D312A37ACB6004CCE92 /* DropDownMenu.swift */,
+				8CB52A9A2A38EDF70073CC09 /* Toast.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1019,6 +1042,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BD5E12A373BE3002A354E /* CurrencyCoverter.swift in Sources */,
+				8CB0FE9D2A38E502002FAF5F /* AddressesListViewModel.swift in Sources */,
 				448A61742A3693EA001B9D2D /* ProductViewModel.swift in Sources */,
 				B83E1A032A33D92400D046AD /* MoreReviewsTableViewController.swift in Sources */,
 				B82EC3412A31F5F9004162CC /* PrdouctDetailsViewModel.swift in Sources */,
@@ -1034,9 +1058,13 @@
 				B80DE7BC2A348EA700C2F995 /* AdressesCell.swift in Sources */,
 				B80DE7AF2A348E4A00C2F995 /* PaymentViewController.swift in Sources */,
 				B80DE7CF2A348EDF00C2F995 /* MEViewController.swift in Sources */,
+				8CB52A9B2A38EDF70073CC09 /* Toast.swift in Sources */,
 				B83F5B6B2A3104D200B3F3B1 /* FavoriteCollectionViewCell.swift in Sources */,
+				8C392D322A37ACB6004CCE92 /* DropDownMenu.swift in Sources */,
+				8C392D342A37BAD1004CCE92 /* NewAddressViewModel.swift in Sources */,
 				B83E1A072A33D97400D046AD /* MoreReviewsTableViewCell.swift in Sources */,
 				B87F637B2A34979F00C2C6DF /* UiColor + Hex.swift in Sources */,
+				8C3BD5E72A376053002A354E /* AddressModel.swift in Sources */,
 				B84083112A338FA8008AB117 /* ReviewsCollectionViewCell.swift in Sources */,
 				B829A4A02A30770400A0A4D0 /* Mangaha.xcdatamodeld in Sources */,
 				44EDE5AF2A35318C002704E0 /* Brands.swift in Sources */,

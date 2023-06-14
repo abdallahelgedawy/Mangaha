@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaults.standard.string(forKey: Constant.defaultAdressIdKey))
         homeViewModel = HomeViewModel()
         brandsLabel.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
         brandsLabel.layer.masksToBounds = true
