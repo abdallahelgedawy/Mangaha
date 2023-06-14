@@ -143,7 +143,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout{
         if collectionView == adsCollection{
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
-        return CGSize(width: 170, height: 200)
+        return CGSize(width: 190, height: 200)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == adsCollection {
