@@ -7,22 +7,22 @@
 
 import Foundation
 struct Brands : Codable {
-    let smart_collections : [Smart_collections]?
+    var smart_collections : [Smart_collections]?
 }
 struct Smart_collections : Codable {
-    let id : Int?
-    let handle : String?
-    let title : String?
-    let updated_at : String?
-    let body_html : String?
-    let published_at : String?
-    let sort_order : String?
-    let template_suffix : String?
-    let disjunctive : Bool?
-    let rules : [Rules]?
-    let published_scope : String?
-    let admin_graphql_api_id : String?
-    let image : Image?
+    var id : Int?
+    var handle : String?
+    var title : String?
+    var updated_at : String?
+    var body_html : String?
+    var published_at : String?
+    var sort_order : String?
+    var template_suffix : String?
+    var disjunctive : Bool?
+    var rules : [Rules]?
+    var published_scope : String?
+    var admin_graphql_api_id : String?
+    var image : Image?
 
     enum CodingKeys: String, CodingKey {
 
@@ -45,9 +45,9 @@ struct Smart_collections : Codable {
 
 }
 struct Rules : Codable {
-    let column : String?
-    let relation : String?
-    let condition : String?
+    var column : String?
+    var relation : String?
+    var condition : String?
 
     enum CodingKeys: String, CodingKey {
 
@@ -59,11 +59,11 @@ struct Rules : Codable {
 
 }
 struct Image : Codable {
-    let created_at : String?
-    let alt : String?
-    let width : Int?
-    let height : Int?
-    let src : String?
+    var created_at : String?
+    var alt : String?
+    var width : Int?
+    var height : Int?
+    var src : String?
 
     enum CodingKeys: String, CodingKey {
 
