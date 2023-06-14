@@ -7,7 +7,7 @@
 
 import Foundation
 class Constant{
-    private static var baseUrl = "https://d097bbce1fd2720f1d64ced55f0e485b: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@mad43-alex-ios-team4.myshopify.com/admin/api/2023-04/"
+    private static var baseUrl = "https://0f0340065b43e0803729efbf5c2e1ff6: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@mad43-alex-ios3.myshopify.com/admin/api/2023-04/"
 
 
     static func allBrands() -> String{

@@ -19,6 +19,7 @@ class CategoryViewController: UIViewController {
     let button1 = UIButton()
     let button2 = UIButton()
     let button3 = UIButton()
+    let button4 = UIButton()
     var mainCategoryId : Int = 0
     
     var allProductsUrl = Constant.allProducts()
@@ -86,6 +87,14 @@ class CategoryViewController: UIViewController {
         button3.layer.cornerRadius = 30
         button3.layer.masksToBounds = true
         view.addSubview(button3)
+        
+        button4.setImage(UIImage(systemName: "nosign"), for: .normal)
+        button4.tintColor = .white
+        button4.backgroundColor = UIColor(hex: 0xFF7466)
+        button4.isHidden = true
+        button4.layer.cornerRadius = 30
+        button4.layer.masksToBounds = true
+        view.addSubview(button4)
     
         
        
@@ -146,6 +155,17 @@ class CategoryViewController: UIViewController {
         
         button3.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 360, width: 60, height: 60)
         button3.addTarget(self, action: #selector(filterTshirts), for: .touchUpInside)
+        
+        button4.frame = CGRect(x: view.frame.size.width - 70, y: view.frame.size.height - 430, width: 60, height: 60)
+        button4.addTarget(self, action: #selector(noFilter), for: .touchUpInside)
+    }
+    
+    @objc private func noFilter(){
+        if mainCategoryId == 0 {
+            categoryViewModel?.getProducts(baseUrl: Constant.allProducts())
+        }else{
+            categoryViewModel?.getProducts(baseUrl:  Constant.mainCategory(category_ID: mainCategoryId))
+        }
     }
     
     @objc private func filterAcc(){
@@ -180,6 +200,7 @@ class CategoryViewController: UIViewController {
         button1.isHidden = !button1.isHidden
         button2.isHidden = !button2.isHidden
         button3.isHidden = !button3.isHidden
+        button4.isHidden = !button4.isHidden
         UIView.animate(withDuration: 0.3, animations: {
                     self.view.layoutIfNeeded()
                 })
@@ -220,7 +241,7 @@ extension CategoryViewController : UICollectionViewDataSource {
 
 extension CategoryViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 300)
+        return CGSize(width: 190, height: 300)
         
     }
 }

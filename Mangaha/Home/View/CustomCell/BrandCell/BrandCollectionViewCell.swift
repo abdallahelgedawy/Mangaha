@@ -15,12 +15,11 @@ class BrandCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var brandImg: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      
+        brandView.layer.shadowOpacity = 0.3
+        brandView.layer.shadowRadius = 10
     }
     
-    func setupCell(name : String , image : UIImage){
-        self.brandName.text = name
-        self.brandImg.image = image
-    }
+   
 
 }
