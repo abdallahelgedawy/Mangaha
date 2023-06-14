@@ -56,6 +56,7 @@ class HomeViewController: UIViewController {
         pageControl.numberOfPages = adsImages.count
        setupNavigationController()
     }
+
     func setupNavigationController(){
         let customOrange = UIColor(hex: 0xFF7466)
         let apperance = UINavigationBarAppearance()

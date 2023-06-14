@@ -23,12 +23,12 @@ class NetworkServices{
                 print(error.localizedDescription)
                 completionHandler(nil)
             }
-        
+            
         }
         task.resume()
-
+        
     }
-
+    
     static func getProducts(baseUrl: String,completionHandler: @escaping (Product?) -> Void ){
         let url = URL(string: baseUrl)
         guard let newUrl = url else {
@@ -44,20 +44,20 @@ class NetworkServices{
                 print(error.localizedDescription)
                 completionHandler(nil)
             }
-        
+            
         }
         task.resume()
-
+        
     }
     
-   static func convertCurency(amount:String,completionHandler: @escaping (Double?) -> Void ){
-       let currency = getCurrency()
-       let url : URL?
-       if currency == "EGP"{
-           url = URL(string: Constant.currencyConverterUrl("EGP", "Eur", amount))
-       }else{
-           url = URL(string: Constant.currencyConverterUrl("Eur", "EGP", amount))
-       }
+    static func convertCurency(amount:String,completionHandler: @escaping (Double?) -> Void ){
+        let currency = getCurrency()
+        let url : URL?
+        if currency == "EGP"{
+            url = URL(string: Constant.currencyConverterUrl("EGP", "Eur", amount))
+        }else{
+            url = URL(string: Constant.currencyConverterUrl("Eur", "EGP", amount))
+        }
         guard let url = url else{
             return
         }
@@ -72,7 +72,7 @@ class NetworkServices{
                 print(error.localizedDescription)
                 completionHandler(nil)
             }
-        
+            
         }
         task.resume()
     }
@@ -83,5 +83,72 @@ class NetworkServices{
         }
         return "Eur"
     }
+    static func getProductInfo( baseUrl : String , completionHandler : @escaping (myProduct?)->Void){
+        guard let url = URL(string: baseUrl) else{return}
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request) { data, response, error in
+            do {
+                guard let data = data else{return}
+                let jsonData = try JSONDecoder().decode(myProduct.self, from: data)
+                completionHandler(jsonData)
+            }catch{
+                print(error.localizedDescription)
+                completionHandler(nil)
+            }
+        }
+        task.resume()
+    }
+    static func postCustomer(customer : userCustomer , completionHandler : @escaping (ResponseCustomer? , Error?)->Void){
+        guard let url = URL(string: Constant.postCustomerEndPoint())else{
+            return
+        }
+        guard let Base = URL(string: "https://mad43-alex-ios3.myshopify.com/admin/api/2023-04/customers.json") else {return}
+        var request = URLRequest(url: Base)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("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", forHTTPHeaderField: "X-Shopify-Access-Token")
+       
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: convertToParameters(customer: customer), options: .prettyPrinted) else { return }
+             request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Request error:", error)
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let responseModel = try decoder.decode(ResponseUser.self, from: data)
+                    let customer = responseModel.customer
+                    completionHandler(customer,nil)
+                } catch {
+                    print(error.localizedDescription)
+                    completionHandler(nil,error)
+                    return
+                }
+            }
+        }
+        task.resume()
+    }
+   static func convertToParameters(customer : userCustomer) -> [String: Any] {
+                    var parameters: [String: Any] = [:]
+                    parameters["customer"] = convertCustomerTOParameters(customer: customer.customer)
+                    return parameters
+                }
+        
+       static func convertCustomerTOParameters(customer:Customer)->[String:Any]{
+                    var parameters : [String:Any] = [:]
+                    parameters["first_name"] = customer.firstName
+                    parameters["email"] = customer.email
+                    parameters["verified_email"] = customer.verifiedEmail
+                    parameters["password"] = customer.password
+                    parameters["password_confirmation"] = customer.passwordConfirmation
+                    parameters["send_email_welcome"] = customer.sendEmailWelcome
 
+                    return parameters
+                }
 }

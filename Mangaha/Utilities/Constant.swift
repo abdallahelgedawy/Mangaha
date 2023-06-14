@@ -13,6 +13,9 @@ class Constant{
     static func allBrands() -> String{
         return baseUrl + "smart_collections.json"
     }
+    static func productInfo(productId : Int)->String{
+        return baseUrl + "products/\(productId).json"
+    }
     
     static func produts(Brand_ID: Int) -> String{
         return baseUrl + "products.json?collection_id=\(Brand_ID)"
@@ -25,7 +28,6 @@ class Constant{
    static func mainCategory(category_ID: Int) -> String {
         return baseUrl + "/products.json?collection_id=\(category_ID)"
     }
-    
     static func mainCategory(category_ID: Int,filterType:String) -> String {
          return baseUrl + "/products.json?collection_id=\(category_ID)&product_type=\(filterType)"
      }
@@ -34,5 +36,8 @@ class Constant{
     }
     
     static let currencyKey = "Currency"
+    static func postCustomerEndPoint()->String{
+        return baseUrl + "customers.json"
+    }
     
 }

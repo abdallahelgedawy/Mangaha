@@ -92,7 +92,9 @@
 		B83F5B6C2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */; };
 		B84083112A338FA8008AB117 /* ReviewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840830F2A338FA8008AB117 /* ReviewsCollectionViewCell.swift */; };
 		B84083122A338FA8008AB117 /* ReviewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84083102A338FA8008AB117 /* ReviewsCollectionViewCell.xib */; };
+		B86708AA2A37DBCC00465879 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B86708A92A37DBCC00465879 /* GoogleService-Info.plist */; };
 		B87F637B2A34979F00C2C6DF /* UiColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */; };
+		B8DA4D082A391751007BB2F5 /* UserCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA4D072A391751007BB2F5 /* UserCustomer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,7 +208,9 @@
 		B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCollectionViewCell.xib; sourceTree = "<group>"; };
 		B840830F2A338FA8008AB117 /* ReviewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B84083102A338FA8008AB117 /* ReviewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewsCollectionViewCell.xib; sourceTree = "<group>"; };
+		B86708A92A37DBCC00465879 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor + Hex.swift"; sourceTree = "<group>"; };
+		B8DA4D072A391751007BB2F5 /* UserCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustomer.swift; sourceTree = "<group>"; };
 		E0EB9E4B003702FD3F96023E /* Pods_MangahaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MangahaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -600,6 +604,7 @@
 				B829A4A12A30770500A0A4D0 /* Assets.xcassets */,
 				B829A4A32A30770500A0A4D0 /* LaunchScreen.storyboard */,
 				B829A4A62A30770500A0A4D0 /* Info.plist */,
+				B86708A92A37DBCC00465879 /* GoogleService-Info.plist */,
 				B829A49E2A30770400A0A4D0 /* Mangaha.xcdatamodeld */,
 				8CFED8B02A30BF35007CE610 /* TabBar.swift */,
 			);
@@ -680,6 +685,7 @@
 		B83F5B452A30D1D100B3F3B1 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				B8DA4D062A391735007BB2F5 /* SignUpModel */,
 				B83F5B472A30D22900B3F3B1 /* SignUpViewModel */,
 				B83F5B462A30D21F00B3F3B1 /* SignUpView */,
 			);
@@ -747,6 +753,14 @@
 				B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */,
 			);
 			path = FavoriteView;
+			sourceTree = "<group>";
+		};
+		B8DA4D062A391735007BB2F5 /* SignUpModel */ = {
+			isa = PBXGroup;
+			children = (
+				B8DA4D072A391751007BB2F5 /* UserCustomer.swift */,
+			);
+			path = SignUpModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -887,6 +901,7 @@
 				B83E1A042A33D92400D046AD /* MoreReviewsTableViewController.xib in Resources */,
 				B82EC34D2A31F708004162CC /* ProductDetailsCollectionViewCell.xib in Resources */,
 				B84083122A338FA8008AB117 /* ReviewsCollectionViewCell.xib in Resources */,
+				B86708AA2A37DBCC00465879 /* GoogleService-Info.plist in Resources */,
 				B83F5B6C2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib in Resources */,
 				B80DE7A32A348E1000C2F995 /* CartCell.xib in Resources */,
 				B82EC3472A31F64B004162CC /* ProductDetailsViewController.xib in Resources */,
@@ -1055,6 +1070,7 @@
 				448FCA302A31D2AA005B226C /* ProductCollectionViewCell.swift in Sources */,
 				448FCA2B2A31D14D005B226C /* ProductViewController.swift in Sources */,
 				8CFED8B12A30BF35007CE610 /* TabBar.swift in Sources */,
+				B8DA4D082A391751007BB2F5 /* UserCustomer.swift in Sources */,
 				448FCA1F2A31B891005B226C /* CategoryCollectionViewCell.swift in Sources */,
 				44DD23D92A35401200D03294 /* Constant.swift in Sources */,
 				448FCA132A31B0B1005B226C /* BrandCollectionViewCell.swift in Sources */,

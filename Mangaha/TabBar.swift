@@ -16,8 +16,9 @@ class TabBar: UITabBarController {
         let greenValue: CGFloat = 116.0
         let blueValue: CGFloat = 102.0
         UITabBar.appearance().tintColor = UIColor(red: (redValue/255.0), green: (greenValue/255.0), blue: (blueValue/255.0), alpha: 1.0)
-       
+        
         setupVCs()
+        
     }
     
 
@@ -35,7 +36,7 @@ class TabBar: UITabBarController {
     
     func setupVCs() {
 
-        viewControllers = [createNavController(for: HomeViewController(nibName: "HomeViewController", bundle: nil), title: NSLocalizedString("Home", comment: ""), image: UIImage(systemName: "house")!),createNavController(for: CategoryViewController(nibName: "CategoryViewController", bundle: nil), title: NSLocalizedString("Category", comment: ""), image: UIImage(systemName: "rectangle.split.2x2.fill")!) , createNavController(for: MEViewController(nibName: "MEViewController", bundle: nil), title: "Profile", image: UIImage(systemName: "person.crop.circle.fill")!) ]
+        viewControllers = [createNavController(for: HomeViewController(nibName: "HomeViewController", bundle: nil), title: NSLocalizedString("Home", comment: ""), image: UIImage(systemName: "house")!),createNavController(for: CategoryViewController(nibName: "CategoryViewController", bundle: nil), title: NSLocalizedString("Category", comment: ""), image: UIImage(systemName: "rectangle.split.2x2.fill")!) , createNavController(for: MEViewController(nibName: "MEViewController", bundle: nil), title: "Profile", image: UIImage(systemName: "person.crop.circle.fill")!)]
 
     }
     

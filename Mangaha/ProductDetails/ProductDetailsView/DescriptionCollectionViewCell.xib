@@ -40,6 +40,9 @@
                 <constraint firstAttribute="trailing" secondItem="g7B-Iw-YqS" secondAttribute="trailing" constant="5" id="qw7-nl-ZHx"/>
             </constraints>
             <size key="customSize" width="296" height="581"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="g7B-Iw-YqS" id="v62-gz-tRR"/>
+            </connections>
             <point key="canvasLocation" x="282.44274809160305" y="205.98591549295776"/>
         </collectionViewCell>
     </objects>
