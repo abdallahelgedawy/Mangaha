@@ -24,13 +24,13 @@ class SignUpViewModel{
             self?.email = myuserCustomer.customer.email
             self?.id = customer.id
             self?.username = myuserCustomer.customer.firstName
-            self?.postCart()
+           // self?.postCart()
         }
         DispatchQueue.main.async {
             self.bindedResult()
         }
     }
-    func postCart(){
+    /*func postCart(){
         NetworkServices.postDraftOrder { draftResponse, error in
             self.cartId = draftResponse?.id ?? 0
             self.postFavorite(email: self.email , username: self.username, userId: self.id , cartId: self.cartId)
@@ -42,7 +42,7 @@ class SignUpViewModel{
             let favoriteId = draftResponse?.id
             self.db.collection("users").addDocument(data: ["id" : userId , "email" : email , "username" : username , "FavoriteId" : favoriteId , "CartId" : self.cartId])
         }
-    }
+    }*/
     func registerUser(customer : userCustomer){
         var email  = customer.customer.email
         var password = customer.customer.password

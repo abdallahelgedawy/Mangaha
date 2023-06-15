@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     window = UIWindow(frame: UIScreen.main.bounds)
                     var navigation = UINavigationController(rootViewController: LoginViewController(nibName: "LoginViewController", bundle: nil))
                     navigation.navigationBar.isHidden = true
-                    self.window?.rootViewController = navigation
+                    self.window?.rootViewController = TabBar()
                     window?.makeKeyAndVisible()
                     window?.windowScene = windowScene
     }

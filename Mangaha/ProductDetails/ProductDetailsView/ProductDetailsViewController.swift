@@ -15,23 +15,24 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     @IBOutlet weak var favBtn: UIButton!
     
     @IBOutlet weak var bagBtn: UIButton!
+    var image:UIImage?
     var price = "0.0"
     
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-     /*   productDetailsViewModel?.bindedResultPrice = {
-            self.myProductDetailsCollection.reloadData()
-        }
-        setupNavigationController()
-        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+        /*   productDetailsViewModel?.bindedResultPrice = {
+         self.myProductDetailsCollection.reloadData()
+         }
+         setupNavigationController()
+         productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+         
+         productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+         DispatchQueue.main.async {
+         self.myProductDetailsCollection.reloadData()
+         }
+         }*/
         
-        productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
-            DispatchQueue.main.async {
-                self.myProductDetailsCollection.reloadData()
-            }
-        }*/
-       
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -148,7 +149,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         let backBarBtn = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action: #selector(popView))
         backBarBtn.tintColor = customOrange
         navigationItem.leftBarButtonItem = backBarBtn
-       
+        
         let apperance = UINavigationBarAppearance()
         apperance.configureWithTransparentBackground()
         apperance.backgroundColor = .white
@@ -164,17 +165,18 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      
         switch indexPath.section{
         case 0 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "productDetails", for: indexPath) as! ProductDetailsCollectionViewCell
             let data = productDetailsViewModel?.getImagesAtIndex(index: indexPath.row)
             cell.imageProductDetails.layer.cornerRadius = 10
             cell.imageProductDetails.sd_setImage(with: URL(string: data?.src ?? ""))
-            
             let hexColor = UIColor(hex: 0xFF7466)
             cell.myPage.currentPageIndicatorTintColor = hexColor
             cell.myPage.numberOfPages = data?.src?.count ?? 0
             cell.myPage.currentPage = indexPath.item
+            image = cell.imageProductDetails.image
             return cell
         case 1 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "reviews", for: indexPath) as! ReviewsCollectionViewCell
@@ -185,7 +187,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             }else{
                 cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
             }
-           
+            price = cell.priceLabel.text ?? "0.0"
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
             return cell
@@ -197,9 +199,10 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         default :
             return UICollectionViewCell()
         }
+       
     }
     
-
+    
     
     @objc func buttonTapped(_ sender: UIButton) {
         print("tapped")
@@ -218,6 +221,26 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         default:
             return CGSize.zero
         }
+    }
+    
+    
+    @IBAction func addToCart(_ sender: Any) {
+        setupCartProduct()
+    }
+    
+    func setupCartProduct(){
+        
+        let product = productDetailsViewModel?.getProductAtIndex(index: 0)?.product
+        if ((productDetailsViewModel?.isInCart(product?.id ?? 0))) ?? false {
+            self.view.makeToast("This product is already in cart")
+        }
+        let id = String(product?.id ?? 0)
+        let title = product?.title
+        let url = product?.image?.src
+        let imageData = image?.jpegData(compressionQuality: 1)
+        let SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price, quantity: "1")
+        productDetailsViewModel?.addProductToCart(product: SavedProduct)
+        self.view.makeToast("Product added to cart")
     }
 }
 
