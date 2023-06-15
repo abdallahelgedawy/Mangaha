@@ -12,6 +12,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDataSource , UIC
     @IBOutlet weak var myFavCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationController()
         let nib = UINib(nibName: "FavoriteCollectionViewCell", bundle: nil)
         myFavCollection.register(nib, forCellWithReuseIdentifier: "favCell")
         myFavCollection.dataSource = self
@@ -38,6 +39,27 @@ class FavoriteViewController: UIViewController, UICollectionViewDataSource , UIC
         super.viewDidLayoutSubviews()
         myFavCollection.collectionViewLayout.invalidateLayout()
     }
+    func setupNavigationController(){
+        navigationItem.setHidesBackButton(true, animated: true)
+        let customOrange = UIColor(hex: 0xFF7466)
+        let backBarBtn = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action: #selector(popView))
+        backBarBtn.tintColor = customOrange
+        navigationItem.leftBarButtonItem = backBarBtn
+       
+        let apperance = UINavigationBarAppearance()
+        apperance.configureWithTransparentBackground()
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationItem.standardAppearance = apperance
+        navigationItem.scrollEdgeAppearance = apperance
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "Favorites"
+    }
+    
+    @objc func popView(){
+        navigationController?.popViewController(animated: true)
+    }
+
     
     
    

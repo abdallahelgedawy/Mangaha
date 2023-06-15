@@ -6,23 +6,35 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var brandsLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var brandSearch: UISearchBar!
     @IBOutlet weak var brandsCollection: UICollectionView!
     @IBOutlet weak var adsCollection: UICollectionView!
+    var homeViewModel : HomeViewModel?
+    var networkIndecator : UIActivityIndicatorView!
     var adsImages = [UIImage(named: "sale1"),UIImage(named: "sale2"),UIImage(named: "sale3")]
-    var brands = [brand(name: "adidas", image: UIImage(named: "tshirt")!),brand(name: "zara", image: UIImage(named: "tshirt")!),brand(name: "breshka", image: UIImage(named: "tshirt")!),brand(name: "pull", image: UIImage(named: "shoes")!
-                                                                                                                                                                                              )]
+   
     var timer : Timer?
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        adsCollection.register(UINib(nibName: "AdsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "adsCell")
+       
+        homeViewModel = HomeViewModel()
+        networkIndecator = UIActivityIndicatorView(style: .large)
+        networkIndecator.color =  UIColor(hex: 0xFF7466)
+        networkIndecator.center = view.center
+        networkIndecator.startAnimating()
+        view.addSubview(networkIndecator)
         
+        brandsLabel.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
+        brandsLabel.layer.masksToBounds = true
+        
+        adsCollection.register(UINib(nibName: "AdsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "adsCell")
         brandsCollection.register(UINib(nibName: "BrandCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "brandCell")
         
         adsCollection.delegate = self
@@ -33,9 +45,43 @@ class HomeViewController: UIViewController {
         
         startTimer()
         
+        homeViewModel?.getBrands(baseUrl: Constant.allBrands())
+        homeViewModel?.bindBrandsListToHomeVC = {
+            DispatchQueue.main.async {
+                self.brandsCollection.reloadData()
+                self.networkIndecator.stopAnimating()
+            }
+        }
+        
         
         pageControl.numberOfPages = adsImages.count
-       
+       setupNavigationController()
+    }
+
+    func setupNavigationController(){
+        let customOrange = UIColor(hex: 0xFF7466)
+        let apperance = UINavigationBarAppearance()
+        apperance.configureWithTransparentBackground()
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationItem.standardAppearance = apperance
+        navigationItem.scrollEdgeAppearance = apperance
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "Home"
+        let CartBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(goToCart))
+        CartBtn.tintColor = customOrange
+        let favBtn = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(goToFav))
+        favBtn.tintColor = customOrange
+        navigationItem.rightBarButtonItems = [CartBtn , favBtn]
+    }
+    
+    @objc func goToCart(){
+        let cart = CartViewController(nibName: "CartViewController", bundle: nil)
+        navigationController?.pushViewController(cart, animated: true)
+    }
+    @objc func goToFav(){
+        let fav = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
+        navigationController?.pushViewController(fav, animated: true)
     }
     
     func startTimer(){
@@ -52,13 +98,7 @@ class HomeViewController: UIViewController {
         pageControl.currentPage = currentIndex
     }
 
-    @IBAction func favoriteBtn(_ sender: Any) {
-    
-    }
-    
-    @IBAction func shoppingCartBtn(_ sender: Any) {
-    
-    }
+  
 }
 
 extension HomeViewController : UICollectionViewDelegate{
@@ -67,6 +107,7 @@ extension HomeViewController : UICollectionViewDelegate{
            
         }else if collectionView == brandsCollection {
             let productVC = ProductViewController(nibName: "ProductViewController", bundle: nil)
+            productVC.productViewModel = homeViewModel?.inistintiateProductViewModel(index: indexPath.row)
             self.navigationController?.pushViewController(productVC, animated: true)
         }
     }
@@ -78,7 +119,7 @@ extension HomeViewController : UICollectionViewDataSource{
         if collectionView == adsCollection {
             return adsImages.count
         }else if collectionView == brandsCollection {
-            return brands.count
+            return homeViewModel?.getBrandsCount() ?? 0
         }
         return 0
     }
@@ -90,8 +131,10 @@ extension HomeViewController : UICollectionViewDataSource{
             return cell
         }
         let cell = brandsCollection.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! BrandCollectionViewCell
-        let data = brands[indexPath.row]
-        cell.setupCell(name: data.name, image: data.image)
+        let data = homeViewModel?.getBrandsAtIndex(index: indexPath.row)
+        cell.brandName.text = data?.title
+        cell.brandImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
+
         return cell
        
     }
@@ -102,7 +145,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout{
         if collectionView == adsCollection{
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
-        return CGSize(width: 170, height: 200)
+        return CGSize(width: 190, height: 200)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == adsCollection {
@@ -111,7 +154,4 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout{
         return 10
     }
 }
-struct brand {
-    var name : String
-    var image : UIImage
-}
+

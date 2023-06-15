@@ -16,11 +16,12 @@ class ContactViewController: UIViewController {
     @IBOutlet var countryNameLabel: UILabel!
     @IBOutlet var cityNameLabel: UILabel!
     @IBOutlet var streetAdressLabel: UILabel!
-    
+    let settingsVM = SettingsViwewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewsCorners()
         setupNavigationBar()
+        curencyLabel.text = getUserCurrency()
     }
 
 
@@ -38,14 +39,15 @@ class ContactViewController: UIViewController {
     }
     
     func setupNavigationBar(){
+        let customOrange = UIColor(hex: 0xFF7466)
         navigationItem.setHidesBackButton(true, animated: true)
         let backBarBtn = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action: #selector(BackToMe))
-        backBarBtn.tintColor = .white
+        backBarBtn.tintColor = customOrange
         navigationItem.leftBarButtonItem = backBarBtn
         let apperance = UINavigationBarAppearance()
         apperance.configureWithTransparentBackground()
-        apperance.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
-        apperance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.standardAppearance = apperance
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -57,15 +59,20 @@ class ContactViewController: UIViewController {
         adressView.changeCornerRadius(corner: [.topLeft,.bottomRight], radius: 30)
         curencyView.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
     }
+    func getUserCurrency()->String{
+        return settingsVM.getCurrencyFromDefaults()
+    }
     
     func showChooseCurrencyAlert(){
         let currencyAlert = UIAlertController(title: "Change Currency", message: "Choose your Currncy", preferredStyle: .alert)
-        let egyAction = UIAlertAction(title: "EGY", style: .default){_ in
-            self.curencyLabel.text = "EGY"
+        let egyAction = UIAlertAction(title: "EGP", style: .default){_ in
+            self.curencyLabel.text = "EGP"
+            self.settingsVM.addCurrencyToDefaults(currency: "EGP")
 
         }
-        let dollarAction = UIAlertAction(title: "Dollar", style: .default){_ in
-            self.curencyLabel.text = "Dollar"
+        let dollarAction = UIAlertAction(title: "Eur", style: .default){_ in
+            self.curencyLabel.text = "Eur"
+            self.settingsVM.addCurrencyToDefaults(currency: "Eur")
         }
         currencyAlert.addAction(egyAction)
         currencyAlert.addAction(dollarAction)

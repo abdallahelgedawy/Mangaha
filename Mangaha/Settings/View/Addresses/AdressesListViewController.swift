@@ -24,17 +24,18 @@ class AdressesListViewController: UIViewController {
     }
     
     func setupNavigationBar(){
+        let customOrange = UIColor(hex: 0xFF7466)
         navigationItem.setHidesBackButton(true, animated: true)
         let addBarBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewAdress))
-        addBarBtn.tintColor = .white
+        addBarBtn.tintColor = customOrange
         navigationItem.rightBarButtonItem = addBarBtn
         let backBarBtn = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action: #selector(BackToSettings))
-        backBarBtn.tintColor = .white
+        backBarBtn.tintColor = customOrange
         navigationItem.leftBarButtonItem = backBarBtn
         let apperance = UINavigationBarAppearance()
         apperance.configureWithTransparentBackground()
-        apperance.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
-        apperance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        apperance.backgroundColor = .white
+        apperance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.standardAppearance = apperance
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false
