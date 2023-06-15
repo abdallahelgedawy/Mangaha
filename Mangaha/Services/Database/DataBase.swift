@@ -70,4 +70,10 @@ class DataBase{
             return product?.count ?? 0 > 0
     }
     
+    func updateProductInCart(productId:String , count:String ){
+        let updatedProduct = fetchProductById(id:productId)
+        updatedProduct?.first?.quantity = count
+        save()
+        
+    }
 }

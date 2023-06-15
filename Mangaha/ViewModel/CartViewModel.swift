@@ -27,6 +27,20 @@ class CartViewModel{
     func deleteFromCart(_ productId:String, _ index:Int){
         dataBase.deleteProductFromCart(id: productId)
         cartProducts.remove(at: index)
+    }
+    
+    func updateProduct(id:String , count:String){
+        print("product id"+id)
+        dataBase.updateProductInCart(productId: id, count: count)
+    }
+    
+    func getCartSubTotal()->String{
+        var subTotal = 0.0
+        for product in cartProducts {
+            print("price" + (product.price ?? "00") )
+            subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 0.0) 
+        }
         
+        return Constant.isEuroCurrency() ? String(subTotal) + "    EUR" : String(subTotal) + "    EGP"
     }
 }

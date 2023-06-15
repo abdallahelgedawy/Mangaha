@@ -16,7 +16,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     
     @IBOutlet weak var bagBtn: UIButton!
     var image:UIImage?
-    var price = "0.0"
+   
     
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
@@ -187,7 +187,6 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             }else{
                 cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
             }
-            price = cell.priceLabel.text ?? "0.0"
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
             return cell
@@ -238,7 +237,8 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         let title = product?.title
         let url = product?.image?.src
         let imageData = image?.jpegData(compressionQuality: 1)
-        let SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price, quantity: "1")
+        let price = product?.variants?[0].price
+        let SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
         productDetailsViewModel?.addProductToCart(product: SavedProduct)
         self.view.makeToast("Product added to cart")
     }
