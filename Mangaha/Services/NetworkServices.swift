@@ -173,7 +173,6 @@ class NetworkServices{
             if let httpResponse = response as? HTTPURLResponse {
                 do {
                     let json = try JSONDecoder().decode(DraftOrderPostResponse.self, from: data!)
-                    print(json.draftOrder?.id)
                     completionHandler(json.draftOrder , nil)
                 } catch {
                     completionHandler(nil , error)
