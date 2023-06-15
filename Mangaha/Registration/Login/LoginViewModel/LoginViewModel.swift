@@ -25,16 +25,20 @@ class LoginViewModel{
                 // Process the customer data
                 let firstName = data["username"] as? String ?? ""
                 let id = data["id"] as? Int ?? 0
+                let favoriteId = data["FavoriteId"] as? Int ?? 0
+                let cartId = data["CartId"] as? Int ?? 0
                 print("before",firstName)
                 print("before",id)
-                self.saveDataIntoUserDefaults(username: firstName, id: id)
+                self.saveDataIntoUserDefaults(username: firstName, id: id , favoriteId: favoriteId , cartId: cartId)
                 
             }
         })
             
     }
-    func saveDataIntoUserDefaults(username : String , id : Int){
+    func saveDataIntoUserDefaults(username : String , id : Int , favoriteId : Int , cartId : Int){
         UserDefaults.standard.set(username, forKey: "CurrentUserName")
         UserDefaults.standard.set(id, forKey: "CurrentUserId")
+        UserDefaults.standard.set(favoriteId, forKey: "FavoriteId")
+        UserDefaults.standard.set(cartId, forKey: "CartId")
     }
 }

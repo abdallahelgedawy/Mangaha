@@ -29,7 +29,6 @@ class CategoryViewModel{
     
     func getProductsAtIndex(index:Int)-> Products{
         return categoriesList?[index] ?? Products()
-        
     }
     
     func  getProductsCount()->Int{
@@ -43,4 +42,12 @@ class CategoryViewModel{
         }
     }
   */
+    func instantiateProductDetailsViewModel(index : Int) -> ProductDetailsViewModel{
+        var productDetailsViewModel = ProductDetailsViewModel()
+        productDetailsViewModel.productId = categoriesList?[index].id
+        return productDetailsViewModel
+    }
+    func takeProducts(){
+        
+    }
 }

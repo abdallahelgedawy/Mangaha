@@ -211,7 +211,9 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        var productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+        productDetails.productDetailsViewModel = categoryViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
+        navigationController?.pushViewController(productDetails, animated: true)
     }
 }
 
@@ -233,6 +235,10 @@ extension CategoryViewController : UICollectionViewDataSource {
         cell.productName.text = data?.title
        // var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")
         cell.productPrice.text = data?.variants?[0].price
+        print(UserDefaults.standard.object(forKey: Constant.currencyKey))
+        if Constant.isEuroCurrency(){
+            cell.productCurrency.text = "€"
+        }
         cell.productCurrency.text = "EGP"
         return cell
     }

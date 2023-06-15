@@ -47,4 +47,8 @@ class Constant{
         }
     static let currentUserName = "CurrentUserName"
     static let currentUserId = "CurrentUserId"
+    private static let postBaeUrl = "https://mad43-alex-ios3.myshopify.com/admin/api/2023-04/"
+    static func postDraftOrderEndPoint()->String{
+        return postBaeUrl + "draft_orders.json"
+    }
 }

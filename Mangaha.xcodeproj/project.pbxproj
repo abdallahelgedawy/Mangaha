@@ -92,6 +92,7 @@
 		B83F5B6C2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */; };
 		B84083112A338FA8008AB117 /* ReviewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840830F2A338FA8008AB117 /* ReviewsCollectionViewCell.swift */; };
 		B84083122A338FA8008AB117 /* ReviewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84083102A338FA8008AB117 /* ReviewsCollectionViewCell.xib */; };
+		B84CBB912A3B2EA4007B4887 /* DraftOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84CBB902A3B2EA4007B4887 /* DraftOrderModel.swift */; };
 		B86708AA2A37DBCC00465879 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B86708A92A37DBCC00465879 /* GoogleService-Info.plist */; };
 		B87F637B2A34979F00C2C6DF /* UiColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */; };
 		B8DA4D082A391751007BB2F5 /* UserCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA4D072A391751007BB2F5 /* UserCustomer.swift */; };
@@ -208,6 +209,7 @@
 		B83F5B6A2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCollectionViewCell.xib; sourceTree = "<group>"; };
 		B840830F2A338FA8008AB117 /* ReviewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B84083102A338FA8008AB117 /* ReviewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewsCollectionViewCell.xib; sourceTree = "<group>"; };
+		B84CBB902A3B2EA4007B4887 /* DraftOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftOrderModel.swift; sourceTree = "<group>"; };
 		B86708A92A37DBCC00465879 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B87F637A2A34979F00C2C6DF /* UiColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor + Hex.swift"; sourceTree = "<group>"; };
 		B8DA4D072A391751007BB2F5 /* UserCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCustomer.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 			children = (
 				44EDE5AE2A35318C002704E0 /* Brands.swift */,
 				444F7B962A35A2BE0061B3B8 /* Product.swift */,
+				B84CBB902A3B2EA4007B4887 /* DraftOrderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1075,6 +1078,7 @@
 				44DD23D92A35401200D03294 /* Constant.swift in Sources */,
 				448FCA132A31B0B1005B226C /* BrandCollectionViewCell.swift in Sources */,
 				B80DE7CC2A348EDF00C2F995 /* WishListCell.swift in Sources */,
+				B84CBB912A3B2EA4007B4887 /* DraftOrderModel.swift in Sources */,
 				448FCA1A2A31B289005B226C /* AdsCollectionViewCell.swift in Sources */,
 				44787E2C2A315A45008C0CBB /* HomeViewController.swift in Sources */,
 				B83F5B5B2A3102A900B3F3B1 /* FavoriteViewModel.swift in Sources */,

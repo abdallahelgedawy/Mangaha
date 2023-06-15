@@ -23,8 +23,7 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
         orderTabelView.delegate = self
         favTableView.dataSource = self
         favTableView.delegate = self
-        setupNavigationBar()
-        
+        setupNavigationBar()        
     }
     
     @IBAction func viewMoreOrder(_ sender: UIButton) {
