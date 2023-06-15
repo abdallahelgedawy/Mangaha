@@ -197,12 +197,12 @@ class NetworkServices{
             }
 
             }
-            
+        task.resume()
 
         }
 
-        task.resume()
-    }
+       
+    
     
     static func getAddressDetails(compelitionHandler:@escaping (CustomerAddress?,Error?) -> Void){
         guard let url = URL(string: Constant.getAddressDetailsEndPoint())else{
@@ -299,7 +299,7 @@ class NetworkServices{
         
         return parameters
     }
-    static func postDraftOrder(completionHandler : @escaping (DraftOrderResponse? , Error?)->Void){
+    static func postDraftOrder(products:[LineItems],completionHandler : @escaping (DraftOrderResponse? , Error?)->Void){
         let url = URL(string: "https://0f0340065b43e0803729efbf5c2e1ff6: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@mad43-alex-ios3.myshopify.com/admin/api/2023-04/draft_orders.json")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -307,8 +307,7 @@ class NetworkServices{
         request.httpShouldHandleCookies = false
         
         do {
-            let lineItems = [LineItems(title: "first" , price: "10" , quantity: 1)]
-            let order = DraftOrderRequest(draftOrder: DraftOrder(lineItems: lineItems))
+            let order = DraftOrderRequest(draftOrder: DraftOrder(lineItems: products))
             let data = try JSONEncoder().encode(order)
             let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
             request.httpBody = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)

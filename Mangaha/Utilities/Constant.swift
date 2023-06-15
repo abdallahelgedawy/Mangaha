@@ -97,7 +97,7 @@ class Constant{
     static let currentUserId = "CurrentUserId"
 
     static func postDraftOrderEndPoint()->String{
-        return postBaeUrl + "draft_orders.json"
+        return postBaseUrl + "draft_orders.json"
     }
 
 }

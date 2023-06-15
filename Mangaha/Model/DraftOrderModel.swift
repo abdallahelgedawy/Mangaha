@@ -22,10 +22,13 @@ struct LineItems : Codable{
     var title    : String?
     var price    : String?
     var quantity : Int?
+    var imageUrl : String?
     enum CodingKeys: String, CodingKey {
         case title
         case price
         case quantity
+        case imageUrl = "sku"
+        
     }
     
 }
