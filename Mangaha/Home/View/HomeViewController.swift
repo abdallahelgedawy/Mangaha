@@ -23,7 +23,6 @@ class HomeViewController: UIViewController {
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         homeViewModel = HomeViewModel()
         networkIndecator = UIActivityIndicatorView(style: .large)
         networkIndecator.color =  UIColor(hex: 0xFF7466)

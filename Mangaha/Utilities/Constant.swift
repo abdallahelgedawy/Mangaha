@@ -9,6 +9,10 @@ import Foundation
 class Constant{
     private static var baseUrl = "https://0f0340065b43e0803729efbf5c2e1ff6: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@mad43-alex-ios3.myshopify.com/admin/api/2023-04/"
 
+        private static let postBaseUrl = "https://mad43-alex-ios3.myshopify.com/admin/api/2023-04/"
+
+
+
 
     static func allBrands() -> String{
         return baseUrl + "smart_collections.json"
@@ -40,15 +44,62 @@ class Constant{
         return baseUrl + "customers.json"
     }
     
-        
-        static func isEuroCurrency()->Bool{
-               return  UserDefaults.standard.object(forKey: Constant.currencyKey) as? String == "Eur"
 
-        }
+    static func isEuroCurrency()->Bool{
+           return  UserDefaults.standard.object(forKey: Constant.currencyKey) as? String == "Eur"
+
+    }
+    
+    static func postAddressEndPoint()->String{
+        return postBaseUrl + "customers/\(getCurrentCustomerId())/addresses.json"
+    }
+    
+    static func getAllAddressesEndPoint()->String{
+        return baseUrl + "customers/\(getCurrentCustomerId())/addresses.json"
+    }
+    
+    static func defaultAddressEndPoint(addressId:String)->String{
+        return postBaseUrl + "customers/\(getCurrentCustomerId())/addresses/\(addressId)/default.json"
+    }
+    
+    static func getCurrentCustomerId()->String{
+        return "7009396097310"
+    }
+    
+    static func deleteAddressEndPoint(addressId:String)->String{
+        return postBaseUrl + "customers/\(getCurrentCustomerId())/addresses/\(addressId).json"
+    }
+    
+    static func firstAddedAddress(isFirstAdrees:Bool){
+        UserDefaults.standard.set(isFirstAdrees, forKey: "firsAddress")
+    }
+    
+    static func isFirstAddress()->Bool{
+        return UserDefaults.standard.object(forKey: "firsAddress") as? Bool ?? true
+    }
+    static let defaultAdressIdKey = "DeafultAddressKey"
+    
+    static func saveDefaultAddressId(id:String){
+        UserDefaults.standard.set(id, forKey: defaultAdressIdKey)
+    }
+    
+    static func getDefaultAddressId()->String{
+        return (UserDefaults.standard.object(forKey: defaultAdressIdKey) as? String)!
+    }
+    
+    static func getAddressDetailsEndPoint()->String{
+        return baseUrl + "customers/\(getCurrentCustomerId())/addresses/\(getDefaultAddressId()).json"
+    }
+    
+
+       
     static let currentUserName = "CurrentUserName"
     static let currentUserId = "CurrentUserId"
-    private static let postBaeUrl = "https://mad43-alex-ios3.myshopify.com/admin/api/2023-04/"
+
     static func postDraftOrderEndPoint()->String{
         return postBaeUrl + "draft_orders.json"
     }
+
 }
+    
+
