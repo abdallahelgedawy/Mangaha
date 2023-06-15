@@ -11,15 +11,27 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     
     
     
-    
+    var productDetailsViewModel : ProductDetailsViewModel?
     @IBOutlet weak var favBtn: UIButton!
     
     @IBOutlet weak var bagBtn: UIButton!
+    var price = "0.0"
     
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+     /*   productDetailsViewModel?.bindedResultPrice = {
+            self.myProductDetailsCollection.reloadData()
+        }
         setupNavigationController()
+        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+        
+        productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+            DispatchQueue.main.async {
+                self.myProductDetailsCollection.reloadData()
+            }
+        }*/
+       
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -43,10 +55,10 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             }
             
         }
-        print(myProductDetailsCollection.numberOfSections)
         myProductDetailsCollection.setCollectionViewLayout(layout, animated: true)
         myProductDetailsCollection.contentInsetAdjustmentBehavior = .never
     }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
@@ -72,6 +84,22 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         
         return section
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        productDetailsViewModel?.bindedResultPrice = {
+            self.myProductDetailsCollection.reloadData()
+        }
+        setupNavigationController()
+        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+        
+        productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+            DispatchQueue.main.async {
+                self.myProductDetailsCollection.reloadData()
+            }
+        }
+    }
+    
+    
     func drawTopSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -104,7 +132,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section{
         case 0 :
-            return 5
+            return productDetailsViewModel?.getImagesCount() ?? 0
         case 1 :
             return 1
         case 2 :
@@ -139,41 +167,32 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         switch indexPath.section{
         case 0 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "productDetails", for: indexPath) as! ProductDetailsCollectionViewCell
+            let data = productDetailsViewModel?.getImagesAtIndex(index: indexPath.row)
             cell.imageProductDetails.layer.cornerRadius = 10
-            
+            cell.imageProductDetails.sd_setImage(with: URL(string: data?.src ?? ""))
             
             let hexColor = UIColor(hex: 0xFF7466)
             cell.myPage.currentPageIndicatorTintColor = hexColor
-            cell.myPage.numberOfPages = 5
+            cell.myPage.numberOfPages = data?.src?.count ?? 0
             cell.myPage.currentPage = indexPath.item
             return cell
         case 1 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "reviews", for: indexPath) as! ReviewsCollectionViewCell
-            cell.sizesBtn.showsMenuAsPrimaryAction = true
-            cell.sizesBtn.menu = UIMenu(
-                title: "Options",
-                options: .destructive,
-                children: [
-                    UIAction(title: "Option 1",attributes: .destructive , handler: { action in
-                        // Handle Option 1 selection
-                        print("Option 1 selected")
-                    }),
-                    UIAction(title: "Option 2",attributes: .destructive , handler: { action in
-                        // Handle Option 2 selection
-                        print("Option 2 selected")
-                    }),
-                    UIAction(title: "Option 3",attributes: .destructive , handler: { action in
-                        // Handle Option 3 selection
-                        print("Option 3 selected")
-                    })
-                ]
-            )
-            
+            let data = productDetailsViewModel?.getProductAtIndex(index: indexPath.row)
+            cell.nameLabel.text = data?.product.title
+            if(Constant.isEuroCurrency()){
+                cell.priceLabel.text = "€" + (data?.product.variants?[0].price ?? "")
+            }else{
+                cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
+            }
+           
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
             return cell
         case 2 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "description", for: indexPath) as! DescriptionCollectionViewCell
+            let data = productDetailsViewModel?.getProductAtIndex(index: indexPath.row)
+            cell.descriptionLabel.text = data?.product.body_html
             return cell
         default :
             return UICollectionViewCell()

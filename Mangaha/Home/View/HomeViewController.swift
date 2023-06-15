@@ -16,14 +16,20 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var brandsCollection: UICollectionView!
     @IBOutlet weak var adsCollection: UICollectionView!
     var homeViewModel : HomeViewModel?
+    var networkIndecator : UIActivityIndicatorView!
     var adsImages = [UIImage(named: "sale1"),UIImage(named: "sale2"),UIImage(named: "sale3")]
    
     var timer : Timer?
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaults.standard.string(forKey: Constant.defaultAdressIdKey))
         homeViewModel = HomeViewModel()
+        networkIndecator = UIActivityIndicatorView(style: .large)
+        networkIndecator.color =  UIColor(hex: 0xFF7466)
+        networkIndecator.center = view.center
+        networkIndecator.startAnimating()
+        view.addSubview(networkIndecator)
+        
         brandsLabel.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
         brandsLabel.layer.masksToBounds = true
         
@@ -42,6 +48,7 @@ class HomeViewController: UIViewController {
         homeViewModel?.bindBrandsListToHomeVC = {
             DispatchQueue.main.async {
                 self.brandsCollection.reloadData()
+                self.networkIndecator.stopAnimating()
             }
         }
         
@@ -49,6 +56,7 @@ class HomeViewController: UIViewController {
         pageControl.numberOfPages = adsImages.count
        setupNavigationController()
     }
+
     func setupNavigationController(){
         let customOrange = UIColor(hex: 0xFF7466)
         let apperance = UINavigationBarAppearance()
@@ -136,7 +144,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout{
         if collectionView == adsCollection{
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
-        return CGSize(width: 170, height: 200)
+        return CGSize(width: 190, height: 200)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == adsCollection {

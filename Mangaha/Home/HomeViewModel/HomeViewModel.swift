@@ -24,7 +24,7 @@ class HomeViewModel{
     }
     
     func getBrandsAtIndex(index:Int)-> Smart_collections{
-        return brandsList?[index] ?? Smart_collections(id: 0, handle: "", title: "", updated_at: "", body_html: "", published_at: "", sort_order: "", template_suffix: "", disjunctive: true, rules: [Rules(column: "", relation: "", condition: "")], published_scope: "", admin_graphql_api_id: "", image: Image(created_at: "", alt: "", width: 0, height: 0, src: ""))
+        return brandsList?[index] ?? Smart_collections()
     }
     
     func  getBrandsCount()->Int{

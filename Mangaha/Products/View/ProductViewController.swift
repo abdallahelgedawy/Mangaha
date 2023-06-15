@@ -13,11 +13,17 @@ class ProductViewController: UIViewController {
     
     @IBOutlet weak var productCollection: UICollectionView!
     @IBOutlet weak var filterProduct: UISegmentedControl!
-   
+    var networkIndecator : UIActivityIndicatorView!
     var productViewModel : ProductViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
+        
+        networkIndecator = UIActivityIndicatorView(style: .large)
+        networkIndecator.color =  UIColor(hex: 0xFF7466)
+        networkIndecator.center = view.center
+        networkIndecator.startAnimating()
+        view.addSubview(networkIndecator)
       
         productCollection.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "productCell")
         
@@ -32,6 +38,7 @@ class ProductViewController: UIViewController {
         productViewModel?.bindproductListToProductVC = {
             DispatchQueue.main.async {
                 self.productCollection.reloadData()
+                self.networkIndecator.stopAnimating()
             }
         }
         
@@ -39,9 +46,9 @@ class ProductViewController: UIViewController {
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-         
+            productViewModel?.filterProductFromLowToHigh()
         }else if sender.selectedSegmentIndex == 2 {
-           
+            productViewModel?.filterProductFromHighToLow()
         }else{
             productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         }
@@ -86,6 +93,7 @@ class ProductViewController: UIViewController {
 extension ProductViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+        productDetails.productDetailsViewModel =  productViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
         navigationController?.pushViewController(productDetails, animated: true)
     }
 }
@@ -110,7 +118,7 @@ extension ProductViewController : UICollectionViewDataSource{
 }
 extension ProductViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 300)
+        return CGSize(width: 190, height: 300)
     }
 }
 
