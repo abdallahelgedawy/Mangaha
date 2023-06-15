@@ -180,7 +180,11 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "reviews", for: indexPath) as! ReviewsCollectionViewCell
             let data = productDetailsViewModel?.getProductAtIndex(index: indexPath.row)
             cell.nameLabel.text = data?.product.title
-                cell.priceLabel.text = data?.product.variants?[0].price
+            if(Constant.isEuroCurrency()){
+                cell.priceLabel.text = "€" + (data?.product.variants?[0].price ?? "")
+            }else{
+                cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
+            }
            
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
