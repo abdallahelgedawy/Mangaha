@@ -1,5 +1,5 @@
 //
-//  OnboardingSlider.swift
+//  OnboardingSlide.swift
 //  Mangaha
 //
 //  Created by mariam adly on 15/06/2023.
