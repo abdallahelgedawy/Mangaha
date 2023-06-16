@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController , UISearchBarDelegate {
 
     @IBOutlet weak var brandsLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -18,12 +18,15 @@ class HomeViewController: UIViewController {
     var homeViewModel : HomeViewModel?
     var networkIndecator : UIActivityIndicatorView!
     var adsImages = [UIImage(named: "sale1"),UIImage(named: "sale2"),UIImage(named: "sale3")]
+    var filteredList : [Smart_collections]?
+    var isSearched : Bool?
    
     var timer : Timer?
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        brandSearch.delegate = self
+        isSearched = false
         homeViewModel = HomeViewModel()
         networkIndecator = UIActivityIndicatorView(style: .large)
         networkIndecator.color =  UIColor(hex: 0xFF7466)
@@ -57,6 +60,23 @@ class HomeViewController: UIViewController {
         pageControl.numberOfPages = adsImages.count
        setupNavigationController()
     }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isSearched = false
+            filteredList?.removeAll()
+           
+        }
+        else {
+            isSearched = true
+            filteredList?.removeAll()
+            filteredList = homeViewModel?.brandsList?.filter{brands in return
+                (brands.title?.contains(searchText))!
+            }
+                
+    }
+            brandsCollection.reloadData()
+    }
+    
 
     func setupNavigationController(){
         let customOrange = UIColor(hex: 0xFF7466)
@@ -107,8 +127,14 @@ extension HomeViewController : UICollectionViewDelegate{
            
         }else if collectionView == brandsCollection {
             let productVC = ProductViewController(nibName: "ProductViewController", bundle: nil)
-            productVC.productViewModel = homeViewModel?.inistintiateProductViewModel(index: indexPath.row)
-            self.navigationController?.pushViewController(productVC, animated: true)
+            if isSearched == true{
+                productVC.productViewModel = homeViewModel?.instantiateFilterProductViewModel(index: indexPath.row, filterList: filteredList!)
+                self.navigationController?.pushViewController(productVC, animated: true)
+            }
+            else{
+                productVC.productViewModel = homeViewModel?.inistintiateProductViewModel(index: indexPath.row)
+                self.navigationController?.pushViewController(productVC, animated: true)
+            }
         }
     }
     
@@ -116,10 +142,15 @@ extension HomeViewController : UICollectionViewDelegate{
 
 extension HomeViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
         if collectionView == adsCollection {
             return adsImages.count
         }else if collectionView == brandsCollection {
-            return homeViewModel?.getBrandsCount() ?? 0
+            if isSearched == true{
+                return filteredList?.count ?? 0
+            }else {
+                return homeViewModel?.getBrandsCount() ?? 0
+            }
         }
         return 0
     }
@@ -128,6 +159,12 @@ extension HomeViewController : UICollectionViewDataSource{
         if collectionView == adsCollection {
             let cell = adsCollection.dequeueReusableCell(withReuseIdentifier: "adsCell", for: indexPath) as! AdsCollectionViewCell
             cell.adsImg.image = adsImages[indexPath.row]
+            return cell
+        }
+        if isSearched!{
+            let cell = brandsCollection.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! BrandCollectionViewCell
+            cell.brandName.text = filteredList?[indexPath.row].title
+            cell.brandImg.sd_setImage(with: URL(string: filteredList?[indexPath.row].image?.src ?? ""), placeholderImage: UIImage(named: ""))
             return cell
         }
         let cell = brandsCollection.dequeueReusableCell(withReuseIdentifier: "brandCell", for: indexPath) as! BrandCollectionViewCell

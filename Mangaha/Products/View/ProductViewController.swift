@@ -7,18 +7,20 @@
 
 import UIKit
 
-class ProductViewController: UIViewController {
+class ProductViewController: UIViewController , UISearchBarDelegate{
     
     @IBOutlet weak var searchProduct: UISearchBar!
-    
+    var isSearched : Bool?
     @IBOutlet weak var productCollection: UICollectionView!
     @IBOutlet weak var filterProduct: UISegmentedControl!
     var networkIndecator : UIActivityIndicatorView!
     var productViewModel : ProductViewModel?
+    var filteredList : [Products]?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
-        
+        isSearched = false
+        searchProduct.delegate = self
         networkIndecator = UIActivityIndicatorView(style: .large)
         networkIndecator.color =  UIColor(hex: 0xFF7466)
         networkIndecator.center = view.center
@@ -42,6 +44,22 @@ class ProductViewController: UIViewController {
             }
         }
         
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isSearched = false
+            filteredList?.removeAll()
+           
+        }
+        else {
+            isSearched = true
+            filteredList?.removeAll()
+            filteredList = productViewModel?.productList!.filter{products in return
+                (products.title?.contains(searchText))!
+            }
+                
+    }
+            productCollection.reloadData()
     }
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -93,18 +111,33 @@ class ProductViewController: UIViewController {
 extension ProductViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
-        productDetails.productDetailsViewModel =  productViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
-        navigationController?.pushViewController(productDetails, animated: true)
+        if isSearched == true{
+            productDetails.productDetailsViewModel = productViewModel?.instantiateProductFilteredViewModel(index: indexPath.row, filterList: filteredList!)
+            navigationController?.pushViewController(productDetails, animated: true)
+        }else{
+            productDetails.productDetailsViewModel =  productViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
+            navigationController?.pushViewController(productDetails, animated: true)
+        }
     }
 }
 
 extension ProductViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSearched == true{
+            return filteredList?.count ?? 0
+        }
         return productViewModel?.getProductsCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        if isSearched!{
+            let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
+            cell.productImg.sd_setImage(with: URL(string: filteredList?[indexPath.row].image?.src ?? ""))
+            cell.productName.text = filteredList?[indexPath.row].title
+            cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
+            cell.productCurrency.text = "EGP"
+            return cell
+        }
         let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
         let data = productViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))

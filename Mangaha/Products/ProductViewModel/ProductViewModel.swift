@@ -45,4 +45,9 @@ class ProductViewModel{
         productDetailsViewModel.productId = productList?[index].id
         return productDetailsViewModel
     }
+    func instantiateProductFilteredViewModel(index : Int , filterList : [Products])->ProductDetailsViewModel{
+        let productDetailsViewModel = ProductDetailsViewModel()
+        productDetailsViewModel.productId = filterList[index].id
+        return productDetailsViewModel
+    }
 }

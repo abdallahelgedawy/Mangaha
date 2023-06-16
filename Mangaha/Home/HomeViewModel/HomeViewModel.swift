@@ -36,5 +36,10 @@ class HomeViewModel{
         productViewModeL.brandId = brandsList?[index].id
         return productViewModeL
     }
+    func instantiateFilterProductViewModel(index : Int , filterList : [Smart_collections]) -> ProductViewModel{
+        let productViewModel = ProductViewModel()
+        productViewModel.brandId = filterList[index].id
+        return productViewModel
+    }
     
 }
