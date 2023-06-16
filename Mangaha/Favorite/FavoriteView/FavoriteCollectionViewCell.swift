@@ -9,14 +9,18 @@ import UIKit
 
 class FavoriteCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet var productPrice: UILabel!
+    @IBOutlet var productTitle: UILabel!
+    @IBOutlet weak var favImage: UIImageView!
+    @IBOutlet weak var myFavBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         myFavBtn.layer.cornerRadius = 10
     }
 
-    @IBOutlet weak var myFavBtn: UIButton!
+    
     @IBAction func favBtn(_ sender: UIButton) {
         print("Favorite")
     }
-    @IBOutlet weak var favImage: UIImageView!
+    
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 class CategoryViewModel{
+    let dataBase = DataBase()
     var bindCategoryListToCategoryVC : (()->()) = {}
     var categoriesList : [Products]? {
         didSet {
@@ -49,5 +50,17 @@ class CategoryViewModel{
     }
     func takeProducts(){
         
+    }
+    
+    
+    func addProductToFavourites(product:CoreDataProduct){
+        dataBase.addToCart(product: product)
+    }
+    
+    func deleteProductFromFavourite(_ id:String){
+        dataBase.deleteProductFromDataBase(id: id, isFavourite: true)
+    }
+    func isInInfav(_ id:String)->Bool{
+        return dataBase.isProductInFavourite(id: id)
     }
 }

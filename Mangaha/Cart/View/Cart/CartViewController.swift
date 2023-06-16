@@ -120,7 +120,7 @@ extension CartViewController : UITableViewDelegate , UITableViewDataSource{
         }
         cell?.productId = product.id
         subTotalLabel.text = cartVM.getCartSubTotal()
-        cell?.cartDelegate.self
+        cell?.cartDelegate = self
         return cell ?? UITableViewCell()
     }
     

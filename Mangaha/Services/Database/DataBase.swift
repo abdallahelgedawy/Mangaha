@@ -24,6 +24,7 @@ class DataBase{
         savedProduct.price = product.price
         savedProduct.quantity = product.quantity
         savedProduct.title = product.title
+        savedProduct.isFavourite = product.isFavourite
         save()
     }
     
@@ -36,7 +37,21 @@ class DataBase{
     }
     
     func getCartProducts()->[CartProduct]?{
+        let predicate = NSPredicate(format: "isFavourite == %@ ", NSNumber(value: false))
         let request: NSFetchRequest<CartProduct> = CartProduct.fetchRequest()
+        request.predicate = predicate
+        do{
+            return try context.fetch(request)
+        }
+        catch{
+            print("error getting Data")
+            return nil
+        }
+    }
+    func getFavouriteProducts()->[CartProduct]?{
+        let predicate = NSPredicate(format: "isFavourite == %@ ", NSNumber(value: true))
+        let request: NSFetchRequest<CartProduct> = CartProduct.fetchRequest()
+        request.predicate = predicate
         do{
             return try context.fetch(request)
         }
@@ -46,9 +61,12 @@ class DataBase{
         }
     }
     
-    func fetchProductById(id:String)->[CartProduct]?{
+    func fetchProductById(id:String , isFavourite:Bool = false)->[CartProduct]?{
         let request: NSFetchRequest<CartProduct> = CartProduct.fetchRequest()
-        request.predicate  = NSPredicate(format: "id MATCHES %@ ", id)
+        let idPredicate = NSPredicate(format: "isFavourite == %@ ", NSNumber(value: isFavourite))
+        let favPredicate  = NSPredicate(format: "id MATCHES %@ ", id)
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [idPredicate , favPredicate])
+        request.predicate = compoundPredicate
         do{
           return try context.fetch(request)
             
@@ -57,12 +75,17 @@ class DataBase{
         }
     }
     
-    func deleteProductFromCart(id:String){
-        let products = fetchProductById(id: id)
+    func deleteProductFromDataBase(id:String,isFavourite:Bool){
+        let products = fetchProductById(id: id , isFavourite: isFavourite)
         if let deletedProduct = products?[0]{
             context.delete(deletedProduct)
             save()
         }
+    }
+    
+    func isProductInFavourite(id:String)->Bool{
+        let  product = fetchProductById(id: id , isFavourite: true)
+            return product?.count ?? 0 > 0
     }
     
     func isProductInCart(id:String)->Bool{

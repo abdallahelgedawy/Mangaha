@@ -58,4 +58,12 @@ class ProductDetailsViewModel{
     func isInCart(_ id:Int)->Bool{
         return dataBase.isProductInCart(id: String(id))
     }
+    
+    func isInFavourite(_ id:Int)->Bool{
+        dataBase.isProductInFavourite(id: String(id))
+    }
+    
+    func deleteProductFromFavourites(_ id:String , _ isFavourite:Bool){
+        dataBase.deleteProductFromDataBase(id: id, isFavourite: isFavourite)
+    }
 }

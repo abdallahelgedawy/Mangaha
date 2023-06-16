@@ -433,7 +433,6 @@
 				44EDE5AE2A35318C002704E0 /* Brands.swift */,
 				444F7B962A35A2BE0061B3B8 /* Product.swift */,
 				B84CBB902A3B2EA4007B4887 /* DraftOrderModel.swift */,
-				8C8B0E2D2A3B92CF00E8F7FA /* CoreDataProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -486,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				B829A49E2A30770400A0A4D0 /* Mangaha.xcdatamodeld */,
+				8C8B0E2D2A3B92CF00E8F7FA /* CoreDataProduct.swift */,
 				8C8B0E282A3B8C6400E8F7FA /* DataBase.swift */,
 			);
 			path = Database;
@@ -502,6 +502,7 @@
 		B80DE79C2A348DB800C2F995 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				8C8B0E2F2A3B9AE900E8F7FA /* ViewModel */,
 				B80DE79D2A348DC400C2F995 /* View */,
 			);
 			path = Cart;
@@ -644,7 +645,6 @@
 				B80DE7D22A348F6E00C2F995 /* Utilities */,
 				B80DE7B12A348E5D00C2F995 /* Settings */,
 				B80DE79C2A348DB800C2F995 /* Cart */,
-				8C8B0E2F2A3B9AE900E8F7FA /* ViewModel */,
 				448FCA262A31D113005B226C /* Products */,
 				44787E2E2A316952008C0CBB /* Categories */,
 				44787E272A3159FC008C0CBB /* Home */,

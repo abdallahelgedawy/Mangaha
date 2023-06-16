@@ -187,6 +187,9 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             }else{
                 cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
             }
+            if productDetailsViewModel?.isInFavourite(data?.product.id ?? 0) ?? false{
+                favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
             return cell
@@ -222,27 +225,67 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         }
     }
     
+    @IBAction func addToFavourite(_ sender: UIButton) {
+        setupFavouriteProduct()
+    }
     
     @IBAction func addToCart(_ sender: Any) {
         setupCartProduct()
     }
     
     func setupCartProduct(){
-        
         let product = productDetailsViewModel?.getProductAtIndex(index: 0)?.product
         if ((productDetailsViewModel?.isInCart(product?.id ?? 0))) ?? false {
             self.view.makeToast("This product is already in cart")
+        }else{
+            let id = String(product?.id ?? 0)
+            let title = product?.title
+            let url = product?.image?.src
+            let imageData = image?.jpegData(compressionQuality: 1)
+            let price = product?.variants?[0].price
+            let SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
+            productDetailsViewModel?.addProductToCart(product: SavedProduct)
+            self.view.makeToast("Product added to cart")
         }
-        let id = String(product?.id ?? 0)
-        let title = product?.title
-        let url = product?.image?.src
-        let imageData = image?.jpegData(compressionQuality: 1)
-        let price = product?.variants?[0].price
-        let SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
-        productDetailsViewModel?.addProductToCart(product: SavedProduct)
-        self.view.makeToast("Product added to cart")
     }
+    func setupFavouriteProduct(){
+        let product = productDetailsViewModel?.getProductAtIndex(index: 0)?.product
+        if ((productDetailsViewModel?.isInFavourite(product?.id ?? 0))) ?? false {
+            deletingFromFavouritesAlert(String(product?.id ?? 0))
+        }else{
+            let id = String(product?.id ?? 0)
+            let title = product?.title
+            let url = product?.image?.src
+            let imageData = image?.jpegData(compressionQuality: 1)
+            let price = product?.variants?[0].price
+            var SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
+            SavedProduct.isFavourite = true
+            productDetailsViewModel?.addProductToCart(product: SavedProduct)
+            favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            self.view.makeToast("Product added to Favourites")
+        }
+    }
+    
+    func deletingFromFavouritesAlert(_ id:String){
+        let deletingAddress = UIAlertController(title: "Delete From Favourites", message: "Are you sure you want to delete this product from Fvourites ?", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Delete", style: .destructive){_ in
+            self.productDetailsViewModel?.deleteProductFromFavourites(id, true)
+            self.favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
+            self.myProductDetailsCollection.reloadData()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel){_ in
+            deletingAddress.dismiss(animated: true)
+        }
+        deletingAddress.addAction(confirm)
+        deletingAddress.addAction(cancel)
+        self.present(deletingAddress, animated: true)
+    }
+    
 }
+
+    
+    
+    
 
     
 

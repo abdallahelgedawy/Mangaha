@@ -8,9 +8,10 @@
 import Foundation
 struct CoreDataProduct{
     let id : String
-    let image:Data
+    var image:Data
     let title:String
     let imageUrl:String
     let price:String
     let quantity:String
+    var isFavourite = false
 }

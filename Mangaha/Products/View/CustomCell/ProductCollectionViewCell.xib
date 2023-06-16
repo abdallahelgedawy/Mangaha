@@ -92,6 +92,7 @@
             </constraints>
             <size key="customSize" width="316" height="343"/>
             <connections>
+                <outlet property="favBtn" destination="RfO-Vy-bSc" id="qeB-cP-HV3"/>
                 <outlet property="productCurrency" destination="yq6-II-GPs" id="jgT-IQ-DqE"/>
                 <outlet property="productImg" destination="Xc3-NG-eEK" id="GlB-Cb-6Io"/>
                 <outlet property="productName" destination="azk-YM-t2w" id="5z6-05-RfC"/>

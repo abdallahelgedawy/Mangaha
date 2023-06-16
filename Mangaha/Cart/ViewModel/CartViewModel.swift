@@ -25,7 +25,7 @@ class CartViewModel{
     }
     
     func deleteFromCart(_ productId:String, _ index:Int){
-        dataBase.deleteProductFromCart(id: productId)
+        dataBase.deleteProductFromDataBase(id: productId, isFavourite: false)
         cartProducts.remove(at: index)
     }
     
