@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mangaha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7r-Fc-wAt">
-                    <rect key="frame" x="104.66666666666669" y="600" width="184" height="52"/>
+                    <rect key="frame" x="104.66666666666669" y="626" width="184" height="52"/>
                     <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="43"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -31,7 +31,7 @@
             <constraints>
                 <constraint firstItem="Y7r-Fc-wAt" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.468193" id="OJS-0S-0Xl"/>
                 <constraint firstItem="Y7r-Fc-wAt" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.0610329" id="iHJ-78-BLK"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Y7r-Fc-wAt" secondAttribute="bottom" constant="166" id="o7j-kZ-wpz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Y7r-Fc-wAt" secondAttribute="bottom" constant="140" id="o7j-kZ-wpz"/>
                 <constraint firstItem="Y7r-Fc-wAt" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="xCL-Ev-WCR"/>
             </constraints>
             <point key="canvasLocation" x="23.664122137404579" y="-11.267605633802818"/>

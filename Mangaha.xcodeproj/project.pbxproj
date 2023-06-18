@@ -19,6 +19,8 @@
 		44787E2D2A315A45008C0CBB /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44787E2B2A315A45008C0CBB /* HomeViewController.xib */; };
 		44787E312A316978008C0CBB /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44787E2F2A316978008C0CBB /* CategoryViewController.swift */; };
 		44787E322A316978008C0CBB /* CategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44787E302A316978008C0CBB /* CategoryViewController.xib */; };
+		447DDEF52A3FBE8F00D0E4C4 /* NetworkServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447DDEF42A3FBE8F00D0E4C4 /* NetworkServicesProtocol.swift */; };
+		447DDEF82A3FC07500D0E4C4 /* NetworkServicesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447DDEF72A3FC07500D0E4C4 /* NetworkServicesTest.swift */; };
 		4483A49D2A3E5A58002843D1 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4483A49B2A3E5A58002843D1 /* SplashScreenViewController.swift */; };
 		4483A49E2A3E5A58002843D1 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4483A49C2A3E5A58002843D1 /* SplashScreenViewController.xib */; };
 		4483A4A22A3E5E5B002843D1 /* e-commerce.json in Resources */ = {isa = PBXBuildFile; fileRef = 4483A4A12A3E5E5B002843D1 /* e-commerce.json */; };
@@ -146,6 +148,8 @@
 		44787E2B2A315A45008C0CBB /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		44787E2F2A316978008C0CBB /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		44787E302A316978008C0CBB /* CategoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryViewController.xib; sourceTree = "<group>"; };
+		447DDEF42A3FBE8F00D0E4C4 /* NetworkServicesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesProtocol.swift; sourceTree = "<group>"; };
+		447DDEF72A3FC07500D0E4C4 /* NetworkServicesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesTest.swift; sourceTree = "<group>"; };
 		4483A49B2A3E5A58002843D1 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		4483A49C2A3E5A58002843D1 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
 		4483A4A12A3E5E5B002843D1 /* e-commerce.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "e-commerce.json"; sourceTree = "<group>"; };
@@ -364,6 +368,14 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		447DDEF62A3FC04C00D0E4C4 /* NetworkServicesTest */ = {
+			isa = PBXGroup;
+			children = (
+				447DDEF72A3FC07500D0E4C4 /* NetworkServicesTest.swift */,
+			);
+			path = NetworkServicesTest;
+			sourceTree = "<group>";
+		};
 		4483A4972A3E59AF002843D1 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +509,7 @@
 			children = (
 				8C8B0E272A3B89B800E8F7FA /* Database */,
 				44EDE5B12A353466002704E0 /* NetworkServices.swift */,
+				447DDEF42A3FBE8F00D0E4C4 /* NetworkServicesProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -724,6 +737,7 @@
 		B829A4AE2A30770500A0A4D0 /* MangahaTests */ = {
 			isa = PBXGroup;
 			children = (
+				447DDEF62A3FC04C00D0E4C4 /* NetworkServicesTest */,
 				B829A4AF2A30770500A0A4D0 /* MangahaTests.swift */,
 			);
 			path = MangahaTests;
@@ -1203,6 +1217,7 @@
 				B80DE7CC2A348EDF00C2F995 /* WishListCell.swift in Sources */,
 				B84CBB912A3B2EA4007B4887 /* DraftOrderModel.swift in Sources */,
 				44E82B102A3BE3AB0058FDF3 /* OnboardingSlide.swift in Sources */,
+				447DDEF52A3FBE8F00D0E4C4 /* NetworkServicesProtocol.swift in Sources */,
 				448FCA1A2A31B289005B226C /* AdsCollectionViewCell.swift in Sources */,
 				44787E2C2A315A45008C0CBB /* HomeViewController.swift in Sources */,
 				B83F5B5B2A3102A900B3F3B1 /* FavoriteViewModel.swift in Sources */,
@@ -1217,6 +1232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				447DDEF82A3FC07500D0E4C4 /* NetworkServicesTest.swift in Sources */,
 				B829A4B02A30770500A0A4D0 /* MangahaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

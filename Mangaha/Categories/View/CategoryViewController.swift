@@ -163,8 +163,10 @@ class CategoryViewController: UIViewController {
     @objc private func noFilter(){
         if mainCategoryId == 0 {
             categoryViewModel?.getProducts(baseUrl: Constant.allProducts())
+            didTapBtn()
         }else{
             categoryViewModel?.getProducts(baseUrl:  Constant.mainCategory(category_ID: mainCategoryId))
+            didTapBtn()
         }
     }
     
@@ -172,8 +174,10 @@ class CategoryViewController: UIViewController {
         if mainCategoryId == 0 {
            allProductsUrl = allProductsUrl + "&product_type=ACCESSORIES"
             categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+            didTapBtn()
         }else{
             categoryViewModel?.getProducts(baseUrl:  Constant.mainCategory(category_ID: mainCategoryId , filterType: "ACCESSORIES"))
+            didTapBtn()
         }
     }
     
@@ -181,8 +185,10 @@ class CategoryViewController: UIViewController {
         if mainCategoryId == 0 {
            allProductsUrl = allProductsUrl + "&product_type=SHOES"
             categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+            didTapBtn()
         }else{
             categoryViewModel?.getProducts(baseUrl: Constant.mainCategory(category_ID: mainCategoryId , filterType: "SHOES"))
+            didTapBtn()
         }
     }
     
@@ -190,8 +196,10 @@ class CategoryViewController: UIViewController {
         if mainCategoryId == 0 {
            allProductsUrl = allProductsUrl + "&product_type=T-SHIRTS"
             categoryViewModel?.getProducts(baseUrl: allProductsUrl)
+            didTapBtn()
         }else{
             categoryViewModel?.getProducts(baseUrl:Constant.mainCategory(category_ID: mainCategoryId , filterType: "T-SHIRTS"))
+            didTapBtn()
         }
     }
     
