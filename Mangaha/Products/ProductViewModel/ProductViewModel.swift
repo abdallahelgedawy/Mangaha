@@ -9,7 +9,7 @@ import Foundation
 class ProductViewModel{
     let dataBase = DataBase()
     var brandId : Int?
-
+    var bindedResultPrice :(()->()) = {}
     var bindproductListToProductVC : (()->()) = {}
     var productList : [Products]? {
         didSet {
@@ -20,29 +20,52 @@ class ProductViewModel{
     func getProducts(baseUrl:String){
         NetworkServices.getProducts(baseUrl: baseUrl){
             [weak self] result in
-            self?.productList = result?.products
-            print(self?.brandId)
+            if let result = result{
+                if Constant.isEuroCurrency() == false {
+                    for item in result.products!{
+                        var myItem = item
+                        NetworkServices.convertCurency(amount:myItem.variants?[0].price ?? "") { convertedPrice, error in
+                            myItem.variants?[0].price = String(convertedPrice ?? 0.0)
+                            self?.productList?.append(myItem)
+                        }
+                    }
+                    
+        productDetailsViewModel.productId = productList?[index].id
+        return productDetailsViewModel
+    }
+    func instantiateProductFilteredViewModel(index : Int , filterList : [Products])->ProductDetailsViewModel{
+    }
+        else {
+         self?.productList = result.products
         }
     }
-    
-    func getProductsAtIndex(index:Int)-> Products{
-        return productList?[index] ?? Products()
-    }
-    
-    func  getProductsCount()->Int{
-        return productList?.count ?? 0
-    }
-    
-    func filterProductFromLowToHigh(){
-        self.productList?.sort{($0.variants![0].price! as NSString).doubleValue < ($1.variants![0].price! as NSString).doubleValue}
-    }
-    
-    func filterProductFromHighToLow(){
-        self.productList?.sort{($0.variants![0].price! as NSString).doubleValue > ($1.variants![0].price! as NSString).doubleValue}
-    }
-    func instantiateProductDetailsViewModel(index : Int)->ProductDetailsViewModel{
+    print(self?.brandId)
+}
+
+DispatchQueue.main.async {
+self.bindedResultPrice()
+}
+}
+
+func getProductsAtIndex(index:Int)-> Products{
+return productList?[index] ?? Products()
+}
+
+func  getProductsCount()->Int{
+return productList?.count ?? 0
+}
+
+func filterProductFromLowToHigh(){
+self.productList?.sort{($0.variants![0].price! as NSString).doubleValue < ($1.variants![0].price! as NSString).doubleValue}
+}
+
+func filterProductFromHighToLow(){
+self.productList?.sort{($0.variants![0].price! as NSString).doubleValue > ($1.variants![0].price! as NSString).doubleValue}
+}
+func instantiateProductDetailsViewModel(index : Int)->ProductDetailsViewModel{
+let productDetailsViewModel = ProductDetailsViewModel()
         let productDetailsViewModel = ProductDetailsViewModel()
-        productDetailsViewModel.productId = productList?[index].id
+        productDetailsViewModel.productId = filterList[index].id
         return productDetailsViewModel
     }
     

@@ -90,6 +90,22 @@
                         <action selector="signUpBtn:" destination="-1" eventType="touchUpInside" id="eoQ-s5-dGv"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already Have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KG9-kS-WeB">
+                    <rect key="frame" x="80" y="677" width="198" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHi-j8-5IV">
+                    <rect key="frame" x="278" y="670" width="75" height="35"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="LogIn">
+                        <color key="baseForegroundColor" red="1" green="0.45490196078431372" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="alreadyHaveAccount:" destination="-1" eventType="touchUpInside" id="gcC-Il-SOW"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -105,8 +121,12 @@
                 <constraint firstItem="rgb-bH-l3T" firstAttribute="top" secondItem="RY9-OH-Cbc" secondAttribute="bottom" constant="50" id="EVh-x0-WbY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RY9-OH-Cbc" secondAttribute="trailing" constant="20" id="H3F-E1-CWM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sJp-oh-WI7" secondAttribute="trailing" constant="20" id="QUg-pE-xFZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KG9-kS-WeB" secondAttribute="bottom" constant="120" id="Tpu-HV-cW7"/>
                 <constraint firstItem="1mH-q9-Idv" firstAttribute="top" secondItem="IGS-w1-NRI" secondAttribute="bottom" constant="63" id="W2a-gx-0CM"/>
+                <constraint firstItem="KG9-kS-WeB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="ZWi-rv-uvu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rgb-bH-l3T" secondAttribute="trailing" constant="20" id="apE-7m-6FC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QHi-j8-5IV" secondAttribute="bottom" constant="113" id="c37-uC-KsQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QHi-j8-5IV" secondAttribute="trailing" constant="40" id="cZK-5L-ghf"/>
                 <constraint firstItem="RY9-OH-Cbc" firstAttribute="top" secondItem="aWB-z6-obC" secondAttribute="bottom" constant="41" id="g6w-Fc-y9s"/>
                 <constraint firstItem="oHb-3Q-UlL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="gZb-ga-gWG"/>
                 <constraint firstItem="1mH-q9-Idv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="j5M-ig-4jq"/>
@@ -119,6 +139,7 @@
                 <constraint firstItem="Gfx-cu-7yR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="uKn-uR-mwY"/>
                 <constraint firstItem="RY9-OH-Cbc" firstAttribute="leading" secondItem="IGS-w1-NRI" secondAttribute="trailing" constant="125" id="vDf-Ul-roC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0jv-eY-5H2" secondAttribute="trailing" constant="90" id="w1t-j3-yE5"/>
+                <constraint firstItem="QHi-j8-5IV" firstAttribute="leading" secondItem="KG9-kS-WeB" secondAttribute="trailing" id="z0z-ME-STz"/>
                 <constraint firstItem="IGS-w1-NRI" firstAttribute="top" secondItem="sue-fZ-7cQ" secondAttribute="bottom" constant="54" id="z2B-OF-oFo"/>
             </constraints>
             <point key="canvasLocation" x="48" y="21"/>

@@ -18,6 +18,8 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     var image:UIImage?
    
     
+    var price = "0.0"
+    var networkIndecator : UIActivityIndicatorView!
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,11 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
          self.myProductDetailsCollection.reloadData()
          }
          }*/
-        
+        networkIndecator = UIActivityIndicatorView(style: .large)
+        networkIndecator.color =  UIColor(hex: 0xFF7466)
+        networkIndecator.center = view.center
+        networkIndecator.startAnimating()
+        view.addSubview(networkIndecator)
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -87,18 +93,32 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        productDetailsViewModel?.bindedResultPrice = {
-            self.myProductDetailsCollection.reloadData()
-        }
-        setupNavigationController()
-        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
         
-        productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+     
+        self.productDetailsViewModel?.bindedResultPrice = {
             DispatchQueue.main.async {
                 self.myProductDetailsCollection.reloadData()
+                self.networkIndecator.stopAnimating()
             }
+            
         }
+      
+      
+        
+        setupNavigationController()
+            self.productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+                DispatchQueue.main.async {
+                    self.networkIndecator.stopAnimating()
+                    self.myProductDetailsCollection.reloadData()
+                }
+            }
+            
+        
+        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
     }
+
+      
+    
     
     
     func drawTopSection() -> NSCollectionLayoutSection {
@@ -174,18 +194,19 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             cell.imageProductDetails.sd_setImage(with: URL(string: data?.src ?? ""))
             let hexColor = UIColor(hex: 0xFF7466)
             cell.myPage.currentPageIndicatorTintColor = hexColor
-            cell.myPage.numberOfPages = data?.src?.count ?? 0
+            cell.myPage.numberOfPages = data?.position ?? 0
             cell.myPage.currentPage = indexPath.item
             image = cell.imageProductDetails.image
             return cell
         case 1 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "reviews", for: indexPath) as! ReviewsCollectionViewCell
             let data = productDetailsViewModel?.getProductAtIndex(index: indexPath.row)
+                    
             cell.nameLabel.text = data?.product.title
             if(Constant.isEuroCurrency()){
-                cell.priceLabel.text = "€" + (data?.product.variants?[0].price ?? "")
+                cell.priceLabel.text =  (data?.product.variants?[0].price ?? "")  + "EUR"
             }else{
-                cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
+                cell.priceLabel.text = (data?.product.variants?[0].price ?? "") + "EGP"
             }
             if productDetailsViewModel?.isInFavourite(data?.product.id ?? 0) ?? false{
                 favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -207,7 +228,6 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     
     
     @objc func buttonTapped(_ sender: UIButton) {
-        print("tapped")
         let moreReviews = MoreReviewsTableViewController(nibName: "MoreReviewsTableViewController", bundle: nil)
         navigationController?.pushViewController(moreReviews, animated: true)
     }
@@ -282,6 +302,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     }
     
 }
+
 
     
     
