@@ -42,6 +42,8 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
          self.productCollection.reloadData()
          self.networkIndecator.stopAnimating()
          }
+         }
+         */
     }
          
 }
@@ -58,6 +60,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
                  products.title?.localizedCaseInsensitiveContains(searchText) == false
                  
             }
+            
         }
         productCollection.reloadData()
     }
@@ -135,6 +138,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         }*/
     }
+}
 
     
     extension ProductViewController : UICollectionViewDelegate{

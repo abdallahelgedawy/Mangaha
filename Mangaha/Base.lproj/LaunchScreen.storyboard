@@ -17,28 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="meb-Ix-QnT">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="625"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="online-shopping-e-commerce-smartphone-icon-11641478692xo7lhxu4lj" translatesAutoresizingMaskIntoConstraints="NO" id="meb-Ix-QnT">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mangaha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zd2-nG-Fqa">
-                                <rect key="frame" x="89" y="662" width="215" height="83"/>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="meb-Ix-QnT" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="KsC-Vm-wLd"/>
-                            <constraint firstItem="meb-Ix-QnT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Pba-dF-38T"/>
-                            <constraint firstItem="zd2-nG-Fqa" firstAttribute="centerX" secondItem="meb-Ix-QnT" secondAttribute="centerX" id="X5R-ip-Tjg"/>
-                            <constraint firstItem="zd2-nG-Fqa" firstAttribute="top" secondItem="meb-Ix-QnT" secondAttribute="bottom" constant="37" id="bok-9P-huG"/>
-                            <constraint firstItem="meb-Ix-QnT" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.733568" id="fb0-TT-zl8"/>
-                            <constraint firstItem="meb-Ix-QnT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gR2-e9-uPn"/>
-                            <constraint firstItem="zd2-nG-Fqa" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.547074" id="otL-Nf-PZw"/>
-                            <constraint firstItem="meb-Ix-QnT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="pgF-83-oDH"/>
-                            <constraint firstItem="zd2-nG-Fqa" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.0974178" id="qxP-qM-YVt"/>
+                            <constraint firstAttribute="bottom" secondItem="meb-Ix-QnT" secondAttribute="bottom" id="4nJ-nc-U7a"/>
+                            <constraint firstItem="meb-Ix-QnT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="E9Y-wP-zrz"/>
+                            <constraint firstItem="meb-Ix-QnT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KZV-4m-UGo"/>
+                            <constraint firstItem="meb-Ix-QnT" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Rry-3w-4eQ"/>
+                            <constraint firstItem="meb-Ix-QnT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dH8-UB-ses"/>
+                            <constraint firstItem="meb-Ix-QnT" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="zjh-R5-8Oy"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -48,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="937" height="625"/>
+        <image name="online-shopping-e-commerce-smartphone-icon-11641478692xo7lhxu4lj" width="480" height="719"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
