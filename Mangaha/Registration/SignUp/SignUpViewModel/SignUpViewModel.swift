@@ -28,15 +28,16 @@ class SignUpViewModel{
             self.bindedResult()
         }
     }
-    /*func postCart(){
-        NetworkServices.postDraftOrder { draftResponse, error in
+
+    func postCart(){
+        NetworkServices.postDraftOrder(products: []) { draftResponse, error in
             self.cartId = draftResponse?.id ?? 0
             self.postFavorite(email: self.email , username: self.username, userId: self.id , cartId: self.cartId)
            
         }
     }
     func postFavorite(email : String , username : String , userId : Int,cartId:Int){
-        NetworkServices.postDraftOrder { draftResponse, error in
+        NetworkServices.postDraftOrder(products: []) { draftResponse, error in
             let favoriteId = draftResponse?.id
             self.db.collection("users").addDocument(data: ["id" : userId , "email" : email , "username" : username , "FavoriteId" : favoriteId , "CartId" : self.cartId])
         }
