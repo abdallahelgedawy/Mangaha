@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class HomeViewController: UIViewController {
-
+    let loginVM = LoginViewModel()
     @IBOutlet weak var brandsLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var brandSearch: UISearchBar!
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        //loginVM.getDataFromServer()
         homeViewModel = HomeViewModel()
         networkIndecator = UIActivityIndicatorView(style: .large)
         networkIndecator.color =  UIColor(hex: 0xFF7466)

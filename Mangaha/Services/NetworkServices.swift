@@ -312,6 +312,7 @@ class NetworkServices{
             let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
             request.httpBody = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
         }catch let error {
+            print("error post")
             print(error.localizedDescription)
         }
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -327,8 +328,10 @@ class NetworkServices{
             if let httpResponse = response as? HTTPURLResponse {
                 do {
                     let json = try JSONDecoder().decode(DraftOrderPostResponse.self, from: data!)
+                    print(json.draftOrder?.lineItems)
                     completionHandler(json.draftOrder , nil)
                 } catch {
+                    print("erro decoding")
                     completionHandler(nil , error)
                 }
                 return
@@ -337,4 +340,44 @@ class NetworkServices{
         }.resume()
     }
     
+    static func deleteDraftOrder(id:Int){
+        guard let url = URL(string: Constant.DraftOrderEndPoint(id: id)) else {
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+       
+        }
+
+        task.resume()
+    }
+    
+    static func getDraftOrder(id :Int , completionHandler:@escaping (DraftOrderResponse? , Error?)->Void){
+        guard let url = URL(string: Constant.DraftOrderEndPoint(id: id)) else{return}
+        print(url)
+        let request = URLRequest(url: url)
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request) { data, response, error in
+            do {
+                guard let data = data else{return}
+                let jsonData = try JSONDecoder().decode(DraftOrderGetResponse.self, from: data)
+                print("data is here")
+                completionHandler(jsonData.draftOrder,nil)
+            }catch{
+                print("error decoding")
+                print(error.localizedDescription)
+                completionHandler(nil,error)
+            }
+        }
+        task.resume()
+        
+    }
 }

@@ -7,11 +7,13 @@
 
 import Foundation
 class ProductDetailsViewModel{
+    let dataBase = DataBase()
     var productId : Int?
     var bindproductInfoListToProductDetailsVC : (()->()) = {}
     var bindedResultPrice :(()->()) = {}
     var convertedPrice : String? = nil
     var productInfo : myProduct?{
+    
         didSet{
             bindproductInfoListToProductDetailsVC()
         }
@@ -47,4 +49,21 @@ class ProductDetailsViewModel{
    /* func getonvertedPrice()->String{
         return convertedPrice ?? "0.0"
     }*/
+    
+    
+    func addProductToCart(product:CoreDataProduct){
+        dataBase.addToCart(product: product)
+    }
+    
+    func isInCart(_ id:Int)->Bool{
+        return dataBase.isProductInCart(id: String(id))
+    }
+    
+    func isInFavourite(_ id:Int)->Bool{
+        dataBase.isProductInFavourite(id: String(id))
+    }
+    
+    func deleteProductFromFavourites(_ id:String , _ isFavourite:Bool){
+        dataBase.deleteProductFromDataBase(id: id, isFavourite: isFavourite)
+    }
 }

@@ -44,6 +44,8 @@ class ProductViewController: UIViewController {
         
     }
     
+ 
+    
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
             productViewModel?.filterProductFromLowToHigh()
@@ -88,6 +90,16 @@ class ProductViewController: UIViewController {
     @objc func popView(){
         navigationController?.popViewController(animated: true)
     }
+    
+    func convertProductToCoreDataProduct(product:Products , imageDta:Data)->CoreDataProduct{
+        let id  = String(product.id ?? 0)
+        let title = product.title
+        let url = product.image?.src
+        let price = product.variants?[0].price
+        var coreDataProduct = CoreDataProduct(id: id, image: imageDta, title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
+        coreDataProduct.isFavourite = true
+        return coreDataProduct
+    }
 }
 
 extension ProductViewController : UICollectionViewDelegate{
@@ -107,10 +119,18 @@ extension ProductViewController : UICollectionViewDataSource{
         
         let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
         let data = productViewModel?.getProductsAtIndex(index: indexPath.row)
+        cell.Product = data
+        if productViewModel?.isInInfav(String(data?.id ?? 0)) ?? true{
+            cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        cell.delegate = self
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
         cell.productPrice.text = data?.variants?[0].price
         cell.productCurrency.text = "EGP"
+        let img = cell.productImg.image?.jpegData(compressionQuality: 1) ?? Data()
+        var favProduct = convertProductToCoreDataProduct(product: data ?? Products(), imageDta: img)
+       
         return cell
        
     }
@@ -121,6 +141,7 @@ extension ProductViewController : UICollectionViewDelegateFlowLayout{
         return CGSize(width: 190, height: 300)
     }
 }
+
 
 
 

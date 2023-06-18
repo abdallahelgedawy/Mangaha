@@ -13,6 +13,9 @@
             <connections>
                 <outlet property="cartTable" destination="E8L-cX-fGL" id="NSY-ju-VCv"/>
                 <outlet property="checkOutBtn" destination="0bo-dC-sT5" id="5FC-TX-t4D"/>
+                <outlet property="nodataImg" destination="RMD-fy-5re" id="6CX-Of-EZg"/>
+                <outlet property="noproductLabel" destination="mOn-cy-kEO" id="qmV-UU-YA9"/>
+                <outlet property="subTot" destination="l75-zQ-pEQ" id="ZWo-p4-ttA"/>
                 <outlet property="subTotalLabel" destination="3XU-P4-gfF" id="njp-Rg-RRf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E8L-cX-fGL">
+                <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="E8L-cX-fGL">
                     <rect key="frame" x="0.0" y="59" width="393" height="426"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
@@ -49,17 +52,35 @@
                         <action selector="checkOut:" destination="-1" eventType="touchUpInside" id="OUW-40-lla"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data" translatesAutoresizingMaskIntoConstraints="NO" id="RMD-fy-5re">
+                    <rect key="frame" x="76.666666666666686" y="172" width="240" height="240"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="240" id="3oC-IX-QOE"/>
+                        <constraint firstAttribute="width" constant="240" id="NzY-qp-aqF"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Products In Cart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOn-cy-kEO">
+                    <rect key="frame" x="8" y="437" width="377" height="31.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                    <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0bo-dC-sT5" secondAttribute="bottom" constant="70" id="005-d3-py5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="E8L-cX-fGL" secondAttribute="trailing" id="5rG-xc-oKw"/>
+                <constraint firstItem="mOn-cy-kEO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="77S-jU-FXJ"/>
+                <constraint firstItem="mOn-cy-kEO" firstAttribute="top" secondItem="RMD-fy-5re" secondAttribute="bottom" constant="25" id="7HW-zx-U7U"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mOn-cy-kEO" secondAttribute="trailing" constant="8" id="FjT-5g-81h"/>
                 <constraint firstItem="0bo-dC-sT5" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="JD5-6Y-2kk"/>
                 <constraint firstItem="0bo-dC-sT5" firstAttribute="top" secondItem="l75-zQ-pEQ" secondAttribute="bottom" constant="40" id="Jg6-eK-Gfm"/>
                 <constraint firstItem="l75-zQ-pEQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="Ujl-hZ-5d0"/>
                 <constraint firstItem="E8L-cX-fGL" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="Zw5-oi-yhg"/>
+                <constraint firstItem="RMD-fy-5re" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="czL-7B-eUb"/>
                 <constraint firstItem="E8L-cX-fGL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eLz-kE-2OB"/>
+                <constraint firstItem="RMD-fy-5re" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-134" id="efK-T0-PWt"/>
                 <constraint firstItem="0bo-dC-sT5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="35" id="hgm-0L-k8o"/>
                 <constraint firstItem="0bo-dC-sT5" firstAttribute="top" secondItem="3XU-P4-gfF" secondAttribute="bottom" constant="40" id="hw0-dO-K6T"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3XU-P4-gfF" secondAttribute="trailing" constant="50" id="sLH-Kb-Ot1"/>
@@ -70,6 +91,7 @@
         </view>
     </objects>
     <resources>
+        <image name="data" width="626" height="626"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
