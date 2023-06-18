@@ -26,30 +26,31 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         networkIndecator.center = view.center
         networkIndecator.startAnimating()
         view.addSubview(networkIndecator)
-      
+        
         productCollection.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "productCell")
         
         productCollection.delegate = self
         productCollection.dataSource = self
         
-       
-      //  productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+        
+        //  productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         
         filterProduct.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
-      /*
-        productViewModel?.bindproductListToProductVC = {
-            DispatchQueue.main.async {
-                self.productCollection.reloadData()
-                self.networkIndecator.stopAnimating()
-            }
-        }
-       */
+        /*
+         productViewModel?.bindproductListToProductVC = {
+         DispatchQueue.main.async {
+         self.productCollection.reloadData()
+         self.networkIndecator.stopAnimating()
+         }
+         }
+         */
     }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearched = false
             filteredList?.removeAll()
-           
+            
         }
         else {
             isSearched = true
@@ -57,12 +58,12 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             filteredList = productViewModel?.productList!.filter{products in return
                 (products.title?.contains(searchText))!
             }
-                
-    }
-            productCollection.reloadData()
+            
+        }
+        productCollection.reloadData()
     }
     
- 
+    
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
@@ -73,7 +74,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         }
     }
-     
+    
     func setupNavigationController(){
         navigationItem.setHidesBackButton(true, animated: true)
         let customOrange = UIColor(hex: 0xFF7466)
@@ -104,7 +105,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         navigationController?.pushViewController(fav, animated: true)
     }
     
-
+    
     @objc func popView(){
         navigationController?.popViewController(animated: true)
     }
@@ -117,6 +118,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         var coreDataProduct = CoreDataProduct(id: id, image: imageDta, title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
         coreDataProduct.isFavourite = true
         return coreDataProduct
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.productViewModel?.bindedResultPrice = {
             DispatchQueue.main.async {
@@ -134,6 +136,9 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
     }
 }
+
+
+
 
 extension ProductViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

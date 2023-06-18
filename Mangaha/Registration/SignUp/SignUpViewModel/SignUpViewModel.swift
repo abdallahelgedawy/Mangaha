@@ -28,7 +28,7 @@ class SignUpViewModel{
             self.bindedResult()
         }
     }
-
+/*
     func postCart(){
         NetworkServices.postDraftOrder(products: []) { draftResponse, error in
             self.cartId = draftResponse?.id ?? 0

@@ -57,8 +57,7 @@ class ProductDetailsViewModel{
             self.bindedResultPrice()
         }
     }*/
-}
-  
+
         
    /* func getonvertedPrice()->String{
         return convertedPrice ?? "0.0"

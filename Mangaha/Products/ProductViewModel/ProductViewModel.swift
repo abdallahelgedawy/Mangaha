@@ -11,6 +11,7 @@ class ProductViewModel{
     var brandId : Int?
     var bindedResultPrice :(()->()) = {}
     var bindproductListToProductVC : (()->()) = {}
+    var filterList : [Products]?
     var productList : [Products]? {
         didSet {
             bindproductListToProductVC()
@@ -25,16 +26,12 @@ class ProductViewModel{
                     for item in result.products!{
                         var myItem = item
                         NetworkServices.convertCurency(amount:myItem.variants?[0].price ?? "") { convertedPrice, error in
+                            self?.productList = result.products
                             myItem.variants?[0].price = String(convertedPrice ?? 0.0)
                             self?.productList?.append(myItem)
                         }
                     }
-                    
-        productDetailsViewModel.productId = productList?[index].id
-        return productDetailsViewModel
-    }
-    func instantiateProductFilteredViewModel(index : Int , filterList : [Products])->ProductDetailsViewModel{
-    }
+                }
         else {
          self?.productList = result.products
         }
@@ -63,11 +60,15 @@ func filterProductFromHighToLow(){
 self.productList?.sort{($0.variants![0].price! as NSString).doubleValue > ($1.variants![0].price! as NSString).doubleValue}
 }
 func instantiateProductDetailsViewModel(index : Int)->ProductDetailsViewModel{
-let productDetailsViewModel = ProductDetailsViewModel()
         let productDetailsViewModel = ProductDetailsViewModel()
-        productDetailsViewModel.productId = filterList[index].id
+        productDetailsViewModel.productId = productList?[index].id
         return productDetailsViewModel
     }
+    func instantiateProductFilteredViewModel(index : Int , filterList : [Products])->ProductDetailsViewModel{
+            let productDetailsViewModel = ProductDetailsViewModel()
+            productDetailsViewModel.productId = filterList[index].id
+            return productDetailsViewModel
+        }
     
     func addProductToFavourites(product:CoreDataProduct){
         dataBase.addToCart(product: product)
