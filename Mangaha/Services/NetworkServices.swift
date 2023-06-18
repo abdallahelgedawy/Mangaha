@@ -62,7 +62,7 @@ class NetworkServices{
                 let result = try JSONDecoder().decode(CurrencyConverter.self, from: data!)
                 completionHandler(result.result,nil)
             }catch let error{
-                print(error.localizedDescription)
+                print("here",error.localizedDescription)
                 completionHandler(nil,error)
             }
             

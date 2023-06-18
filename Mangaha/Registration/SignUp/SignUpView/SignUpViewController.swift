@@ -47,7 +47,11 @@ class SignUpViewController: UIViewController {
             
     }
             
-              
+    @IBAction func alreadyHaveAccount(_ sender: UIButton) {
+        let loginVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        navigationController?.pushViewController(loginVc, animated: true)
+    }
+    
 }
         
 

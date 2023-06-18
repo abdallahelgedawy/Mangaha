@@ -64,12 +64,28 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        /*
-        // Center the animation view vertically
-        NSLayoutConstraint.activate([
-            animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-        */
         
+    }
+    
+    @IBAction func forgotPassword(_ sender: UIButton) {
+        Auth.auth().sendPasswordReset(withEmail: emailTF.text ?? ""){ error in
+            if let error = error {
+                let alertController = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                }
+               
+                alertController.addAction(okAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(title: "Alert", message: "Password reset email sent", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                }
+               
+                alertController.addAction(okAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
 }

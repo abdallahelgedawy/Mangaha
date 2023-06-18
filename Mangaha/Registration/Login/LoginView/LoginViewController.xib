@@ -82,12 +82,23 @@
                         <action selector="noAccountBtn:" destination="-1" eventType="touchUpInside" id="6sX-y1-jmP"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5R-ln-0Su">
+                    <rect key="frame" x="116.66666666666669" y="547" width="160" height="35"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Forgot Password?">
+                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="forgotPassword:" destination="-1" eventType="touchUpInside" id="YYw-qP-zjb"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tP5-wg-Lfa" secondAttribute="trailing" constant="100" id="1c3-TW-KC4"/>
                 <constraint firstItem="9tN-zq-pgM" firstAttribute="top" secondItem="MeE-jv-oGs" secondAttribute="bottom" constant="71" id="5L1-1f-zm9"/>
+                <constraint firstItem="MeE-jv-oGs" firstAttribute="top" secondItem="l5R-ln-0Su" secondAttribute="bottom" constant="55" id="7aR-Qo-KPj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="j25-gM-nd0" secondAttribute="trailing" constant="50" id="Aau-QF-T2W"/>
                 <constraint firstItem="iyL-2q-ROg" firstAttribute="top" secondItem="tP5-wg-Lfa" secondAttribute="bottom" constant="50" id="Bho-fY-O50"/>
                 <constraint firstItem="j25-gM-nd0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="155" id="CvL-ID-cCM"/>
@@ -113,6 +124,7 @@
                 <constraint firstItem="j25-gM-nd0" firstAttribute="top" secondItem="MeE-jv-oGs" secondAttribute="bottom" constant="64" id="onX-VC-WLs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iyL-2q-ROg" secondAttribute="trailing" constant="50" id="pgK-GT-Abb"/>
                 <constraint firstItem="b0P-ZO-FXL" firstAttribute="top" secondItem="iyL-2q-ROg" secondAttribute="bottom" constant="42" id="qGD-6X-roS"/>
+                <constraint firstItem="l5R-ln-0Su" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uEa-0J-Myg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="j25-gM-nd0" secondAttribute="bottom" constant="47" id="vMh-0h-pdF"/>
             </constraints>
             <point key="canvasLocation" x="95" y="20"/>

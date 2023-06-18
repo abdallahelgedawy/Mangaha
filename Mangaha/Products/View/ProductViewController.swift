@@ -33,17 +33,17 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         productCollection.dataSource = self
         
        
-        productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+      //  productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         
         filterProduct.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
-        
+      /*
         productViewModel?.bindproductListToProductVC = {
             DispatchQueue.main.async {
                 self.productCollection.reloadData()
                 self.networkIndecator.stopAnimating()
             }
         }
-        
+       */
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
@@ -71,7 +71,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         }
     }
-
+     
     func setupNavigationController(){
         navigationItem.setHidesBackButton(true, animated: true)
         let customOrange = UIColor(hex: 0xFF7466)
@@ -106,6 +106,22 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
     @objc func popView(){
         navigationController?.popViewController(animated: true)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.productViewModel?.bindedResultPrice = {
+            DispatchQueue.main.async {
+                self.productCollection.reloadData()
+                self.networkIndecator.stopAnimating()
+            }
+        }
+        setupNavigationController()
+        self.productViewModel?.bindproductListToProductVC = {
+            DispatchQueue.main.async {
+                self.productCollection.reloadData()
+                self.networkIndecator.stopAnimating()
+            }
+        }
+        productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+    }
 }
 
 extension ProductViewController : UICollectionViewDelegate{
@@ -134,16 +150,28 @@ extension ProductViewController : UICollectionViewDataSource{
             let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
             cell.productImg.sd_setImage(with: URL(string: filteredList?[indexPath.row].image?.src ?? ""))
             cell.productName.text = filteredList?[indexPath.row].title
-            cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
-            cell.productCurrency.text = "EGP"
+            
+            if Constant.isEuroCurrency() {
+                cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
+                cell.productCurrency.text = "EUR"
+            }else {
+                cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
+                cell.productCurrency.text = "EGP"
+            }
             return cell
         }
         let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
         let data = productViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
-        cell.productPrice.text = data?.variants?[0].price
-        cell.productCurrency.text = "EGP"
+        
+        if Constant.isEuroCurrency() {
+            cell.productPrice.text = data?.variants?[0].price
+            cell.productCurrency.text = "EUR"
+        }else {
+            cell.productPrice.text = data?.variants?[0].price
+            cell.productCurrency.text = "EGP"
+        }
         return cell
        
     }

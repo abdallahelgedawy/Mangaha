@@ -17,11 +17,23 @@ class ProductDetailsViewModel{
         }
     }
     func getProductsInfo(baseUrl : String){
-        NetworkServices.getProductInfo(baseUrl: baseUrl) { productInfo in
-            self.productInfo = productInfo
-            if Constant.isEuroCurrency() == false{
-                self.setConvertedPrice()
+        NetworkServices.getProductInfo(baseUrl: baseUrl) { myProductInfo in
+            if Constant.isEuroCurrency() == false {
+                print(self.productInfo?.product.variants?[0].price)
+                NetworkServices.convertCurency(amount: myProductInfo?.product.variants?[0].price ?? "") { convertedPrice, error in
+                    self.productInfo = myProductInfo
+                    self.productInfo?.product.variants?[0].price = String(convertedPrice ?? 0.0)
+                   
+                    print(convertedPrice)
+                }
             }
+            else {
+        
+            self.productInfo = myProductInfo
+            }
+        }
+        DispatchQueue.main.async {
+            self.bindedResultPrice()
         }
     }
     
@@ -34,17 +46,21 @@ class ProductDetailsViewModel{
     func getProductAtIndex(index : Int)->myProduct?{
         return productInfo
     }
-    func setConvertedPrice(){
+   /* func setConvertedPrice(price : String , completionHandler : @escaping (String)->Void){
         NetworkServices.convertCurency(amount: productInfo?.product.variants?[0].price ?? "0.0") { myPrice, error in
-                self.convertedPrice = String(myPrice ?? 0.0)
+            self.convertedPrice = String(myPrice ?? 0.0)
             self.productInfo?.product.variants?[0].price = self.convertedPrice
-            }
+        }
         DispatchQueue.main.async {
             self.bindedResultPrice()
         }
-        }
+    }*/
+}
+  
         
    /* func getonvertedPrice()->String{
         return convertedPrice ?? "0.0"
     }*/
-}
+   
+
+
