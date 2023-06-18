@@ -8,7 +8,9 @@
 import UIKit
 
 class FavoriteCollectionViewCell: UICollectionViewCell {
-
+    var product :CartProduct?
+      var index:Int?
+    var delegate:CellDelegate?
     @IBOutlet var productPrice: UILabel!
     @IBOutlet var productTitle: UILabel!
     @IBOutlet weak var favImage: UIImageView!
@@ -20,7 +22,12 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 
     
     @IBAction func favBtn(_ sender: UIButton) {
-        print("Favorite")
+        delegate?.deleteButtonPressed(cell: self, product?.id ?? "")
     }
+
     
+}
+
+protocol CellDelegate: AnyObject {
+    func deleteButtonPressed(cell: UICollectionViewCell , _ id:String)
 }

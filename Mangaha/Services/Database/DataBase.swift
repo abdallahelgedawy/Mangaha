@@ -53,6 +53,7 @@ class DataBase{
         let request: NSFetchRequest<CartProduct> = CartProduct.fetchRequest()
         request.predicate = predicate
         do{
+            print("testing profile core data")
             return try context.fetch(request)
         }
         catch{
@@ -99,4 +100,33 @@ class DataBase{
         save()
         
     }
+    
+    func deleteEntity(){
+        let fetchRequest : NSFetchRequest<NSFetchRequestResult> = CartProduct.fetchRequest()
+        let batchDelete = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do{
+            try context.execute(batchDelete)
+            save()
+        }catch{
+            print("Error to delet entity")
+        }
+    }
+    
+    func deleteAllTableItems(completion:@escaping()->Void){
+            let fetchRequest=NSFetchRequest<NSManagedObject>(entityName: "CartProduct")
+            do {
+                let products = try context.fetch(fetchRequest)
+                print("hereeeeee")
+                for product in products {
+                    context.delete(product)
+                    try context.save()
+                    print("deletedSuccessfully")
+                }
+               
+            } catch {
+                print("eroor")
+            }
+       
+        }
+    
 }

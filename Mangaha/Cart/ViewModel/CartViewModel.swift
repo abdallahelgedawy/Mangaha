@@ -43,4 +43,9 @@ class CartViewModel{
         
         return Constant.isEuroCurrency() ? String(subTotal) + "    EUR" : String(subTotal) + "    EGP"
     }
+    func inistintiateProductDetVM(_ index : Int)->ProductDetailsViewModel{
+        var productDetVM = ProductDetailsViewModel()
+        productDetVM.productId = Int(cartProducts[index].id ?? "")
+        return productDetVM
+    }
 }

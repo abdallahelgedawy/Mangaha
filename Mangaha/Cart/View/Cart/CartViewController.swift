@@ -136,6 +136,11 @@ extension CartViewController : UITableViewDelegate , UITableViewDataSource{
             deletingFromCartAlert(product.id ?? "0" , indexPath.row)
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let productDetVC = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+        productDetVC.productDetailsViewModel = cartVM.inistintiateProductDetVM(indexPath.row)
+        navigationController?.pushViewController(productDetVC, animated: true)
+    }
     
 }
 

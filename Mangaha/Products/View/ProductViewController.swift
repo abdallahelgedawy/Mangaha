@@ -44,6 +44,8 @@ class ProductViewController: UIViewController {
         
     }
     
+ 
+    
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
             productViewModel?.filterProductFromLowToHigh()

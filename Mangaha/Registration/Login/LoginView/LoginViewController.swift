@@ -25,7 +25,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupAnimation()
         loginBtn.layer.cornerRadius = 10
+        
+        navigationItem.setHidesBackButton(true, animated: true)
        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     @IBOutlet weak var loginBtn: UIButton!
     @IBAction func myLoginBtn(_ sender: UIButton) {
@@ -41,10 +46,11 @@ class LoginViewController: UIViewController {
                 
                 self.present(alertController, animated: true, completion: nil)
             }else{
-                self.loginViewModel.retrieveUserData(email: email)
-                self.navigationController?.pushViewController(TabBar(), animated: true)
+                self.loginViewModel.retrieveUserData(email: email, completion: {
+                })
+               self.navigationController?.pushViewController(TabBar(), animated: true)
             }
-            
+          
             
         }
     }

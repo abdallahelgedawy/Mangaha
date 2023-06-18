@@ -11,20 +11,18 @@ import FirebaseAuth
 class SignUpViewModel{
     var customer : ResponseCustomer = ResponseCustomer(id: 0, firstName: "")
     var bindedResult :  (()->()) = {}
-    var cartId : Int = 0
-    var email : String = ""
-    var id : Int = 0
-    var username : String = ""
     var db = Firestore.firestore()
     func postCustomer(myuserCustomer : userCustomer){
         NetworkServices.postCustomer(customer: myuserCustomer) { [weak self] customer, errors in
             guard let customer = customer else {return}
             self?.customer = customer
             print(customer.id)
-            self?.email = myuserCustomer.customer.email
-            self?.id = customer.id
-            self?.username = myuserCustomer.customer.firstName
-           // self?.postCart()
+            let email = myuserCustomer.customer.email
+            let id = customer.id
+            let username = myuserCustomer.customer.firstName
+            self?.db.collection("users").addDocument(data: ["id" : id , "email" : email , "username" : username , "FavoriteId" : -1 , "CartId" : -1])
+            UserDefaults.standard.set(-1, forKey: "FavoriteId")
+            UserDefaults.standard.set(-1, forKey: "CartId")
         }
         DispatchQueue.main.async {
             self.bindedResult()
