@@ -19,13 +19,20 @@ struct DraftOrder : Codable{
     }
 }
 struct LineItems : Codable{
+   // var id : Int?
     var title    : String?
     var price    : String?
     var quantity : Int?
+    var imageUrl : String?
+    //var prodId : Int?
     enum CodingKeys: String, CodingKey {
         case title
         case price
         case quantity
+        case imageUrl = "sku"
+       // case id
+        //case prodId = "variant_id"
+        
     }
     
 }
@@ -43,4 +50,12 @@ struct DraftOrderResponse : Codable {
         case lineItems = "line_items"
     }
 }
+
+struct DraftOrderGetResponse : Codable{
+    let draftOrder : DraftOrderResponse
+    enum CodingKeys: String, CodingKey {
+        case draftOrder = "draft_order"
+    }
+}
+
 

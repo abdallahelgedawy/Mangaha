@@ -7,7 +7,7 @@
 
 import Foundation
 class ProductViewModel{
-
+    let dataBase = DataBase()
     var brandId : Int?
 
     var bindproductListToProductVC : (()->()) = {}
@@ -44,5 +44,16 @@ class ProductViewModel{
         let productDetailsViewModel = ProductDetailsViewModel()
         productDetailsViewModel.productId = productList?[index].id
         return productDetailsViewModel
+    }
+    
+    func addProductToFavourites(product:CoreDataProduct){
+        dataBase.addToCart(product: product)
+    }
+    
+    func deleteProductFromFavourite(_ id:String){
+        dataBase.deleteProductFromDataBase(id: id, isFavourite: true)
+    }
+    func isInInfav(_ id:String)->Bool{
+        return dataBase.isProductInFavourite(id: id)
     }
 }

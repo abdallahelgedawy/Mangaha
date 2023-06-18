@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteViewController" customModule="Mangaha" customModuleProvider="target">
             <connections>
                 <outlet property="myFavCollection" destination="f8V-sJ-lu7" id="DEv-3k-Xq7"/>
+                <outlet property="nodataImg" destination="yrW-8m-aWL" id="mQN-4M-oRg"/>
+                <outlet property="nodataLabel" destination="JP9-pS-8rM" id="oau-ij-oCq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,19 +32,38 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data" translatesAutoresizingMaskIntoConstraints="NO" id="yrW-8m-aWL">
+                    <rect key="frame" x="76" y="218" width="240" height="233"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="233" id="U9V-GD-2hU"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No products in favourites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JP9-pS-8rM">
+                    <rect key="frame" x="8" y="482" width="377" height="27.666666666666686"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                    <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="yrW-8m-aWL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="159" id="8MJ-rc-4nj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yrW-8m-aWL" secondAttribute="trailing" constant="77" id="MQ6-6H-0z5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="f8V-sJ-lu7" secondAttribute="bottom" id="S2n-Ss-cqJ"/>
+                <constraint firstItem="yrW-8m-aWL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="76" id="TJH-oy-BpY"/>
                 <constraint firstItem="f8V-sJ-lu7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Xo2-a8-FZL"/>
+                <constraint firstItem="JP9-pS-8rM" firstAttribute="top" secondItem="yrW-8m-aWL" secondAttribute="bottom" constant="31" id="aG7-ng-UnV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f8V-sJ-lu7" secondAttribute="trailing" id="b1w-3X-6Zg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JP9-pS-8rM" secondAttribute="trailing" constant="8" id="jYa-HH-9Pq"/>
+                <constraint firstItem="JP9-pS-8rM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="lqg-1Z-3Hi"/>
                 <constraint firstItem="f8V-sJ-lu7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yoy-7y-LfS"/>
             </constraints>
-            <point key="canvasLocation" x="95" y="20"/>
+            <point key="canvasLocation" x="93.89312977099236" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
+        <image name="data" width="626" height="626"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

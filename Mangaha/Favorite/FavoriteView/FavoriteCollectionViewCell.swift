@@ -8,15 +8,26 @@
 import UIKit
 
 class FavoriteCollectionViewCell: UICollectionViewCell {
-
+    var product :CartProduct?
+      var index:Int?
+    var delegate:CellDelegate?
+    @IBOutlet var productPrice: UILabel!
+    @IBOutlet var productTitle: UILabel!
+    @IBOutlet weak var favImage: UIImageView!
+    @IBOutlet weak var myFavBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         myFavBtn.layer.cornerRadius = 10
     }
 
-    @IBOutlet weak var myFavBtn: UIButton!
+    
     @IBAction func favBtn(_ sender: UIButton) {
-        print("Favorite")
+        delegate?.deleteButtonPressed(cell: self, product?.id ?? "")
     }
-    @IBOutlet weak var favImage: UIImageView!
+
+    
+}
+
+protocol CellDelegate: AnyObject {
+    func deleteButtonPressed(cell: UICollectionViewCell , _ id:String)
 }

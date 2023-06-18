@@ -15,23 +15,24 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     @IBOutlet weak var favBtn: UIButton!
     
     @IBOutlet weak var bagBtn: UIButton!
-    var price = "0.0"
+    var image:UIImage?
+   
     
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-     /*   productDetailsViewModel?.bindedResultPrice = {
-            self.myProductDetailsCollection.reloadData()
-        }
-        setupNavigationController()
-        productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+        /*   productDetailsViewModel?.bindedResultPrice = {
+         self.myProductDetailsCollection.reloadData()
+         }
+         setupNavigationController()
+         productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+         
+         productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
+         DispatchQueue.main.async {
+         self.myProductDetailsCollection.reloadData()
+         }
+         }*/
         
-        productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
-            DispatchQueue.main.async {
-                self.myProductDetailsCollection.reloadData()
-            }
-        }*/
-       
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -148,7 +149,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         let backBarBtn = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.fill"), style: .plain, target: self, action: #selector(popView))
         backBarBtn.tintColor = customOrange
         navigationItem.leftBarButtonItem = backBarBtn
-       
+        
         let apperance = UINavigationBarAppearance()
         apperance.configureWithTransparentBackground()
         apperance.backgroundColor = .white
@@ -164,17 +165,18 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      
         switch indexPath.section{
         case 0 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "productDetails", for: indexPath) as! ProductDetailsCollectionViewCell
             let data = productDetailsViewModel?.getImagesAtIndex(index: indexPath.row)
             cell.imageProductDetails.layer.cornerRadius = 10
             cell.imageProductDetails.sd_setImage(with: URL(string: data?.src ?? ""))
-            
             let hexColor = UIColor(hex: 0xFF7466)
             cell.myPage.currentPageIndicatorTintColor = hexColor
             cell.myPage.numberOfPages = data?.src?.count ?? 0
             cell.myPage.currentPage = indexPath.item
+            image = cell.imageProductDetails.image
             return cell
         case 1 :
             let cell = myProductDetailsCollection.dequeueReusableCell(withReuseIdentifier: "reviews", for: indexPath) as! ReviewsCollectionViewCell
@@ -185,7 +187,9 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             }else{
                 cell.priceLabel.text = "EGP" + (data?.product.variants?[0].price ?? "")
             }
-           
+            if productDetailsViewModel?.isInFavourite(data?.product.id ?? 0) ?? false{
+                favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }
             cell.btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.btn.isUserInteractionEnabled = true
             return cell
@@ -197,9 +201,10 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         default :
             return UICollectionViewCell()
         }
+       
     }
     
-
+    
     
     @objc func buttonTapped(_ sender: UIButton) {
         print("tapped")
@@ -219,7 +224,68 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             return CGSize.zero
         }
     }
+    
+    @IBAction func addToFavourite(_ sender: UIButton) {
+        setupFavouriteProduct()
+    }
+    
+    @IBAction func addToCart(_ sender: Any) {
+        setupCartProduct()
+    }
+    
+    func setupCartProduct(){
+        let product = productDetailsViewModel?.getProductAtIndex(index: 0)?.product
+        if ((productDetailsViewModel?.isInCart(product?.id ?? 0))) ?? false {
+            self.view.makeToast("This product is already in cart")
+        }else{
+            let id = String(product?.id ?? 0)
+            let title = product?.title
+            let url = product?.image?.src
+            let imageData = image?.jpegData(compressionQuality: 1)
+            let price = product?.variants?[0].price
+            let SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
+            productDetailsViewModel?.addProductToCart(product: SavedProduct)
+            self.view.makeToast("Product added to cart")
+        }
+    }
+    func setupFavouriteProduct(){
+        let product = productDetailsViewModel?.getProductAtIndex(index: 0)?.product
+        if ((productDetailsViewModel?.isInFavourite(product?.id ?? 0))) ?? false {
+            deletingFromFavouritesAlert(String(product?.id ?? 0))
+        }else{
+            let id = String(product?.id ?? 0)
+            let title = product?.title
+            let url = product?.image?.src
+            let imageData = image?.jpegData(compressionQuality: 1)
+            let price = product?.variants?[0].price
+            var SavedProduct = CoreDataProduct(id: id, image: imageData ?? Data(), title: title ?? "", imageUrl: url ?? "", price: price ?? "", quantity: "1")
+            SavedProduct.isFavourite = true
+            productDetailsViewModel?.addProductToCart(product: SavedProduct)
+            favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            self.view.makeToast("Product added to Favourites")
+        }
+    }
+    
+    func deletingFromFavouritesAlert(_ id:String){
+        let deletingAddress = UIAlertController(title: "Delete From Favourites", message: "Are you sure you want to delete this product from Fvourites ?", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Delete", style: .destructive){_ in
+            self.productDetailsViewModel?.deleteProductFromFavourites(id, true)
+            self.favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
+            self.myProductDetailsCollection.reloadData()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel){_ in
+            deletingAddress.dismiss(animated: true)
+        }
+        deletingAddress.addAction(confirm)
+        deletingAddress.addAction(cancel)
+        self.present(deletingAddress, animated: true)
+    }
+    
 }
+
+    
+    
+    
 
     
 

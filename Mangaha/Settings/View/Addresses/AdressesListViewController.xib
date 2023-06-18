@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdressesListViewController" customModule="Mangaha" customModuleProvider="target">
             <connections>
                 <outlet property="adressesTable" destination="Yeg-eJ-yrD" id="Kdf-2P-oGQ"/>
+                <outlet property="loadingBar" destination="ciE-G8-hrK" id="r2A-7A-TV1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,26 +21,34 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your Adress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNu-Ws-lHi">
-                    <rect key="frame" x="15" y="109" width="181" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your Addresses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNu-Ws-lHi">
+                    <rect key="frame" x="15" y="109" width="140" height="24"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-eJ-yrD">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-eJ-yrD">
                     <rect key="frame" x="0.0" y="153" width="393" height="665"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ciE-G8-hrK">
+                    <rect key="frame" x="100" y="416" width="193" height="20"/>
+                    <color key="color" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Yeg-eJ-yrD" secondAttribute="trailing" id="2QU-JN-UPf"/>
+                <constraint firstItem="ciE-G8-hrK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="FGw-OB-6fm"/>
                 <constraint firstItem="Yeg-eJ-yrD" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="MyF-IK-dV9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ciE-G8-hrK" secondAttribute="trailing" constant="100" id="XPY-d3-PjK"/>
+                <constraint firstItem="ciE-G8-hrK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="hRq-Qx-hDr"/>
                 <constraint firstItem="eNu-Ws-lHi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="hbm-9i-YFP"/>
                 <constraint firstItem="eNu-Ws-lHi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="kbR-bX-7FX"/>
                 <constraint firstItem="Yeg-eJ-yrD" firstAttribute="top" secondItem="eNu-Ws-lHi" secondAttribute="bottom" constant="20" id="nqg-Qc-bBb"/>
                 <constraint firstItem="Yeg-eJ-yrD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zJK-h4-TwQ"/>
+                <constraint firstItem="ciE-G8-hrK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zQ7-Px-zj5"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>

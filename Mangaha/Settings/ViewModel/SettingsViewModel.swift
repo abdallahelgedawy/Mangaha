@@ -8,6 +8,9 @@
 import Foundation
 class SettingsViwewModel{
     let defaults = UserDefaults.standard
+    var defaultAddress = [CustomerAddress]()
+    var bindedResult: (()->())={}
+    
     
     func addCurrencyToDefaults(currency:String){
         defaults.set(currency, forKey: Constant.currencyKey)
@@ -18,5 +21,17 @@ class SettingsViwewModel{
             return currency
         }
         return "Eur"
+    }
+    
+    func getDefaultAddress(){
+        NetworkServices.getAddressDetails { [weak self] address, error in
+            if let address = address{
+                self?.defaultAddress.append(address)
+                print("default" + (self?.defaultAddress.first?.address1 ?? "oooo" ))
+            }
+            DispatchQueue.main.async {
+                self?.bindedResult()
+            }
+        }
     }
 }

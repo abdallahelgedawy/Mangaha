@@ -231,6 +231,11 @@ extension CategoryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
         let data = categoryViewModel?.getProductsAtIndex(index: indexPath.row)
+        cell.Product = data
+        cell.categoryDelegate = self
+        if categoryViewModel?.isInInfav(String(data?.id ?? 0)) ?? false{
+            cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
        // var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")

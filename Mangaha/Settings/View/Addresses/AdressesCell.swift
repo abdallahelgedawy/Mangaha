@@ -9,6 +9,7 @@ import UIKit
 
 class AdressesCell: UITableViewCell {
 
+    @IBOutlet var phoneLabel: UILabel!
     @IBOutlet var cellBuble: UIView!
     @IBOutlet var countryLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
