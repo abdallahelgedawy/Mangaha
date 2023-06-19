@@ -26,10 +26,12 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
         favTableView.delegate = self
         setupNavigationBar()
        // profileVM.getWishList()
+        profileVM.getOrderss(baseUrl: Constant.getOrder(customerId: 0))
     }
     override func viewWillAppear(_ animated: Bool) {
         print("will appear")
         profileVM.getWishList()
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         print("did appear")
@@ -38,6 +40,8 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func viewMoreOrder(_ sender: UIButton) {
+        let orderVC = OrderViewController(nibName: "OrderViewController", bundle: nil)
+        navigationController?.pushViewController(orderVC, animated: true)
     }
     
     @IBAction func viewMoreFavourites(_ sender: Any) {
@@ -126,7 +130,9 @@ extension MEViewController : UITableViewDataSource , UITableViewDelegate{
             return cell ?? UITableViewCell()
         }else{
          let cell = orderTabelView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as? OrderSettingsCell
-            cell?.orderPriceLabel.text = "555555 L.E"
+            let order = profileVM.getOrdersAtIndex(index: indexPath.row)
+            cell?.orderPriceLabel.text = order.line_items?[0].price
+            cell?.orderDateLabel.text = order.created_at
             return cell ?? UITableViewCell()
         }
         

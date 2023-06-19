@@ -12,12 +12,10 @@ class Constant{
 
         private static let postBaseUrl = "https://mad43-alex-ios3.myshopify.com/admin/api/2023-04/"
 
-
-
-
     static func allBrands() -> String{
         return baseUrl + "smart_collections.json"
     }
+    
     static func productInfo(productId : Int)->String{
         return baseUrl + "products/\(productId).json"
     }
@@ -108,7 +106,13 @@ class Constant{
        return "https://0f0340065b43e0803729efbf5c2e1ff6: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@mad43-alex-ios3.myshopify.com/admin/api/2023-04/draft_orders/\(id).json"
     }
     
+    static func postOrder()-> String{
+        return baseUrl + "orders.json"
+    }
     
+    static func getOrder(customerId : Int)-> String{
+        return baseUrl + "customers/\(customerId)/orders.json"
+    }
 }
     
 

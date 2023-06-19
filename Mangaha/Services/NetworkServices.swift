@@ -380,4 +380,80 @@ class NetworkServices{
         task.resume()
         
     }
+    
+    static func postOrder( url : String , order : PostOrder, completionHandler : @escaping ( ResponseOrder?, Error?)->Void){
+        let url = URL(string: url)
+        guard let newUrl = url else {
+            return
+        }
+        var request = URLRequest(url: newUrl)
+            request.httpMethod = "POST"
+            let session = URLSession.shared
+           request.httpShouldHandleCookies = false
+            
+            do {
+                let data = try JSONEncoder().encode(order)
+                let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+                request.httpBody = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
+            }catch let error {
+                print("error encoding")
+                print(error.localizedDescription)
+            }
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+          session.dataTask(with: request) { (data, response, error) in
+            
+                if let error = error {
+                    completionHandler(nil , error)
+                    return
+                }
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    print(httpResponse.statusCode)
+                    do {
+                        let json = try JSONDecoder().decode(ResponseOrder.self, from: data!)
+                        print("success")
+                        completionHandler(json , nil)
+                    } catch {
+                        print("hna feh error")
+                        completionHandler(nil , error)
+                    }
+                    return
+                }
+                
+            }.resume()
+           
+        }
+    
+    static func getOrders(url : String , completionHandler : @escaping (GetOrder? , Error?)->Void){
+        let url = URL(string: url)
+        guard let newUrl = url else {
+            return
+        }
+        var request = URLRequest(url: newUrl)
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request){ data,response , error in
+            
+            if let error = error {
+                completionHandler(nil , error)
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print(httpResponse.statusCode)
+                do {
+                    let json = try JSONDecoder().decode(GetOrder.self, from: data!)
+                    print("success")
+                    completionHandler(json , nil)
+                } catch {
+                    print("hna feh error")
+                    completionHandler(nil , error)
+                }
+                return
+            }
+            
+        }
+        task.resume()
+    }
 }

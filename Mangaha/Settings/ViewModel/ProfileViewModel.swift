@@ -13,6 +13,28 @@ class ProfileViewModel{
     var favourites = [CartProduct]()
     let db = Firestore.firestore()
     var bindedResult: (()->())={}
+    
+    var bindOrderListToMEVC : (()->()) = {}
+    var ordersList : [Order]? {
+        didSet {
+            bindOrderListToMEVC()
+        }
+    }
+
+    func getOrderss(baseUrl:String){
+        NetworkServices.getOrders(url: baseUrl){
+            [weak self] result,error  in
+            self?.ordersList = result?.orders
+        }
+    }
+    
+    func getOrdersAtIndex(index:Int)-> Order{
+        return ordersList?[index] ?? Order()
+    }
+    
+    func  getOrderssCount()->Int{
+        return ordersList?.count ?? 0
+    }
    private  func convertCoreDataToProduct(coreDataProducts:[CartProduct])->[LineItems]{
         var lineItems = [LineItems]()
         for product in coreDataProducts{
