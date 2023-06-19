@@ -124,6 +124,12 @@ class ProfileViewModel{
         productDetVM.productId = Int(favourites[index].id ?? "")
         return productDetVM
     }
+    func resetUserDefualtsCoupons(){
+        UserDefaults.standard.set("none", forKey: "FirstC")
+        UserDefaults.standard.set("none", forKey: "SecondC")
+        UserDefaults.standard.set("none", forKey: "ThirdC")
+        
+    }
 }
                                                                                       
                                                                                 
