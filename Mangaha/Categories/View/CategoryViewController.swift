@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class CategoryViewController: UIViewController {
+class CategoryViewController: UIViewController , UISearchBarDelegate  {
 
   
     @IBOutlet weak var searchCategory: UISearchBar!
@@ -21,8 +21,9 @@ class CategoryViewController: UIViewController {
     let button3 = UIButton()
     let button4 = UIButton()
     var mainCategoryId : Int = 0
-    
+    var isSearched : Bool?
     var allProductsUrl = Constant.allProducts()
+    var filteredList : [Products]?
     private let floatingBtn : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         button.layer.masksToBounds = true
@@ -41,7 +42,8 @@ class CategoryViewController: UIViewController {
         categoryViewModel = CategoryViewModel()
         setupNavigationController()
         view.addSubview(floatingBtn)
-        
+        isSearched = false
+        searchCategory.delegate = self
         networkIndecator = UIActivityIndicatorView(style: .large)
         networkIndecator.color =  UIColor(hex: 0xFF7466)
         networkIndecator.center = view.center
@@ -99,6 +101,26 @@ class CategoryViewController: UIViewController {
         
        
     }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isSearched = false
+            filteredList?.removeAll()
+            
+        }
+        else {
+            isSearched = true
+            filteredList?.removeAll()
+            filteredList = categoryViewModel?.categoriesList?.filter { category in
+                guard let title = category.title else {
+                    return false
+                }
+                return title.localizedCaseInsensitiveContains(searchText)
+            }
+            
+        }
+        categoryCollection.reloadData()
+    }
+ 
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
            mainCategoryId = 448684261661
@@ -209,16 +231,25 @@ class CategoryViewController: UIViewController {
 
 }
 
-extension CategoryViewController : UICollectionViewDelegate{
+extension CategoryViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
-        productDetails.productDetailsViewModel = categoryViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
-        navigationController?.pushViewController(productDetails, animated: true)
+        if isSearched == true{
+            var productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+            productDetails.productDetailsViewModel = categoryViewModel?.instantiateCategoryFilteredViewModel(index: indexPath.row, filterList: filteredList)
+            navigationController?.pushViewController(productDetails, animated: true)
+        }else{
+            var productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+            productDetails.productDetailsViewModel = categoryViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
+            navigationController?.pushViewController(productDetails, animated: true)
+        }
     }
 }
 
 extension CategoryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSearched == true{
+            return filteredList?.count ?? 0
+        }
         var list = categoryViewModel?.getProductsCount() ?? 0
         if list == 0 {
             categoryCollection.isHidden = true
@@ -230,8 +261,25 @@ extension CategoryViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
+        
         let data = categoryViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.Product = data
+        if isSearched!{
+            cell.categoryDelegate = self
+            if categoryViewModel?.isInInfav(String(filteredList?[indexPath.row].id ?? 0)) ?? false{
+                cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }
+            cell.productImg.sd_setImage(with: URL(string: filteredList?[indexPath.row].image?.src ?? ""))
+            cell.productName.text = filteredList?[indexPath.row].title
+           // var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")
+            cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
+            print(UserDefaults.standard.object(forKey: Constant.currencyKey))
+            if Constant.isEuroCurrency(){
+                cell.productCurrency.text = "€"
+            }
+            cell.productCurrency.text = "EGP"
+            return cell
+        }
         cell.categoryDelegate = self
         if categoryViewModel?.isInInfav(String(data?.id ?? 0)) ?? false{
             cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)

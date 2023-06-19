@@ -33,20 +33,18 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         productCollection.dataSource = self
         
         
-         productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+        productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         
         filterProduct.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         
-         productViewModel?.bindproductListToProductVC = {
-         DispatchQueue.main.async {
-         self.productCollection.reloadData()
-         self.networkIndecator.stopAnimating()
-         }
-         }
-         */
+        productViewModel?.bindproductListToProductVC = {
+            DispatchQueue.main.async {
+                self.productCollection.reloadData()
+                self.networkIndecator.stopAnimating()
+            }
+        }
+        
     }
-         
-}
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearched = false
@@ -56,14 +54,16 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         else {
             isSearched = true
             filteredList?.removeAll()
-            filteredList = productViewModel?.productList!.filter{products in return
-                 products.title?.localizedCaseInsensitiveContains(searchText) == false
-                 
+            filteredList = productViewModel?.productList?.filter { product in
+                guard let title = product.title else {
+                    return false
+                }
+                return title.localizedCaseInsensitiveContains(searchText)
             }
-            
         }
         productCollection.reloadData()
     }
+ 
     
     
     
@@ -138,7 +138,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         }*/
     }
-}
+
 
     
     extension ProductViewController : UICollectionViewDelegate{

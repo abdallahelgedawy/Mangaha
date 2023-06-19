@@ -12,8 +12,10 @@
             <connections>
                 <outlet property="confirmationPasswordTF" destination="sJp-oh-WI7" id="cu9-ji-dpN"/>
                 <outlet property="emailTF" destination="RY9-OH-Cbc" id="DRU-a4-Ywt"/>
+                <outlet property="matchLabel" destination="P6A-Cy-mQy" id="QDp-46-oiG"/>
                 <outlet property="passwordTF" destination="rgb-bH-l3T" id="whf-mG-brW"/>
                 <outlet property="registerBtn" destination="0jv-eY-5H2" id="vJH-hA-OaU"/>
+                <outlet property="strengthLabel" destination="G2V-Jz-1lx" id="E3m-FS-tHR"/>
                 <outlet property="usernameTF" destination="aWB-z6-obC" id="CT0-aG-SLX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -106,6 +108,36 @@
                         <action selector="alreadyHaveAccount:" destination="-1" eventType="touchUpInside" id="gcC-Il-SOW"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBh-g9-nE3">
+                    <rect key="frame" x="315.33333333333331" y="302" width="57.666666666666686" height="34.333333333333314"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="eye.slash.fill" catalog="system"/>
+                    <connections>
+                        <action selector="toggleBtnSignUp:" destination="-1" eventType="touchUpInside" id="Mf9-Ot-3Zd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sE5-Lt-xhQ">
+                    <rect key="frame" x="315.33333333333331" y="410" width="57.666666666666686" height="34"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="eye.slash.fill" catalog="system"/>
+                    <connections>
+                        <action selector="toggleBtnConfirm:" destination="-1" eventType="touchUpInside" id="wsc-S0-aiV"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weak Password!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2V-Jz-1lx">
+                    <rect key="frame" x="280.66666666666669" y="337.66666666666669" width="92.333333333333314" height="14.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" systemColor="systemRedColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doesn't Match!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6A-Cy-mQy">
+                    <rect key="frame" x="286.66666666666669" y="458.66666666666669" width="86.333333333333314" height="14.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" systemColor="systemRedColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -120,25 +152,35 @@
                 <constraint firstItem="sue-fZ-7cQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Dmw-TC-eZ6"/>
                 <constraint firstItem="rgb-bH-l3T" firstAttribute="top" secondItem="RY9-OH-Cbc" secondAttribute="bottom" constant="50" id="EVh-x0-WbY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RY9-OH-Cbc" secondAttribute="trailing" constant="20" id="H3F-E1-CWM"/>
+                <constraint firstItem="sE5-Lt-xhQ" firstAttribute="top" secondItem="sJp-oh-WI7" secondAttribute="top" id="IzV-gN-Ey5"/>
+                <constraint firstItem="sJp-oh-WI7" firstAttribute="top" secondItem="G2V-Jz-1lx" secondAttribute="bottom" constant="58" id="JQa-ej-ibE"/>
+                <constraint firstItem="kBh-g9-nE3" firstAttribute="top" secondItem="rgb-bH-l3T" secondAttribute="top" id="KwZ-ZR-69c"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sJp-oh-WI7" secondAttribute="trailing" constant="20" id="QUg-pE-xFZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KG9-kS-WeB" secondAttribute="bottom" constant="120" id="Tpu-HV-cW7"/>
                 <constraint firstItem="1mH-q9-Idv" firstAttribute="top" secondItem="IGS-w1-NRI" secondAttribute="bottom" constant="63" id="W2a-gx-0CM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="P6A-Cy-mQy" secondAttribute="trailing" constant="20" id="WdR-tO-RHI"/>
                 <constraint firstItem="KG9-kS-WeB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="ZWi-rv-uvu"/>
+                <constraint firstItem="0jv-eY-5H2" firstAttribute="top" secondItem="P6A-Cy-mQy" secondAttribute="bottom" constant="101" id="Zdh-Xf-DoK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rgb-bH-l3T" secondAttribute="trailing" constant="20" id="apE-7m-6FC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QHi-j8-5IV" secondAttribute="bottom" constant="113" id="c37-uC-KsQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QHi-j8-5IV" secondAttribute="trailing" constant="40" id="cZK-5L-ghf"/>
+                <constraint firstItem="kBh-g9-nE3" firstAttribute="trailing" secondItem="rgb-bH-l3T" secondAttribute="trailing" id="fR2-AU-WYe"/>
                 <constraint firstItem="RY9-OH-Cbc" firstAttribute="top" secondItem="aWB-z6-obC" secondAttribute="bottom" constant="41" id="g6w-Fc-y9s"/>
                 <constraint firstItem="oHb-3Q-UlL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="gZb-ga-gWG"/>
                 <constraint firstItem="1mH-q9-Idv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="j5M-ig-4jq"/>
+                <constraint firstItem="sE5-Lt-xhQ" firstAttribute="bottom" secondItem="sJp-oh-WI7" secondAttribute="bottom" id="k8Z-iI-SNb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="G2V-Jz-1lx" secondAttribute="trailing" constant="20" id="m3j-nb-IFx"/>
                 <constraint firstItem="Gfx-cu-7yR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="mWi-Tj-Ehb"/>
                 <constraint firstItem="sJp-oh-WI7" firstAttribute="leading" secondItem="oHb-3Q-UlL" secondAttribute="trailing" constant="20" id="n4Z-j8-gNK"/>
                 <constraint firstItem="aWB-z6-obC" firstAttribute="top" secondItem="Gfx-cu-7yR" secondAttribute="bottom" constant="56" id="nsF-Se-SRs"/>
+                <constraint firstItem="kBh-g9-nE3" firstAttribute="trailing" secondItem="rgb-bH-l3T" secondAttribute="trailing" id="o1s-7V-4oe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aWB-z6-obC" secondAttribute="trailing" constant="20" id="rnP-Qo-AYG"/>
                 <constraint firstItem="IGS-w1-NRI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="rz6-ef-rqj"/>
                 <constraint firstItem="aWB-z6-obC" firstAttribute="leading" secondItem="sue-fZ-7cQ" secondAttribute="trailing" constant="85" id="sz4-dw-jah"/>
                 <constraint firstItem="Gfx-cu-7yR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="uKn-uR-mwY"/>
                 <constraint firstItem="RY9-OH-Cbc" firstAttribute="leading" secondItem="IGS-w1-NRI" secondAttribute="trailing" constant="125" id="vDf-Ul-roC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0jv-eY-5H2" secondAttribute="trailing" constant="90" id="w1t-j3-yE5"/>
+                <constraint firstItem="sE5-Lt-xhQ" firstAttribute="trailing" secondItem="sJp-oh-WI7" secondAttribute="trailing" id="w9T-yy-kyc"/>
                 <constraint firstItem="QHi-j8-5IV" firstAttribute="leading" secondItem="KG9-kS-WeB" secondAttribute="trailing" id="z0z-ME-STz"/>
                 <constraint firstItem="IGS-w1-NRI" firstAttribute="top" secondItem="sue-fZ-7cQ" secondAttribute="bottom" constant="54" id="z2B-OF-oFo"/>
             </constraints>
@@ -146,8 +188,12 @@
         </view>
     </objects>
     <resources>
+        <image name="eye.slash.fill" catalog="system" width="128" height="85"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

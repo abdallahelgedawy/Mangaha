@@ -12,7 +12,6 @@ class ProductViewModel{
     var bindedResultPrice :(()->()) = {}
     var filterList : [Products]?
     var bindproductListToProductVC : (()->()) = {}
-    var filterList : [Products]?
     var productList : [Products]? {
         didSet {
             bindproductListToProductVC()

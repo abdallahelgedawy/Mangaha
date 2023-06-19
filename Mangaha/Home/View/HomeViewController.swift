@@ -64,17 +64,19 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         if searchText.isEmpty {
             isSearched = false
             filteredList?.removeAll()
-           
+            
         }
         else {
             isSearched = true
             filteredList?.removeAll()
-            filteredList = homeViewModel?.brandsList?.filter{brands in return
-                (brands.title?.contains(searchText))!
+            filteredList = homeViewModel?.brandsList?.filter { brand in
+                guard let title = brand.title else {
+                    return false
+                }
+                return title.localizedCaseInsensitiveContains(searchText)
             }
-                
-    }
-            brandsCollection.reloadData()
+        }
+        brandsCollection.reloadData()
     }
     
 

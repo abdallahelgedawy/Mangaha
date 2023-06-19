@@ -12,8 +12,10 @@ import FirebaseFirestore
 
 
 class LoginViewController: UIViewController {
+
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var passwordTF: UITextField!
+    var isHide : Bool?
     var email : String? = nil
     var username : String? = nil
     var db = Firestore.firestore()
@@ -25,6 +27,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupAnimation()
         loginBtn.layer.cornerRadius = 10
+        isHide = true
+        
         
         navigationItem.setHidesBackButton(true, animated: true)
        
@@ -32,6 +36,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
+
     @IBOutlet weak var loginBtn: UIButton!
     @IBAction func myLoginBtn(_ sender: UIButton) {
         guard let email = emailTF.text else {return}
@@ -92,6 +97,17 @@ class LoginViewController: UIViewController {
                 
                 self.present(alertController, animated: true, completion: nil)
             }
+        }
+    }
+    @IBAction func toggleBtn(_ sender: UIButton) {
+        isHide = !isHide!
+        
+        if isHide! {
+            sender.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+            passwordTF.isSecureTextEntry = true
+        } else {
+            sender.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            passwordTF.isSecureTextEntry = false
         }
     }
 }

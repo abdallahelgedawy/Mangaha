@@ -20,7 +20,7 @@ class CategoryViewModel{
             bindResult()
         }
     }
-    
+    var filterList : [Products]?
     func getProducts(baseUrl:String){
         NetworkServices.getProducts(baseUrl: baseUrl){
             [weak self] result in
@@ -48,6 +48,11 @@ class CategoryViewModel{
         productDetailsViewModel.productId = categoriesList?[index].id
         return productDetailsViewModel
     }
+    func instantiateCategoryFilteredViewModel(index : Int ,  filterList : [Products]?)->ProductDetailsViewModel{
+        var productDetailsViewModel = ProductDetailsViewModel()
+        productDetailsViewModel.productId = filterList?[index].id
+        return productDetailsViewModel
+        }
     func takeProducts(){
         
     }
