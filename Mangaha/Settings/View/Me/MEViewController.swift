@@ -26,7 +26,7 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
         favTableView.delegate = self
         setupNavigationBar()
        // profileVM.getWishList()
-        profileVM.getOrderss(baseUrl: Constant.getOrder(customerId: 0))
+        profileVM.getOrderss(baseUrl: Constant.getOrder(customerId: Constant.getCurrentCustomerId()))
     }
     override func viewWillAppear(_ animated: Bool) {
         print("will appear")
@@ -40,7 +40,7 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func viewMoreOrder(_ sender: UIButton) {
-        let orderVC = OrderViewController(nibName: "OrderViewController", bundle: nil)
+       let orderVC = OrderViewController(nibName: "OrderViewController", bundle: nil)
         navigationController?.pushViewController(orderVC, animated: true)
     }
     

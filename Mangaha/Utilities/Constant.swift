@@ -61,8 +61,8 @@ class Constant{
         return postBaseUrl + "customers/\(getCurrentCustomerId())/addresses/\(addressId)/default.json"
     }
     
-    static func getCurrentCustomerId()->String{
-        return "7009396097310"
+    static func getCurrentCustomerId()->Int{
+        return 7009396097310
     }
     
     static func deleteAddressEndPoint(addressId:String)->String{
