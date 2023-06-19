@@ -24,6 +24,7 @@ class CategoryViewController: UIViewController , UISearchBarDelegate  {
     var isSearched : Bool?
     var allProductsUrl = Constant.allProducts()
     var filteredList : [Products]?
+    var guest = UserDefaults.standard.object(forKey: "isGuest") as? Bool
     private let floatingBtn : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         button.layer.masksToBounds = true
@@ -157,12 +158,52 @@ class CategoryViewController: UIViewController , UISearchBarDelegate  {
         navigationItem.rightBarButtonItems = [CartBtn , favBtn]
     }
     @objc func goToCart(){
-        let cart = CartViewController(nibName: "CartViewController", bundle: nil)
-        navigationController?.pushViewController(cart, animated: true)
+        if guest == true{
+        let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+            let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            self.navigationController?.pushViewController(signInVc, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.hidesBottomBarWhenPushed = true
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            self.dismiss(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        }else {
+            let cart = CartViewController(nibName: "CartViewController", bundle: nil)
+            navigationController?.pushViewController(cart, animated: true)
+        }
     }
     @objc func goToFav(){
-        let fav = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
-        navigationController?.pushViewController(fav, animated: true)
+        if guest == true{
+        let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+            let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            self.navigationController?.pushViewController(signInVc, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.hidesBottomBarWhenPushed = true
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            self.dismiss(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        }else {
+            let fav = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
+            navigationController?.pushViewController(fav, animated: true)
+        }
     }
     
     override func viewDidLayoutSubviews() {

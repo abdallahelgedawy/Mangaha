@@ -17,7 +17,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     var Product:Products?
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet var favBtn: UIButton!
-    
+    var guest = UserDefaults.standard.object(forKey: "isGuest") as? Bool
     @IBOutlet weak var productCurrency: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,11 +25,38 @@ class ProductCollectionViewCell: UICollectionViewCell {
         productView.layer.shadowRadius = 10
     }
 
-    @IBAction func favoriteBtn(_ sender: Any) {
+    @IBAction func favoriteBtn(_ sender: Any) {if guest == true{
+        let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+            guard let viewController = self.superview?.next(ofType: UIViewController.self) as? UIViewController else {
+                return
+            }
+            
+
+            let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            viewController.navigationController?.pushViewController(signInVc, animated: true)
+            viewController.tabBarController?.tabBar.isHidden = true
+            viewController.tabBarController?.hidesBottomBarWhenPushed = true
+
+        }
+
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            
+        }
+
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        if let topViewController = UIApplication.shared.keyWindow?.rootViewController {
+            // Present the alert on the topmost view controller
+            topViewController.present(alertController, animated: true, completion: nil)
+        }
+    }else {
         if let Product = Product{
-        handleFavouriteProduct(product: Product)
+            handleFavouriteProduct(product: Product)
         }
     }
+}
     
 func handleFavouriteProduct(product: Products) {
     if ((productViewModel.isInInfav(String(product.id ?? 0)))) {
@@ -70,6 +97,20 @@ func handleFavouriteProduct(product: Products) {
         }
     }
 }
+extension UIResponder {
+    func next<T>(ofType type: T.Type) -> T? {
+        if let nextResponder = self.next as? T {
+            return nextResponder
+        } else if let nextResponder = self.next {
+            return nextResponder.next(ofType: type)
+        } else {
+            return nil
+        }
+    }
+}
+
+
+
 
 
 

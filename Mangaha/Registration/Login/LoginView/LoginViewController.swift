@@ -13,6 +13,7 @@ import FirebaseFirestore
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var myGuestBtn: UIButton!
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var passwordTF: UITextField!
     var isHide : Bool?
@@ -22,19 +23,42 @@ class LoginViewController: UIViewController {
     var id : Int? = nil
     var loginViewModel = LoginViewModel()
     let animationView = LottieAnimationView()
+    var isGuest : Bool?
     @IBOutlet weak var emailTF: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAnimation()
         loginBtn.layer.cornerRadius = 10
         isHide = true
-        
+        myGuestBtn.layer.cornerRadius = 15
+        isGuest = false
         
         navigationItem.setHidesBackButton(true, animated: true)
        
     }
+    
+    @IBAction func guestBtn(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to enter as a guest with limited features?", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+            self.isGuest = true
+            UserDefaults.standard.set(self.isGuest, forKey: "isGuest")
+            self.navigationController?.pushViewController(TabBar(), animated: true)
+         
+        }
+
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            self.dismiss(animated: true)
+        }
+
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+
+        self.present(alertController, animated: true, completion: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
+        isGuest = false
     }
 
     @IBOutlet weak var loginBtn: UIButton!
@@ -53,6 +77,8 @@ class LoginViewController: UIViewController {
             }else{
                 self.loginViewModel.retrieveUserData(email: email, completion: {
                 })
+                self.isGuest = false
+                UserDefaults.standard.set(self.isGuest, forKey: "isGuest")
                self.navigationController?.pushViewController(TabBar(), animated: true)
             }
           
