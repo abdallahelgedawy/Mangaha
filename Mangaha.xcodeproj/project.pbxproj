@@ -334,8 +334,8 @@
 			isa = PBXGroup;
 			children = (
 				443E7AD22A40B50600F20F99 /* MockNetworkService.swift */,
-				443E7AD62A40B7AA00F20F99 /* BrandsResponse.swift */,
 				443E7AD82A40B83800F20F99 /* ProductsResponse.swift */,
+				443E7AD62A40B7AA00F20F99 /* BrandsResponse.swift */,
 			);
 			path = MockModels;
 			sourceTree = "<group>";
