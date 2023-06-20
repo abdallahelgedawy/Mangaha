@@ -66,7 +66,7 @@ class PaymentViewController: UIViewController {
                 }
     }
     @IBAction func confirmPayment(_ sender: UIButton) {
-        
+        paymentVM.postOrder(url: Constant.postOrder())
     }
     
     @IBAction func applyCopoun(_ sender: UIButton) {

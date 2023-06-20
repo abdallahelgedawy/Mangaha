@@ -382,7 +382,7 @@ class NetworkServices{
     }
     
     static func postOrder( url : String , order : PostOrder, completionHandler : @escaping ( ResponseOrder?, Error?)->Void){
-        let url = URL(string: url)
+        let url = URL(string: "https://0f0340065b43e0803729efbf5c2e1ff6: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@mad43-alex-ios3.myshopify.com/admin/api/2023-04/orders.json")
         guard let newUrl = url else {
             return
         }
@@ -392,6 +392,7 @@ class NetworkServices{
            request.httpShouldHandleCookies = false
             
             do {
+
                 let data = try JSONEncoder().encode(order)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
                 request.httpBody = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
@@ -416,6 +417,7 @@ class NetworkServices{
                         print("success")
                         completionHandler(json , nil)
                     } catch {
+                        print(error.localizedDescription)
                         print("hna feh error")
                         completionHandler(nil , error)
                     }

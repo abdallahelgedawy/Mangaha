@@ -10,10 +10,10 @@ struct userCustomer: Codable {
     let customer: Customer
 }
 struct Customer: Codable {
-    let firstName,email: String
-    let verifiedEmail: Bool
-    let password, passwordConfirmation: String
-    let sendEmailWelcome: Bool
+    var firstName,email: String
+    var verifiedEmail: Bool
+    var password, passwordConfirmation: String
+    var sendEmailWelcome: Bool
     
 
     enum CodingKeys: String, CodingKey {

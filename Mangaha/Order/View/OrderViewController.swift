@@ -18,10 +18,15 @@ class OrderViewController: UIViewController {
         orderTableView.delegate = self
         orderTableView.dataSource = self
         
-        orderTableView.register(UINib(nibName: "OrderSettingsCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "OrderCell")
+        orderTableView.register(UINib(nibName: "OrderSettingsCell", bundle: nil), forCellReuseIdentifier: "OrderCell")
         
         orderViewModel?.getOrderss(baseUrl: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0))
-
+        orderViewModel?.bindOrderListToOrderVC = {
+            DispatchQueue.main.async {
+                self.orderTableView.reloadData()
+            }
+        }
+        
     }
     
     
@@ -59,7 +64,7 @@ extension OrderViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = orderTableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderSettingsCell
         let order = orderViewModel?.getOrdersAtIndex(index: indexPath.row)
-        cell.orderDateLabel.text = order?.created_at
+         cell.orderDateLabel.text = order?.created_at
         cell.orderPriceLabel.text = order?.line_items?[0].price
         return cell
     }

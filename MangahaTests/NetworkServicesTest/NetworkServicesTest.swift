@@ -47,4 +47,33 @@ final class NetworkServicesTest: XCTestCase {
         }
         waitForExpectations(timeout: 5,handler: nil)
     }
+    
+    func testGetAllAddressesForCustomer(){
+        let myExpectation = expectation(description: "wait for my Api")
+        NetworkServices.getAllAddressesForCustomer(){
+            address,error  in
+            guard let addressList = address else{
+                XCTFail()
+                myExpectation.fulfill()
+                return
+            }
+            XCTAssertGreaterThan(addressList.count, 0, "fail to catch data")
+            myExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 5,handler: nil)
+    }
+    func testGetOrders(){
+        let myExpectation = expectation(description: "wait for my Api")
+        NetworkServices.getOrders(url: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0)){
+            order,error  in
+            guard let ordersList = order?.orders else{
+                XCTFail()
+                myExpectation.fulfill()
+                return
+            }
+            XCTAssertGreaterThan(ordersList.count, 0, "fail to catch data")
+            myExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 5,handler: nil)
+    }
 }
