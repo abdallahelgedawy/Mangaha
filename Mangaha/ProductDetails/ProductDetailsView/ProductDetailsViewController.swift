@@ -98,7 +98,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         self.productDetailsViewModel?.bindedResultPrice = {
             DispatchQueue.main.async {
                 self.myProductDetailsCollection.reloadData()
-                self.networkIndecator.stopAnimating()
+              //  self.networkIndecator.stopAnimating()
             }
             
         }
