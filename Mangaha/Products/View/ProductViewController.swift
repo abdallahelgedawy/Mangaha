@@ -16,6 +16,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
     var networkIndecator : UIActivityIndicatorView!
     var productViewModel : ProductViewModel?
     var filteredList : [Products]?
+    var guest = UserDefaults.standard.object(forKey: "isGuest") as? Bool
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
@@ -33,17 +34,17 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         productCollection.dataSource = self
         
         
-         productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+        productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         
         filterProduct.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         
-         productViewModel?.bindproductListToProductVC = {
-         DispatchQueue.main.async {
-         self.productCollection.reloadData()
-         self.networkIndecator.stopAnimating()
-         }
-         }
-         
+        productViewModel?.bindproductListToProductVC = {
+            DispatchQueue.main.async {
+                self.productCollection.reloadData()
+                self.networkIndecator.stopAnimating()
+            }
+        }
+        
     }
          
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -55,14 +56,16 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         else {
             isSearched = true
             filteredList?.removeAll()
-            filteredList = productViewModel?.productList!.filter{products in return
-                 products.title?.localizedCaseInsensitiveContains(searchText) == false
-                 
+            filteredList = productViewModel?.productList?.filter { product in
+                guard let title = product.title else {
+                    return false
+                }
+                return title.localizedCaseInsensitiveContains(searchText)
             }
-            
         }
         productCollection.reloadData()
     }
+ 
     
     
     
@@ -98,12 +101,53 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         navigationItem.rightBarButtonItems = [CartBtn , favBtn]
     }
     @objc func goToCart(){
+        if guest == true{
+        let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+            let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            self.navigationController?.pushViewController(signInVc, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.hidesBottomBarWhenPushed = true
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            self.dismiss(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }else {
         let cart = CartViewController(nibName: "CartViewController", bundle: nil)
         navigationController?.pushViewController(cart, animated: true)
     }
+}
+    
     @objc func goToFav(){
-        let fav = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
-        navigationController?.pushViewController(fav, animated: true)
+        if guest == true{
+            let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+                let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(signInVc, animated: true)
+                self.tabBarController?.tabBar.isHidden = true
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+            }
+            
+            let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+                self.dismiss(animated: true)
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            let fav = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
+            navigationController?.pushViewController(fav, animated: true)
+        }
     }
     
     
@@ -180,6 +224,7 @@ extension ProductViewController : UICollectionViewDataSource{
         let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
         let data = productViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.Product = data
+        
         if productViewModel?.isInInfav(String(data?.id ?? 0)) ?? true{
             cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }

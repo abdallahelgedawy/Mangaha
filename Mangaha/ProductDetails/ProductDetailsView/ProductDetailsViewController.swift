@@ -17,7 +17,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     @IBOutlet weak var bagBtn: UIButton!
     var image:UIImage?
    
-    
+    var guest = UserDefaults.standard.object(forKey: "isGuest") as? Bool
     var price = "0.0"
     var networkIndecator : UIActivityIndicatorView!
     @IBOutlet weak var myProductDetailsCollection: UICollectionView!
@@ -98,7 +98,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         self.productDetailsViewModel?.bindedResultPrice = {
             DispatchQueue.main.async {
                 self.myProductDetailsCollection.reloadData()
-                self.networkIndecator.stopAnimating()
+              //  self.networkIndecator.stopAnimating()
             }
             
         }
@@ -246,11 +246,52 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     }
     
     @IBAction func addToFavourite(_ sender: UIButton) {
-        setupFavouriteProduct()
+        if guest == true{
+        let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+            let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            self.navigationController?.pushViewController(signInVc, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.hidesBottomBarWhenPushed = true
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            self.dismiss(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        }else {
+            setupFavouriteProduct()
+        }
+        
     }
     
     @IBAction func addToCart(_ sender: Any) {
-        setupCartProduct()
+        if guest == true{
+        let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+            let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            self.navigationController?.pushViewController(signInVc, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.hidesBottomBarWhenPushed = true
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            self.dismiss(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        }else {
+            setupCartProduct()
+        }
     }
     
     func setupCartProduct(){

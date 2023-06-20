@@ -17,6 +17,7 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var favTableView: UITableView!
     @IBOutlet var orderTabelView: UITableView!
     @IBOutlet var welcomeLabel: UILabel!
+    var guest = UserDefaults.standard.object(forKey: "isGuest") as? Bool
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
@@ -40,13 +41,52 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func viewMoreOrder(_ sender: UIButton) {
-       let orderVC = OrderViewController(nibName: "OrderViewController", bundle: nil)
-        navigationController?.pushViewController(orderVC, animated: true)
+        if guest == true{
+            let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+                let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(signInVc, animated: true)
+                self.tabBarController?.tabBar.isHidden = true
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+            }
+            
+            let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+                self.dismiss(animated: true)
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            
+        }
     }
     
     @IBAction func viewMoreFavourites(_ sender: Any) {
-        let favVC = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
-        navigationController?.pushViewController(favVC, animated: true)
+        if guest == true{
+            let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+                let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(signInVc, animated: true)
+                self.tabBarController?.tabBar.isHidden = true
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+            }
+            
+            let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+                self.dismiss(animated: true)
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            let favVC = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
+            navigationController?.pushViewController(favVC, animated: true)
+        }
     }
     
     func registerCell(){
@@ -76,24 +116,82 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
             
     }
     @objc func moveToSettings(){
-        let settingsVc = ContactViewController(nibName: "ContactViewController", bundle: nil)
-        navigationController?.pushViewController(settingsVc, animated: true)
-    
+        if guest == true{
+            let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+                let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(signInVc, animated: true)
+                self.tabBarController?.tabBar.isHidden = true
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+            }
+            
+            let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+                self.dismiss(animated: true)
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            let settingsVc = ContactViewController(nibName: "ContactViewController", bundle: nil)
+            navigationController?.pushViewController(settingsVc, animated: true)
+        }
     }
     @objc func moveToCart(){
-        let cartVC = CartViewController(nibName: "CartViewController", bundle: nil)
-        navigationController?.pushViewController(cartVC, animated: true)
-        
+        if guest == true{
+            let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+                let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(signInVc, animated: true)
+                self.tabBarController?.tabBar.isHidden = true
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+            }
+            
+            let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+                self.dismiss(animated: true)
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            let cartVC = CartViewController(nibName: "CartViewController", bundle: nil)
+            navigationController?.pushViewController(cartVC, animated: true)
+        }
     }
     @objc func logOut(){
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.hidesBottomBarWhenPushed = true
-                self.profileVM.bindedResult = {
-                    let loginVC  = LoginViewController(nibName: "LoginViewController", bundle: nil)
-                    self.navigationController?.pushViewController(loginVC, animated: true)
-                    
-                }
-                self.profileVM.makeFavouritesDraftOrder()
+        if guest == true{
+            let alertController = UIAlertController(title: "Alert", message: "Cannot Use This Feature", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Back To Sign in", style: .default) { (_) in
+                let signInVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(signInVc, animated: true)
+                self.tabBarController?.tabBar.isHidden = true
+                self.tabBarController?.hidesBottomBarWhenPushed = true
+            }
+            
+            let cancelAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+                self.dismiss(animated: true)
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }else {
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.hidesBottomBarWhenPushed = true
+            self.profileVM.bindedResult = {
+                let loginVC  = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                self.navigationController?.pushViewController(loginVC, animated: true)
+                
+            }
+            self.profileVM.makeFavouritesDraftOrder()
+        }
     }
 }
 
