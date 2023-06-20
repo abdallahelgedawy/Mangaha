@@ -28,6 +28,11 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
         setupNavigationBar()
        // profileVM.getWishList()
         profileVM.getOrderss(baseUrl: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0))
+        profileVM.bindOrderListToMEVC = {
+            DispatchQueue.main.async {
+                self.orderTabelView.reloadData()
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         print("will appear")
@@ -60,7 +65,8 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
             
             self.present(alertController, animated: true, completion: nil)
         }else {
-            
+            let orderVC = OrderViewController(nibName: "OrderViewController", bundle: nil)
+            navigationController?.pushViewController(orderVC, animated: true)
         }
     }
     

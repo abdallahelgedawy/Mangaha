@@ -12,10 +12,13 @@ struct PostOrder: Codable {
 }
 struct Order: Codable {
     var line_items    : [LineItem]?
-    var customer : Customer?
+    var customer : CustomerId?
     var created_at : String?
 }
-
+struct CustomerId: Codable {
+    let id : Int?
+    
+}
 struct LineItem: Codable {
     let title: String
     let price: String
@@ -27,5 +30,5 @@ struct ResponseOrder: Codable {
 }
 struct OrderInfo: Codable {
     let id: Int
-    let createdAt: Date
+    var createdAt: Date?
 }

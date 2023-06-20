@@ -15,6 +15,13 @@ class PaymentViewModel{
     private var totalPrice = 0.0
     var totalBeforeDiscount = 0.0
     
+    var bindOrderListToPaymentVC : (()->()) = {}
+    var ordersList : [LineItem]? {
+        didSet {
+            bindOrderListToPaymentVC()
+        }
+    }
+    
     func setupCopouns(){
         let firstC = UserDefaults.standard.object(forKey: "FirstC") as? String ?? "none"
         print(firstC)
@@ -33,6 +40,23 @@ class PaymentViewModel{
         }
     }
     
+    func convertCoreDataProductToLineItem()-> [LineItem] {
+        getCartProducts()
+        var lineItems = [LineItem]()
+        for item in cartProducts{
+         var  lineItem = LineItem(title: item.title ?? "", price: item.price ?? "", quantity: Int(item.quantity ?? "1") ?? 1)
+            lineItems.append(lineItem)
+        }
+     return lineItems
+    }
+    
+    func postOrder(url : String){
+        var lineItems = convertCoreDataProductToLineItem()
+        var customer = CustomerId(id: Int(Constant.getCurrentCustomerId()))
+        NetworkServices.postOrder(url: url ,order: PostOrder(order: Order(line_items: lineItems,customer: customer))){
+            [weak self] order, error in
+        }
+    }
     
     func getCoupouns()->[String]{
         return coupouns
