@@ -20,7 +20,7 @@ class OrderViewController: UIViewController {
         
         orderTableView.register(UINib(nibName: "OrderSettingsCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "OrderCell")
         
-        orderViewModel?.getOrderss(baseUrl: Constant.getOrder(customerId: Constant.getCurrentCustomerId()))
+        orderViewModel?.getOrderss(baseUrl: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0))
 
     }
     
