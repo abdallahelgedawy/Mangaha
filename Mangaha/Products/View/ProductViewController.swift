@@ -43,10 +43,9 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
          self.networkIndecator.stopAnimating()
          }
          }
-         */
+         
     }
          
-}
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearched = false
@@ -137,7 +136,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             }
             productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         }*/
-    }
+    
 }
 
     
