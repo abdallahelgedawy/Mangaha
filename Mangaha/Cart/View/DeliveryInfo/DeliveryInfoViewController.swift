@@ -6,28 +6,64 @@
 //
 
 import UIKit
+import CoreLocation
 
 class DeliveryInfoViewController: UIViewController {
-
+    let customOrange = UIColor(hex: 0xFF7466)
+    let deliveryVM = DeliveryViewModel()
+    @IBOutlet var loadin: UIActivityIndicatorView!
     @IBOutlet var paymentBtn: UIButton!
     @IBOutlet var phoneNumberTf: UITextField!
     @IBOutlet var streetTf: UITextField!
     @IBOutlet var cityTf: UITextField!
-    @IBOutlet var countryTF: UITextField!
+    let locationManger = CLLocationManager()
+    var country = ""
+    var city = ""
+    var street = ""
+    @IBOutlet var countryTF: DropDown!{
+        didSet{
+            self.countryTF.optionArray = deliveryVM.generateCountries()
+            self.countryTF.selectedRowColor = customOrange
+        }
+    }
+    @IBOutlet var warningLabel: UILabel!
+    @IBOutlet var defaultAddressBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
         paymentBtn.layer.cornerRadius = 20
-        
+        loadin.isHidden = true
+        warningLabel.isHidden = true
+       
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if Constant.getDefaultAddressId() == ""{
+            defaultAddressBtn.isHidden = true
+        }
+        warningLabel.text = "Please fill all fields"
     }
 
     @IBAction func paymentPresses(_ sender: UIButton) {
-        let paymentVC = PaymentViewController(nibName: "PaymentViewController", bundle: nil)
-        navigationController?.pushViewController(paymentVC, animated: true)
+        if countryTF.text?.count == 0 || cityTf.text?.count == 0 || streetTf.text?.count == 0 || phoneNumberTf.text?.count == 0{
+            warningLabel.isHidden = false
+        }else{
+            let paymentVC = PaymentViewController(nibName: "PaymentViewController", bundle: nil)
+            navigationController?.pushViewController(paymentVC, animated: true)
+        }
     }
     @IBAction func chooseAdress(_ sender: UIButton) {
+        loadin.isHidden = false
+        setAddress(isDefault: true)
     }
     
+    @IBAction func setAddressByGPS(_ sender: UIButton) {
+        locationManger.requestWhenInUseAuthorization()
+         setupLocationRequests()
+         locationManger.requestLocation()
+        countryTF.text = country
+        cityTf.text = city
+        streetTf.text = street
+    }
     func setupNavigationController(){
         let customOrange = UIColor(hex: 0xFF7466)
         navigationItem.setHidesBackButton(true, animated: true)
@@ -48,5 +84,56 @@ class DeliveryInfoViewController: UIViewController {
     @objc func popView(){
         navigationController?.popViewController(animated: true)
     }
-
+    
+    func setAddress(isDefault:Bool){
+        deliveryVM.bindedResult = {
+            self.cityTf.text = self.deliveryVM.getCity()
+            self.countryTF.text = self.deliveryVM.getCountry()
+            self.streetTf.text = self.deliveryVM.gerStreet()
+            if isDefault{
+                self.phoneNumberTf.text = self.deliveryVM.getphone()
+            }
+            self.loadin.isHidden = true
+        }
+        deliveryVM.getDeafultAddress()
+    }
 }
+
+extension DeliveryInfoViewController:CLLocationManagerDelegate{
+    
+    func setupLocationRequests(){
+         locationManger.delegate = self
+            locationManger.desiredAccuracy = kCLLocationAccuracyBest
+            locationManger.startUpdatingLocation()
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.last else{return}
+        let geocoder = CLGeocoder()
+                geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+                    if let error = error {
+                        // Handle the error
+                        print("Reverse geocoding failed with error: \(error.localizedDescription)")
+                        return
+                    }
+                    guard let placemark = placemarks?.first else { return }
+                    
+                    if let c = placemark.country{
+                        self.countryTF.text = c
+                    }
+                    if let city = placemark.locality{
+                        self.cityTf.text = city
+                    }
+                    if let street = placemark.thoroughfare{
+                        self.streetTf.text = street
+                    }
+                    
+                  
+                }
+            }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+}
+
+

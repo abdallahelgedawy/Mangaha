@@ -46,6 +46,7 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
          */
     }
     
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearched = false
@@ -120,10 +121,11 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         return coreDataProduct
     }
     override func viewWillAppear(_ animated: Bool) {
+        productCollection.reloadData()
         self.productViewModel?.bindedResultPrice = {
             DispatchQueue.main.async {
                 self.productCollection.reloadData()
-                self.networkIndecator.stopAnimating()
+                //self.networkIndecator.stopAnimating()
             }
         }
         setupNavigationController()
@@ -178,10 +180,15 @@ extension ProductViewController : UICollectionViewDataSource{
         }
         let cell = productCollection.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as! ProductCollectionViewCell
         let data = productViewModel?.getProductsAtIndex(index: indexPath.row)
-        cell.Product = data
-        if productViewModel?.isInInfav(String(data?.id ?? 0)) ?? true{
+        var isFav = productViewModel?.isInInfav(String(data?.id ?? 0))
+        if isFav ?? false{
             cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            cell.favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
+        
+        cell.Product = data
+         
         cell.delegate = self
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title

@@ -117,7 +117,9 @@ class CategoryViewController: UIViewController {
             categoryViewModel?.getProducts(baseUrl: allProductsUrl)
         }
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        categoryCollection.reloadData()
+    }
     func setupNavigationController(){
         let customOrange = UIColor(hex: 0xFF7466)
         let apperance = UINavigationBarAppearance()
@@ -233,16 +235,18 @@ extension CategoryViewController : UICollectionViewDataSource {
         let data = categoryViewModel?.getProductsAtIndex(index: indexPath.row)
         cell.Product = data
         cell.categoryDelegate = self
-        if categoryViewModel?.isInInfav(String(data?.id ?? 0)) ?? false{
+        var isFav = categoryViewModel?.isInInfav(String(data?.id ?? 0))
+        if isFav ?? false{
             cell.favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }else{
+            cell.favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
+        
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
-       // var currency = categoryViewModel?.getCurrency(amount: data?.variants?[0].price ?? "")
         cell.productPrice.text = data?.variants?[0].price
-        print(UserDefaults.standard.object(forKey: Constant.currencyKey))
         if Constant.isEuroCurrency(){
-            cell.productCurrency.text = "€"
+            cell.productCurrency.text = "EUR"
         }
         cell.productCurrency.text = "EGP"
         return cell
