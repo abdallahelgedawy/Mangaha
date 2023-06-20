@@ -47,8 +47,13 @@ class DeliveryInfoViewController: UIViewController {
         if countryTF.text?.count == 0 || cityTf.text?.count == 0 || streetTf.text?.count == 0 || phoneNumberTf.text?.count == 0{
             warningLabel.isHidden = false
         }else{
-            let paymentVC = PaymentViewController(nibName: "PaymentViewController", bundle: nil)
-            navigationController?.pushViewController(paymentVC, animated: true)
+            if phoneNumberTf.text?.count ?? 0 < 11 || phoneNumberTf.text?.count ?? 0 > 15 {
+                warningLabel.text = "Invalid Phone Number"
+            }else{
+                let paymentVC = PaymentViewController(nibName: "PaymentViewController", bundle: nil)
+                paymentVC.paymentVM = deliveryVM.inistintiatePaymentViewModel()
+                navigationController?.pushViewController(paymentVC, animated: true)
+            }
         }
     }
     @IBAction func chooseAdress(_ sender: UIButton) {

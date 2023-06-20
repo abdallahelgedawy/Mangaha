@@ -50,6 +50,11 @@
 		44EDE5AF2A35318C002704E0 /* Brands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE5AE2A35318C002704E0 /* Brands.swift */; };
 		44EDE5B22A353466002704E0 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDE5B12A353466002704E0 /* NetworkServices.swift */; };
 		708F135E2AF2B685E0F93766 /* Pods_Mangaha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CEB5B7D1495BE6BDB9AB6E /* Pods_Mangaha.framework */; };
+		8C1DD9F02A41FBF7000DCD48 /* PaymentDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1DD9EE2A41FBF7000DCD48 /* PaymentDoneViewController.swift */; };
+		8C1DD9F12A41FBF7000DCD48 /* PaymentDoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C1DD9EF2A41FBF7000DCD48 /* PaymentDoneViewController.xib */; };
+		8C1DD9F42A42018D000DCD48 /* FinalOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1DD9F22A42018D000DCD48 /* FinalOrderCell.swift */; };
+		8C1DD9F52A42018D000DCD48 /* FinalOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C1DD9F32A42018D000DCD48 /* FinalOrderCell.xib */; };
+		8C1DD9F72A4205AC000DCD48 /* PaymentDoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1DD9F62A4205AC000DCD48 /* PaymentDoneViewModel.swift */; };
 		8C392D322A37ACB6004CCE92 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C392D312A37ACB6004CCE92 /* DropDownMenu.swift */; };
 		8C392D342A37BAD1004CCE92 /* NewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C392D332A37BAD1004CCE92 /* NewAddressViewModel.swift */; };
 		8C3BD5E12A373BE3002A354E /* CurrencyCoverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3BD5E02A373BE3002A354E /* CurrencyCoverter.swift */; };
@@ -192,6 +197,11 @@
 		503BF43223B9931207132D2F /* Pods-Mangaha-MangahaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mangaha-MangahaUITests.release.xcconfig"; path = "Target Support Files/Pods-Mangaha-MangahaUITests/Pods-Mangaha-MangahaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		56CEB5B7D1495BE6BDB9AB6E /* Pods_Mangaha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mangaha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		708F7A7479A1CC9596E70449 /* Pods-Mangaha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mangaha.debug.xcconfig"; path = "Target Support Files/Pods-Mangaha/Pods-Mangaha.debug.xcconfig"; sourceTree = "<group>"; };
+		8C1DD9EE2A41FBF7000DCD48 /* PaymentDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDoneViewController.swift; sourceTree = "<group>"; };
+		8C1DD9EF2A41FBF7000DCD48 /* PaymentDoneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentDoneViewController.xib; sourceTree = "<group>"; };
+		8C1DD9F22A42018D000DCD48 /* FinalOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalOrderCell.swift; sourceTree = "<group>"; };
+		8C1DD9F32A42018D000DCD48 /* FinalOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinalOrderCell.xib; sourceTree = "<group>"; };
+		8C1DD9F62A4205AC000DCD48 /* PaymentDoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDoneViewModel.swift; sourceTree = "<group>"; };
 		8C392D312A37ACB6004CCE92 /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 		8C392D332A37BAD1004CCE92 /* NewAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddressViewModel.swift; sourceTree = "<group>"; };
 		8C3BD5E02A373BE3002A354E /* CurrencyCoverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCoverter.swift; sourceTree = "<group>"; };
@@ -643,6 +653,7 @@
 				8C8B0E302A3B9B0600E8F7FA /* CartViewModel.swift */,
 				8CAFAE822A3F8AF3008936F7 /* PaymentViewModel.swift */,
 				8CB4A0822A3FA6A6007020FF /* DeliveryViewModel.swift */,
+				8C1DD9F62A4205AC000DCD48 /* PaymentDoneViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -691,6 +702,10 @@
 			children = (
 				B80DE7AD2A348E4A00C2F995 /* PaymentViewController.swift */,
 				B80DE7AE2A348E4A00C2F995 /* PaymentViewController.xib */,
+				8C1DD9EE2A41FBF7000DCD48 /* PaymentDoneViewController.swift */,
+				8C1DD9EF2A41FBF7000DCD48 /* PaymentDoneViewController.xib */,
+				8C1DD9F22A42018D000DCD48 /* FinalOrderCell.swift */,
+				8C1DD9F32A42018D000DCD48 /* FinalOrderCell.xib */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1078,6 +1093,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44787E322A316978008C0CBB /* CategoryViewController.xib in Resources */,
+				8C1DD9F12A41FBF7000DCD48 /* PaymentDoneViewController.xib in Resources */,
 				44268D692A3B9C76006738FA /* OnboardingViewController.xib in Resources */,
 				B80DE7C42A348EC800C2F995 /* ContactViewController.xib in Resources */,
 				448FCA2C2A31D14D005B226C /* ProductViewController.xib in Resources */,
@@ -1113,6 +1129,7 @@
 				B86708AA2A37DBCC00465879 /* GoogleService-Info.plist in Resources */,
 				B83F5B6C2A3104D200B3F3B1 /* FavoriteCollectionViewCell.xib in Resources */,
 				B80DE7A32A348E1000C2F995 /* CartCell.xib in Resources */,
+				8C1DD9F52A42018D000DCD48 /* FinalOrderCell.xib in Resources */,
 				B82EC3472A31F64B004162CC /* ProductDetailsViewController.xib in Resources */,
 				B83F5B572A30EE6500B3F3B1 /* signin.json in Resources */,
 				4483A49E2A3E5A58002843D1 /* SplashScreenViewController.xib in Resources */,
@@ -1262,12 +1279,14 @@
 				B83E19FF2A33D4F000D046AD /* DescriptionCollectionViewCell.swift in Sources */,
 				8CB02E4B2A3DC4BB004D9F6E /* ProfileViewModel.swift in Sources */,
 				B80DE7D12A348EDF00C2F995 /* OrderSettingsCell.swift in Sources */,
+				8C1DD9F72A4205AC000DCD48 /* PaymentDoneViewModel.swift in Sources */,
 				B80DE7BC2A348EA700C2F995 /* AdressesCell.swift in Sources */,
 				B80DE7AF2A348E4A00C2F995 /* PaymentViewController.swift in Sources */,
 				B80DE7CF2A348EDF00C2F995 /* MEViewController.swift in Sources */,
 				8CB52A9B2A38EDF70073CC09 /* Toast.swift in Sources */,
 				448197DA2A4082D100EA416E /* PostOrder.swift in Sources */,
 				B83F5B6B2A3104D200B3F3B1 /* FavoriteCollectionViewCell.swift in Sources */,
+				8C1DD9F02A41FBF7000DCD48 /* PaymentDoneViewController.swift in Sources */,
 				8C392D322A37ACB6004CCE92 /* DropDownMenu.swift in Sources */,
 				8C392D342A37BAD1004CCE92 /* NewAddressViewModel.swift in Sources */,
 				B83E1A072A33D97400D046AD /* MoreReviewsTableViewCell.swift in Sources */,
@@ -1311,6 +1330,7 @@
 				B83F5B5B2A3102A900B3F3B1 /* FavoriteViewModel.swift in Sources */,
 				B80DE7A52A348E1000C2F995 /* CartViewController.swift in Sources */,
 				B83F5B4D2A30D25600B3F3B1 /* SignUpViewModel.swift in Sources */,
+				8C1DD9F42A42018D000DCD48 /* FinalOrderCell.swift in Sources */,
 				444F7B972A35A2BE0061B3B8 /* Product.swift in Sources */,
 				8C3BD5E42A3741D5002A354E /* SettingsViewModel.swift in Sources */,
 			);

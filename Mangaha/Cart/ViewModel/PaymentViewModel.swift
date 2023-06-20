@@ -14,6 +14,7 @@ class PaymentViewModel{
     private var subTotal = 0.0
     private var totalPrice = 0.0
     var totalBeforeDiscount = 0.0
+    var address:CustomerAddress?
     
     func setupCopouns(){
         let firstC = UserDefaults.standard.object(forKey: "FirstC") as? String ?? "none"
@@ -97,4 +98,10 @@ class PaymentViewModel{
               request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Shopify", amount: NSDecimalNumber(value: totalPrice ))]
             return request
         }
+    
+    func inistintiateDonePaymentViewModel()->PaymentDoneViewModel{
+        var donePayment = PaymentDoneViewModel()
+        donePayment.address = address
+        return donePayment
+    }
 }

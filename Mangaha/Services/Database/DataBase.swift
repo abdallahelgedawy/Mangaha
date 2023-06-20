@@ -126,7 +126,11 @@ class DataBase{
             } catch {
                 print("eroor")
             }
-       
         }
-    
+    func getFavouritesCount()->Int{
+        return getFavouriteProducts()?.count ?? 0
+    }
+    func getCartCount()->Int{
+        return getCartProducts()?.count ?? 0
+    }
 }

@@ -10,7 +10,7 @@ import PassKit
 
 class PaymentViewController: UIViewController {
     let customOrange = UIColor(hex: 0xFF7466)
-    let paymentVM = PaymentViewModel()
+    var paymentVM = PaymentViewModel()
     @IBOutlet var paymentView: UIView!
     @IBOutlet var confirmBtn: UIButton!
     @IBOutlet var totalPaymentLabel: UILabel!
@@ -66,6 +66,7 @@ class PaymentViewController: UIViewController {
                 }
     }
     @IBAction func confirmPayment(_ sender: UIButton) {
+        
     }
     
     @IBAction func applyCopoun(_ sender: UIButton) {

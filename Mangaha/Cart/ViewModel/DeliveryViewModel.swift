@@ -18,7 +18,7 @@ class DeliveryViewModel{
             DispatchQueue.main.async {
                 self.bindedResult()
             }
-           
+            
         }
     }
     
@@ -43,5 +43,11 @@ class DeliveryViewModel{
             let identifier = Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: code])
             return Locale(identifier: "en_US_POSIX").localizedString(forIdentifier: identifier) ?? "Unknown"
         }
+    }
+    
+    func inistintiatePaymentViewModel()->PaymentViewModel{
+        var paymentVM = PaymentViewModel()
+        paymentVM.address = defaultAddress
+        return paymentVM
     }
 }
