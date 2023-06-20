@@ -8,7 +8,7 @@
 import UIKit
 
 class PaymentDoneViewController: UIViewController {
-
+    var paymentDoneVM = PaymentDoneViewModel()
     @IBOutlet var PhoneLabel: UILabel!
     @IBOutlet var streetLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
@@ -21,34 +21,59 @@ class PaymentDoneViewController: UIViewController {
         productTable.dataSource = self
         productTable.delegate = self
         RegisterCell()
+        navigationItem.setHidesBackButton(true, animated: true)
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
+            self.paymentDoneVM.deleteCart()
+        }
+        
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        paymentDoneVM.getCartProducts()
+        setupDelivryInfo()
+        backHomeBtn.layer.cornerRadius = 20
+    }
     func RegisterCell(){
         productTable.register(UINib(nibName: "FinalOrderCell", bundle: nil), forCellReuseIdentifier: "FinalOrderCell")
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupDelivryInfo(){
+        deliveryInfoView.changeCornerRadius(corner: [.topLeft,.bottomRight], radius: 20)
+        countryLabel.text = paymentDoneVM.getCountry()
+        cityLabel.text = paymentDoneVM.getCity()
+        streetLabel.text = paymentDoneVM.getStreet()
+        PhoneLabel.text = paymentDoneVM.getPhone()
     }
-    */
 
     @IBAction func BackToHome(_ sender: UIButton) {
+        let homeVC = HomeViewController(nibName: "HomeViewController", bundle: nil)
+        navigationController?.pushViewController(homeVC, animated: true)
     }
 }
 
 extension PaymentDoneViewController : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return paymentDoneVM.getProductsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FinalOrderCell", for: indexPath) as? FinalOrderCell
+        let product = paymentDoneVM.getProductAtIndex(index: indexPath.row)
+        cell?.productImg.image = UIImage(data: product.image ?? Data())
+        cell?.productName.text = product.title
+        cell?.productPrice.text = product.price
+        cell?.productQuantity.text = product.quantity
+        let totalPrice = (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 0.0)
+        if Constant.isEuroCurrency(){
+            cell?.productTotalPrice.text = String(format: "%.2f", totalPrice) + "  EUR"
+            
+        }else{
+            cell?.productTotalPrice.text = String(format: "%.2f", totalPrice) + "  EGP"
+        }
+        return cell ?? UITableViewCell()
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return productTable.frame.height * 0.5
     }
     
-    
+   
 }

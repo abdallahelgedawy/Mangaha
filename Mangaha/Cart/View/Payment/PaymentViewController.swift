@@ -30,6 +30,7 @@ class PaymentViewController: UIViewController {
     @IBOutlet var subTotalLabel: UILabel!
     @IBOutlet var CashBtn: UIButton!
     @IBOutlet var applePaymentBtn: UIButton!
+    var paymentMethod = false
     override func viewDidLoad() {
         super.viewDidLoad()
         confirmBtn.layer.cornerRadius = 20
@@ -38,8 +39,11 @@ class PaymentViewController: UIViewController {
         paymentView.layer.cornerRadius = 20
         setupNavigationController()
         
+        
     }
     override func viewWillAppear(_ animated: Bool) {
+        applePaymentBtn.backgroundColor = .lightGray
+        CashBtn.backgroundColor = .lightGray
         if Constant.isEuroCurrency(){
             subTotalLabel.text = paymentVM.getSubTotal() + "   EUR"
             deliveryFeesLabel.text = "5.0   EUR"
@@ -53,8 +57,24 @@ class PaymentViewController: UIViewController {
     }
 
     @IBAction func cashCheck(_ sender: UIButton) {
-        CashBtn.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
-        applePaymentBtn.backgroundColor = UIColor.lightGray
+        if Constant.isEuroCurrency(){
+            if Double(paymentVM.getTotalPrice()) ?? 0.0 > 1000{
+                showPaymetCashErrorAlert(amount: "1000 EUR")
+            }else{
+                paymentMethod = true
+                CashBtn.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
+                applePaymentBtn.backgroundColor = UIColor.lightGray
+            }
+        }else{
+            if Double(paymentVM.getTotalPrice()) ?? 0.0 > 15000 {
+                showPaymetCashErrorAlert(amount: "15000  EGP")
+            }else{
+                paymentMethod = true
+                CashBtn.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
+                applePaymentBtn.backgroundColor = UIColor.lightGray
+            }
+        }
+       
     }
     @IBAction func applePaymentCheck(_ sender: UIButton) {
         applePaymentBtn.backgroundColor = UIColor(red: 255/256, green: 116/256, blue: 102/256, alpha: 1)
@@ -64,9 +84,17 @@ class PaymentViewController: UIViewController {
                     controller!.delegate = self
                     present(controller!,  animated: true ,completion: nil)
                 }
+        paymentMethod = true
     }
     @IBAction func confirmPayment(_ sender: UIButton) {
-        paymentVM.postOrder(url: Constant.postOrder())
+        if paymentMethod == true{
+            paymentVM.postOrder(url: Constant.postOrder())
+            let donePaymentVC = PaymentDoneViewController(nibName: "PaymentDoneViewController", bundle: nil)
+            donePaymentVC.paymentDoneVM = paymentVM.inistintiateDonePaymentViewModel()
+            navigationController?.pushViewController(donePaymentVC, animated: true)
+        }else{
+            showChoosePaymentMethodAlert()
+        }
     }
     
     @IBAction func applyCopoun(_ sender: UIButton) {
@@ -105,6 +133,27 @@ class PaymentViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func showPaymetCashErrorAlert(amount:String){
+            let alert = UIAlertController(title: "Cash Payment unavailable", message: "Maximum amount for pay on cash is\( amount)", preferredStyle: .alert)
+ 
+            let cancel = UIAlertAction(title: "OK", style: .cancel){_ in
+               alert.dismiss(animated: true)
+            }
+           
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+    }
+    
+    func showChoosePaymentMethodAlert(){
+        let alert = UIAlertController(title: "No payment Method choosed", message: "Please choose payment method before confirm the order", preferredStyle: .alert)
+
+        let cancel = UIAlertAction(title: "OK", style: .cancel){_ in
+           alert.dismiss(animated: true)
+        }
+       
+        alert.addAction(cancel)
+        self.present(alert, animated: true)
+    }
     
 }
 extension PaymentViewController : PKPaymentAuthorizationViewControllerDelegate {

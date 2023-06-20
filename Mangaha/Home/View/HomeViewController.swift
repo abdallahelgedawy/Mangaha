@@ -63,7 +63,7 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         //homeViewModel?.createUserDefualtsCoupons()
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        navigationItem.setHidesBackButton(true, animated: true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {

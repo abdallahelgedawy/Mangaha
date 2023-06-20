@@ -12,10 +12,9 @@ class PaymentViewModel{
     var coupouns = [String]()
     private var cartProducts = [CartProduct]()
     private var subTotal = 0.0
-    private var totalPrice = 0.0
+     var totalPrice = 0.0
     var totalBeforeDiscount = 0.0
     var address:CustomerAddress?
-    
     var bindOrderListToPaymentVC : (()->()) = {}
     var ordersList : [LineItem]? {
         didSet {
@@ -45,17 +44,18 @@ class PaymentViewModel{
         getCartProducts()
         var lineItems = [LineItem]()
         for item in cartProducts{
-         var  lineItem = LineItem(title: item.title ?? "", price: item.price ?? "", quantity: Int(item.quantity ?? "1") ?? 1)
+            let  lineItem = LineItem(title: item.title ?? "", price: item.price ?? "", quantity: Int(item.quantity ?? "1") ?? 1)
             lineItems.append(lineItem)
         }
      return lineItems
     }
     
     func postOrder(url : String){
-        var lineItems = convertCoreDataProductToLineItem()
-        var customer = CustomerId(id: Int(Constant.getCurrentCustomerId()))
+        let lineItems = convertCoreDataProductToLineItem()
+        let customer = CustomerId(id: Int(Constant.getCurrentCustomerId()))
         NetworkServices.postOrder(url: url ,order: PostOrder(order: Order(line_items: lineItems,customer: customer))){
             [weak self] order, error in
+            
         }
     }
     
@@ -76,7 +76,7 @@ class PaymentViewModel{
     
     private func calculateSubTotal(){
         for product in cartProducts{
-            subTotal += Double(product.price ?? "0.0") ?? 0.0
+            subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 1)
         }
     }
     

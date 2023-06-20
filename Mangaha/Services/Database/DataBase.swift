@@ -133,4 +133,15 @@ class DataBase{
     func getCartCount()->Int{
         return getCartProducts()?.count ?? 0
     }
+    
+    func deleteCartProducts(){
+        guard let cartProducts = getCartProducts()else{
+            return
+        }
+        for p in cartProducts {
+            context.delete(p)
+            save()
+        }
+    }
+    
 }

@@ -63,8 +63,8 @@ class DeliveryInfoViewController: UIViewController {
     
     @IBAction func setAddressByGPS(_ sender: UIButton) {
         locationManger.requestWhenInUseAuthorization()
-         setupLocationRequests()
-         locationManger.requestLocation()
+        setupLocationRequests()
+        locationManger.requestLocation()
         countryTF.text = country
         cityTf.text = city
         streetTf.text = street
@@ -109,15 +109,13 @@ extension DeliveryInfoViewController:CLLocationManagerDelegate{
     func setupLocationRequests(){
          locationManger.delegate = self
             locationManger.desiredAccuracy = kCLLocationAccuracyBest
-            locationManger.startUpdatingLocation()
-        
+            //locationManger.startUpdatingLocation()
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let userLocation = locations.last else{return}
         let geocoder = CLGeocoder()
                 geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                     if let error = error {
-                        // Handle the error
                         print("Reverse geocoding failed with error: \(error.localizedDescription)")
                         return
                     }

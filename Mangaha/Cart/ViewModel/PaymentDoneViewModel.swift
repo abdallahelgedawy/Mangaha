@@ -15,6 +15,7 @@ class PaymentDoneViewModel{
         if let products = dataBase.getCartProducts(){
             cartProducts = products
         }
+      
     }
     
     func getProductsCount()->Int{
@@ -23,5 +24,21 @@ class PaymentDoneViewModel{
     
     func getProductAtIndex(index:Int)->CartProduct{
         return cartProducts[index]
+    }
+    
+    func getCountry()->String{
+        return address?.country ?? ""
+    }
+    func getCity()->String{
+        return address?.city ?? ""
+    }
+    func getStreet()->String{
+        return address?.address1 ?? ""
+    }
+    func getPhone()->String{
+        return address?.phone ?? ""
+    }
+    func deleteCart(){
+        dataBase.deleteCartProducts()
     }
 }
