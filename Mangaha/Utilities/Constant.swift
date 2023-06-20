@@ -61,8 +61,9 @@ class Constant{
         return postBaseUrl + "customers/\(getCurrentCustomerId())/addresses/\(addressId)/default.json"
     }
     
-    static func getCurrentCustomerId()->Int{
-        return 7009396097310
+    static func getCurrentCustomerId()->String{
+        let userId = UserDefaults.standard.object(forKey: "CurrentUserId") as? Int ?? 0
+        return String(userId)
     }
     
     static func deleteAddressEndPoint(addressId:String)->String{
@@ -83,7 +84,7 @@ class Constant{
     }
     
     static func getDefaultAddressId()->String{
-        return (UserDefaults.standard.object(forKey: defaultAdressIdKey) as? String)!
+        return (UserDefaults.standard.object(forKey: defaultAdressIdKey) as? String ?? "")
     }
     
     static func getAddressDetailsEndPoint()->String{
@@ -105,6 +106,7 @@ class Constant{
     static func DraftOrderEndPoint(id:Int)->String{
        return "https://0f0340065b43e0803729efbf5c2e1ff6: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@mad43-alex-ios3.myshopify.com/admin/api/2023-04/draft_orders/\(id).json"
     }
+    static let MARCHANT_ID = "merchant.com.pushpendra.pay"
     
     static func postOrder()-> String{
         return baseUrl + "orders.json"

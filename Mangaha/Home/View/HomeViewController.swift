@@ -60,6 +60,7 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         
         pageControl.numberOfPages = adsImages.count
        setupNavigationController()
+        //homeViewModel?.createUserDefualtsCoupons()
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -172,7 +173,11 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
 extension HomeViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == adsCollection {
-           
+            let copoun = homeViewModel?.getCopunAtIndex(index: indexPath.row)
+                homeViewModel?.addCoupounsToUserDefaults(copounCode: copoun ?? "none")
+            if let copoun = copoun{
+                self.view.makeToast("Copoun \(String(describing: copoun)) Activated")
+            }
         }else if collectionView == brandsCollection {
             let productVC = ProductViewController(nibName: "ProductViewController", bundle: nil)
             if isSearched == true{

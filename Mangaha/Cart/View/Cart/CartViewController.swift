@@ -30,11 +30,20 @@ class CartViewController: UIViewController , cartViewDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         cartVM.getCartProducts()
-        nodataImg.isHidden = false
-        noproductLabel.isHidden = false
-        checkOutBtn.isHidden = true
-        subTotalLabel.isHidden = true
-        subTot.isHidden = true
+        if  cartVM.getProductsCount() == 0{
+            nodataImg.isHidden = false
+            noproductLabel.isHidden = false
+            checkOutBtn.isHidden = true
+            subTotalLabel.isHidden = true
+            subTot.isHidden = true
+        }else{
+            nodataImg.isHidden = true
+            noproductLabel.isHidden = true
+            checkOutBtn.isHidden = false
+            subTotalLabel.isHidden = false
+            subTot.isHidden = false
+        }
+    
     }
 
     func registerCell(){

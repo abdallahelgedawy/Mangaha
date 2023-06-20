@@ -192,6 +192,15 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
             }
             self.profileVM.makeFavouritesDraftOrder()
         }
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.hidesBottomBarWhenPushed = true
+                self.profileVM.bindedResult = {
+                    self.profileVM.resetUserDefualtsCoupons()
+                    let loginVC  = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                    self.navigationController?.pushViewController(loginVC, animated: true)
+                    
+                }
+                self.profileVM.makeFavouritesDraftOrder()
     }
 }
 
