@@ -33,10 +33,10 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         productCollection.dataSource = self
         
         
-        //  productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+         productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
         
         filterProduct.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
-        /*
+        
          productViewModel?.bindproductListToProductVC = {
          DispatchQueue.main.async {
          self.productCollection.reloadData()
@@ -45,7 +45,8 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
          }
          */
     }
-    
+         
+}
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearched = false
@@ -56,7 +57,8 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
             isSearched = true
             filteredList?.removeAll()
             filteredList = productViewModel?.productList!.filter{products in return
-                (products.title?.contains(searchText))!
+                 products.title?.localizedCaseInsensitiveContains(searchText) == false
+                 
             }
             
         }
@@ -119,39 +121,39 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         coreDataProduct.isFavourite = true
         return coreDataProduct
     }
-    override func viewWillAppear(_ animated: Bool) {
-        self.productViewModel?.bindedResultPrice = {
-            DispatchQueue.main.async {
-                self.productCollection.reloadData()
-                self.networkIndecator.stopAnimating()
+      /*  override func viewWillAppear(_ animated: Bool) {
+            self.productViewModel?.bindedResultPrice = {
+                DispatchQueue.main.async {
+                    self.productCollection.reloadData()
+                    self.networkIndecator.stopAnimating()
+                }
             }
-        }
-        setupNavigationController()
-        self.productViewModel?.bindproductListToProductVC = {
-            DispatchQueue.main.async {
-                self.productCollection.reloadData()
-                self.networkIndecator.stopAnimating()
+            setupNavigationController()
+            self.productViewModel?.bindproductListToProductVC = {
+                DispatchQueue.main.async {
+                    self.productCollection.reloadData()
+                    self.networkIndecator.stopAnimating()
+                }
             }
-        }
-        productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+            productViewModel?.getProducts(baseUrl: Constant.produts(Brand_ID: productViewModel?.brandId ?? 0))
+        }*/
     }
 }
 
-
-
-
-extension ProductViewController : UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
-        if isSearched == true{
-            productDetails.productDetailsViewModel = productViewModel?.instantiateProductFilteredViewModel(index: indexPath.row, filterList: filteredList!)
-            navigationController?.pushViewController(productDetails, animated: true)
-        }else{
-            productDetails.productDetailsViewModel =  productViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
-            navigationController?.pushViewController(productDetails, animated: true)
+    
+    extension ProductViewController : UICollectionViewDelegate{
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let productDetails = ProductDetailsViewController(nibName: "ProductDetailsViewController", bundle: nil)
+            if isSearched == true{
+                productDetails.productDetailsViewModel = productViewModel?.instantiateProductFilteredViewModel(index: indexPath.row, filterList: filteredList!)
+                navigationController?.pushViewController(productDetails, animated: true)
+            }else{
+                productDetails.productDetailsViewModel =  productViewModel?.instantiateProductDetailsViewModel(index: indexPath.row)
+                navigationController?.pushViewController(productDetails, animated: true)
+            }
         }
     }
-}
+
 
 extension ProductViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

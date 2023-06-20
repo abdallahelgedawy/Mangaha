@@ -58,6 +58,7 @@ class ProductDetailsViewModel{
         }
     }*/
 
+  
         
    /* func getonvertedPrice()->String{
         return convertedPrice ?? "0.0"
@@ -80,3 +81,5 @@ class ProductDetailsViewModel{
         dataBase.deleteProductFromDataBase(id: id, isFavourite: isFavourite)
     }
 }
+
+
