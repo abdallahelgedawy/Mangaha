@@ -45,12 +45,16 @@ class DeliveryInfoViewController: UIViewController {
 
     @IBAction func paymentPresses(_ sender: UIButton) {
         if countryTF.text?.count == 0 || cityTf.text?.count == 0 || streetTf.text?.count == 0 || phoneNumberTf.text?.count == 0{
+            warningLabel.text = "Please fill all fields"
             warningLabel.isHidden = false
         }else{
             if phoneNumberTf.text?.count ?? 0 < 11 || phoneNumberTf.text?.count ?? 0 > 15 {
+                warningLabel.isHidden = false
                 warningLabel.text = "Invalid Phone Number"
             }else{
                 let paymentVC = PaymentViewController(nibName: "PaymentViewController", bundle: nil)
+                let address = CustomerAddress(id: 0, customerID: 0, firstName:"", address1: streetTf?.text ?? "", city: cityTf.text ?? "", phone: phoneNumberTf?.text ?? "", name: "", countryName: countryTF?.text ?? "", country: countryTF?.text ?? "", customerAddressDefault: false)
+                deliveryVM.defaultAddress = address
                 paymentVC.paymentVM = deliveryVM.inistintiatePaymentViewModel()
                 navigationController?.pushViewController(paymentVC, animated: true)
             }
@@ -127,7 +131,7 @@ extension DeliveryInfoViewController:CLLocationManagerDelegate{
                     if let city = placemark.locality{
                         self.cityTf.text = city
                     }
-                    if let street = placemark.thoroughfare{
+                    if let street = placemark.subThoroughfare{
                         self.streetTf.text = street
                     }
                     

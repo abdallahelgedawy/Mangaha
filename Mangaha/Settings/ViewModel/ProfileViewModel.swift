@@ -88,6 +88,7 @@ class ProfileViewModel{
     
     private  func makeCartDraftOrder(_ id:Int){
         let lineItems = getCartItems()
+        print("cart: \(lineItems)")
         NetworkServices.postDraftOrder(products: lineItems) { cartOrder, error in
             let cartId = cartOrder?.id
             self.updateFireBase(cartId ?? -1, id)

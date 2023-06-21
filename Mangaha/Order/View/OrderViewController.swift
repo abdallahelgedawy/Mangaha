@@ -9,6 +9,9 @@ import UIKit
 
 class OrderViewController: UIViewController {
 
+    @IBOutlet var loading: UIActivityIndicatorView!
+    @IBOutlet var noOrderLabel: UILabel!
+    @IBOutlet var noordersIMG: UIImageView!
     @IBOutlet weak var orderTableView: UITableView!
     var orderViewModel : OrderViewModel?
     override func viewDidLoad() {
@@ -17,6 +20,8 @@ class OrderViewController: UIViewController {
         orderViewModel = OrderViewModel()
         orderTableView.delegate = self
         orderTableView.dataSource = self
+        noordersIMG.isHidden = true
+        noOrderLabel.isHidden = true
         
         orderTableView.register(UINib(nibName: "OrderSettingsCell", bundle: nil), forCellReuseIdentifier: "OrderCell")
         
@@ -24,6 +29,7 @@ class OrderViewController: UIViewController {
         orderViewModel?.bindOrderListToOrderVC = {
             DispatchQueue.main.async {
                 self.orderTableView.reloadData()
+                self.loading.isHidden = true
             }
         }
         
@@ -62,6 +68,13 @@ extension OrderViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if orderViewModel?.getOrderssCount() == 0 {
+            noordersIMG.isHidden = false
+            noOrderLabel.isHidden = false
+        }else{
+            noordersIMG.isHidden = true
+            noOrderLabel.isHidden = true
+        }
         let cell = orderTableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderSettingsCell
         let order = orderViewModel?.getOrdersAtIndex(index: indexPath.row)
          cell.orderDateLabel.text = order?.created_at

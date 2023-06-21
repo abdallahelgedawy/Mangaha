@@ -8,12 +8,12 @@
 import UIKit
 
 class ProductDetailsViewController: UIViewController , UICollectionViewDataSource , UICollectionViewDelegate {
-    
-    
-    
+    let  favBtnBadge = BadgeButton()
+    let cartBtn = BadgeButton()
+    let dataBase = DataBase()
     var productDetailsViewModel : ProductDetailsViewModel?
     @IBOutlet weak var favBtn: UIButton!
-    
+    let networkListener = NetworkListener()
     @IBOutlet weak var bagBtn: UIButton!
     var image:UIImage?
    
@@ -32,13 +32,8 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
          productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
          DispatchQueue.main.async {
          self.myProductDetailsCollection.reloadData()
-         }
          }*/
-        networkIndecator = UIActivityIndicatorView(style: .large)
-        networkIndecator.color =  UIColor(hex: 0xFF7466)
-        networkIndecator.center = view.center
-        networkIndecator.startAnimating()
-        view.addSubview(networkIndecator)
+         
         favBtn.layer.cornerRadius = 20
         bagBtn.layer.cornerRadius = 20
         let nib = UINib(nibName: "ProductDetailsCollectionViewCell", bundle: nil)
@@ -93,7 +88,14 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+   networkIndecator = UIActivityIndicatorView(style: .large)
+   networkIndecator.color =  UIColor(hex: 0xFF7466)
+   networkIndecator.center = view.center
+   networkIndecator.startAnimating()
+   view.addSubview(networkIndecator)
+        myProductDetailsCollection.isHidden = true
+        favBtn.isHidden = true
+        bagBtn.isHidden = true
      
         self.productDetailsViewModel?.bindedResultPrice = {
             DispatchQueue.main.async {
@@ -102,14 +104,16 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             }
             
         }
-      
-      
-        
         setupNavigationController()
             self.productDetailsViewModel?.bindproductInfoListToProductDetailsVC = {
                 DispatchQueue.main.async {
                     self.networkIndecator.stopAnimating()
                     self.myProductDetailsCollection.reloadData()
+                    self.myProductDetailsCollection.isHidden = false
+                    self.favBtn.isHidden = false
+                    self.bagBtn.isHidden = false
+                    
+                    
                 }
             }
             
@@ -178,8 +182,30 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Product Details"
+      
+        cartBtn.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        cartBtn.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
+        cartBtn.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartBtn.tintColor = customOrange
+        cartBtn.badgeCount = dataBase.getCartCount()
+        let cartBarBtn = UIBarButtonItem(customView: cartBtn)
+      
+        favBtnBadge.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 60, height: 60))
+        favBtnBadge.addTarget(self, action: #selector(goToFav), for: .touchUpInside)
+        favBtnBadge.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        favBtnBadge.tintColor = customOrange
+        favBtnBadge.badgeCount = dataBase.getFavouritesCount()
+        let favBarBtn = UIBarButtonItem(customView:  favBtnBadge)
+        navigationItem.rightBarButtonItems = [cartBarBtn , favBarBtn]
     }
-    
+    @objc func goToCart(){
+        let cartVC = CartViewController(nibName: "CartViewController", bundle: nil)
+        navigationController?.pushViewController(cartVC, animated: true)
+    }
+    @objc func goToFav(){
+        let favVC = FavoriteViewController(nibName: "FavoriteViewController", bundle: nil)
+        navigationController?.pushViewController(favVC, animated: true)
+    }
     @objc func popView(){
         navigationController?.popViewController(animated: true)
     }
@@ -206,7 +232,8 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             if(Constant.isEuroCurrency()){
                 cell.priceLabel.text =  (data?.product.variants?[0].price ?? "")  + "EUR"
             }else{
-                cell.priceLabel.text = (data?.product.variants?[0].price ?? "") + "EGP"
+                let price : Double = (Double(data?.product.variants?[0].price ?? "") ?? 0) * 34
+                cell.priceLabel.text = String(price) + "EGP"
             }
             if productDetailsViewModel?.isInFavourite(data?.product.id ?? 0) ?? false{
                 favBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -265,7 +292,12 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         
         self.present(alertController, animated: true, completion: nil)
         }else {
-            setupFavouriteProduct()
+            if networkListener.isNetworkAvailable() {
+                setupFavouriteProduct()
+                favBtnBadge.badgeCount = dataBase.getCartCount()
+            }else{
+                self.present(Constant.NetworkAlert(),animated: true)
+            }
         }
         
     }
@@ -291,6 +323,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         self.present(alertController, animated: true, completion: nil)
         }else {
             setupCartProduct()
+            cartBtn.badgeCount = dataBase.getCartCount()
         }
     }
     

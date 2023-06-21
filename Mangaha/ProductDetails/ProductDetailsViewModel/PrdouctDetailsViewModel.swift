@@ -20,7 +20,7 @@ class ProductDetailsViewModel{
     }
     func getProductsInfo(baseUrl : String){
         NetworkServices.getProductInfo(baseUrl: baseUrl) { myProductInfo in
-            if Constant.isEuroCurrency() == false {
+            /*if Constant.isEuroCurrency() == false {
                 print(self.productInfo?.product.variants?[0].price)
                 NetworkServices.convertCurency(amount: myProductInfo?.product.variants?[0].price ?? "") { convertedPrice, error in
                     self.productInfo = myProductInfo
@@ -28,11 +28,11 @@ class ProductDetailsViewModel{
                    
                     print(convertedPrice)
                 }
-            }
-            else {
+            }*/
+            //else {
         
             self.productInfo = myProductInfo
-            }
+           // }
         }
         DispatchQueue.main.async {
             self.bindedResultPrice()

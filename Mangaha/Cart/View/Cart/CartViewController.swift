@@ -122,11 +122,7 @@ extension CartViewController : UITableViewDelegate , UITableViewDataSource{
         }else{
             cell?.productPrice.text = (product.price ?? "0.0") + "   EGP"
         }
-        if let image = product.image{
-            cell?.productImg.image = UIImage(data: image)
-        }else{
-            cell?.productImg.image = UIImage(named: "data")
-        }
+        cell?.productImg.sd_setImage(with: URL(string: product.imageUrl ?? ""), placeholderImage: UIImage(named: "data"))
         cell?.productId = product.id
         subTotalLabel.text = cartVM.getCartSubTotal()
         cell?.cartDelegate = self

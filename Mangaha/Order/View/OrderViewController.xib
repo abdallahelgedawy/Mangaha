@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderViewController" customModule="Mangaha" customModuleProvider="target">
             <connections>
+                <outlet property="loading" destination="xDH-tp-dxm" id="cck-0X-DsE"/>
+                <outlet property="noOrderLabel" destination="yMs-X2-8uR" id="06c-Z1-Q5Z"/>
+                <outlet property="noordersIMG" destination="Nqd-D5-ldq" id="zVc-cy-zwm"/>
                 <outlet property="orderTableView" destination="k9x-8o-yzy" id="EUb-KN-HFq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,19 +27,46 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No orders yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMs-X2-8uR">
+                    <rect key="frame" x="8" y="502.99999999999994" width="377" height="26.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xDH-tp-dxm">
+                    <rect key="frame" x="171.66666666666666" y="401" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="848-Tm-IBg"/>
+                        <constraint firstAttribute="height" constant="50" id="Piq-ZZ-dWo"/>
+                    </constraints>
+                    <color key="color" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data" translatesAutoresizingMaskIntoConstraints="NO" id="Nqd-D5-ldq">
+                    <rect key="frame" x="69" y="250" width="255" height="230"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="k9x-8o-yzy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="09T-HF-TCN"/>
                 <constraint firstItem="k9x-8o-yzy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5ZD-5X-nTQ"/>
+                <constraint firstItem="xDH-tp-dxm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H2G-01-zPe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k9x-8o-yzy" secondAttribute="trailing" id="NqE-bT-YYQ"/>
+                <constraint firstItem="xDH-tp-dxm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="QtS-IS-XBV"/>
+                <constraint firstItem="Nqd-D5-ldq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="191" id="RFj-hl-0vN"/>
+                <constraint firstItem="yMs-X2-8uR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="YDP-Xr-yNN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="k9x-8o-yzy" secondAttribute="bottom" id="d2Q-jR-1ed"/>
+                <constraint firstItem="Nqd-D5-ldq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="f1n-l5-zdR"/>
+                <constraint firstItem="Nqd-D5-ldq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="69" id="hLw-Lw-DJ3"/>
+                <constraint firstItem="Nqd-D5-ldq" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-61" id="jQU-nQ-9FR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yMs-X2-8uR" secondAttribute="trailing" constant="8" id="qOQ-qh-uS5"/>
+                <constraint firstItem="yMs-X2-8uR" firstAttribute="top" secondItem="Nqd-D5-ldq" secondAttribute="bottom" constant="22.999999999999943" id="zUt-3R-uqU"/>
             </constraints>
-            <point key="canvasLocation" x="25" y="-11"/>
+            <point key="canvasLocation" x="23.664122137404579" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
+        <image name="data" width="626" height="626"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

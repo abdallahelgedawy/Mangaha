@@ -134,7 +134,7 @@ class PaymentViewController: UIViewController {
     }
     
     func showPaymetCashErrorAlert(amount:String){
-            let alert = UIAlertController(title: "Cash Payment unavailable", message: "Maximum amount for pay on cash is\( amount)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Cash Payment unavailable", message: "Maximum amount for pay on cash is \( amount)", preferredStyle: .alert)
  
             let cancel = UIAlertAction(title: "OK", style: .cancel){_ in
                alert.dismiss(animated: true)

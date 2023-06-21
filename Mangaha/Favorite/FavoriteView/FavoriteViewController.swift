@@ -44,7 +44,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDataSource , UIC
         let favProduct = favouriteVM.getProductByIndex(indexPath.row)
         cell.favImage.layer.cornerRadius = 10.0
         cell.favImage.clipsToBounds = true
-        cell.favImage.image = UIImage(data: favProduct.image ?? Data())
+        cell.favImage.sd_setImage(with: URL(string:favProduct.imageUrl ?? ""), placeholderImage: UIImage(named: "data"))
         cell.product = favProduct
         if Constant.isEuroCurrency(){
             cell.productPrice.text = (favProduct.price ?? "0.0") + "    EUR"
@@ -95,6 +95,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDataSource , UIC
         let confirm = UIAlertAction(title: "Delete", style: .destructive){_ in
             self.favouriteVM.deleteFromFavourites(id, index)
             self.myFavCollection.reloadData()
+            
             if self.favouriteVM.getFavouritesCount() == 0{
                 self.nodataImg.isHidden = false
                 self.nodataLabel.isHidden = false

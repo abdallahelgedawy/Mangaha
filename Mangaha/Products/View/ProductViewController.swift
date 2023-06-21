@@ -8,7 +8,7 @@
 import UIKit
 
 class ProductViewController: UIViewController , UISearchBarDelegate{
-    
+    let dataBase = DataBase()
     @IBOutlet weak var searchProduct: UISearchBar!
     var isSearched : Bool?
     @IBOutlet weak var productCollection: UICollectionView!
@@ -95,11 +95,26 @@ class ProductViewController: UIViewController , UISearchBarDelegate{
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Products"
-        let CartBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(goToCart))
+        let cartBtn = BadgeButton()
+        cartBtn.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        cartBtn.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
+        cartBtn.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartBtn.tintColor = customOrange
+        cartBtn.badgeCount = dataBase.getCartCount()
+        let cartBarBtn = UIBarButtonItem(customView: cartBtn)
+        let  favBtnBadge = BadgeButton()
+        favBtnBadge.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 60, height: 60))
+        favBtnBadge.addTarget(self, action: #selector(goToFav), for: .touchUpInside)
+        favBtnBadge.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        favBtnBadge.tintColor = customOrange
+        favBtnBadge.badgeCount = dataBase.getFavouritesCount()
+        let favBarBtn = UIBarButtonItem(customView:  favBtnBadge)
+        navigationItem.rightBarButtonItems = [cartBarBtn , favBarBtn]
+       /* let CartBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(goToCart))
         CartBtn.tintColor = customOrange
         let favBtn = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(goToFav))
         favBtn.tintColor = customOrange
-        navigationItem.rightBarButtonItems = [CartBtn , favBtn]
+        navigationItem.rightBarButtonItems = [CartBtn , favBtn]*/
     }
     @objc func goToCart(){
         if guest == true{
@@ -217,7 +232,8 @@ extension ProductViewController : UICollectionViewDataSource{
                 cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
                 cell.productCurrency.text = "EUR"
             }else {
-                cell.productPrice.text = filteredList?[indexPath.row].variants?[0].price
+                let price :Double = (Double(filteredList?[indexPath.row].variants?[0].price ?? "0.0") ?? 0.0) * 34.0
+                cell.productPrice.text = String(price)
                 cell.productCurrency.text = "EGP"
             }
             return cell
@@ -230,12 +246,11 @@ extension ProductViewController : UICollectionViewDataSource{
         }else{
             cell.favBtn.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-        
         cell.Product = data
-         
         cell.delegate = self
         cell.productImg.sd_setImage(with: URL(string: data?.image?.src ?? ""))
         cell.productName.text = data?.title
+        
         cell.productPrice.text = data?.variants?[0].price
         cell.productCurrency.text = "EGP"
         let img = cell.productImg.image?.jpegData(compressionQuality: 1) ?? Data()
@@ -246,7 +261,8 @@ extension ProductViewController : UICollectionViewDataSource{
             cell.productPrice.text = data?.variants?[0].price
             cell.productCurrency.text = "EUR"
         }else {
-            cell.productPrice.text = data?.variants?[0].price
+            let price :Double = ((Double(data?.variants?[0].price ?? "0.0") ?? 0.0) * 34.0)
+            cell.productPrice.text = String(price)
             cell.productCurrency.text = "EGP"
         }
         return cell

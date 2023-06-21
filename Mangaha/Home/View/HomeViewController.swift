@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class HomeViewController: UIViewController , UISearchBarDelegate {
-
+    let dataBase = DataBase()
     @IBOutlet weak var brandsLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var brandSearch: UISearchBar!
@@ -25,7 +25,6 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
     var currentIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         brandSearch.delegate = self
         isSearched = false
         homeViewModel = HomeViewModel()
@@ -59,10 +58,11 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         
         
         pageControl.numberOfPages = adsImages.count
-       setupNavigationController()
+      
         //homeViewModel?.createUserDefualtsCoupons()
     }
     override func viewWillAppear(_ animated: Bool) {
+        setupNavigationController()
         navigationItem.setHidesBackButton(true, animated: true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -95,11 +95,28 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Home"
-        let CartBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(goToCart))
+        let cartBtn = BadgeButton()
+        cartBtn.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+        cartBtn.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
+        cartBtn.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartBtn.tintColor = customOrange
+        cartBtn.badgeCount = dataBase.getCartCount()
+        let cartBarBtn = UIBarButtonItem(customView: cartBtn)
+        let  favBtnBadge = BadgeButton()
+        favBtnBadge.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 60, height: 60))
+        favBtnBadge.addTarget(self, action: #selector(goToFav), for: .touchUpInside)
+        favBtnBadge.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        favBtnBadge.tintColor = customOrange
+        favBtnBadge.badgeCount = dataBase.getFavouritesCount()
+        let favBarBtn = UIBarButtonItem(customView:  favBtnBadge)
+        
+        
+        navigationItem.rightBarButtonItems = [cartBarBtn , favBarBtn]
+       /* let CartBtn = UIBarButtonItem(image: UIImage(systemName: "cart.fill"), style: .plain, target: self, action: #selector(goToCart))
         CartBtn.tintColor = customOrange
         let favBtn = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(goToFav))
         favBtn.tintColor = customOrange
-        navigationItem.rightBarButtonItems = [CartBtn , favBtn]
+        navigationItem.rightBarButtonItems = [CartBtn , favBtn]*/
     }
     
     @objc func goToCart(){

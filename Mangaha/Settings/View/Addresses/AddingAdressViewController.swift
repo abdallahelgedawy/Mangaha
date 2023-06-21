@@ -46,19 +46,26 @@ class AddingAdressViewController: UIViewController {
     }
     @objc func doneNewAdress(){
         if countryTF.text?.count == 0 || cityTF.text?.count == 0 || streetTF.text?.count == 0 || phoneTF.text?.count == 0{
+            warningLabel.text = "Pleasw fill all fields"
             warningLabel.isHidden = false
         }else{
-            newAdressVM.bindedResult={
-                self.view.makeToast(self.newAdressVM.message)
+            if phoneTF.text?.count ?? 0 < 11 || phoneTF.text?.count ?? 0 > 15 {
+                warningLabel.text = "Invalid phone phone number"
+                warningLabel.isHidden = false
+                
+            }else{
+                newAdressVM.bindedResult={
+                    self.view.makeToast(self.newAdressVM.message)
+                }
+                let address = Address(address1: streetTF.text ?? "", city: cityTF.text ?? "", phone: phoneTF.text ?? "", countryName: countryTF.text ?? "",country: countryTF.text ?? "")
+                print(countryTF.text)
+                newAdressVM.addNewAddress(address:AddressModel(address: address))
+                countryTF.text = ""
+                cityTF.text = ""
+                streetTF.text = ""
+                phoneTF.text = ""
+                warningLabel.isHidden = true
             }
-            let address = Address(address1: streetTF.text ?? "", city: cityTF.text ?? "", phone: phoneTF.text ?? "", countryName: countryTF.text ?? "",country: countryTF.text ?? "")
-            print(countryTF.text)
-            newAdressVM.addNewAddress(address:AddressModel(address: address))
-            countryTF.text = ""
-            cityTF.text = ""
-            streetTF.text = ""
-            phoneTF.text = ""
-            warningLabel.isHidden = true
         }
     }
     @objc func backToAdressesList(){

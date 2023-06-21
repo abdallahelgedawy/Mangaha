@@ -12,6 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MEViewController" customModule="Mangaha" customModuleProvider="target">
             <connections>
                 <outlet property="favTableView" destination="S0h-Ib-Zdb" id="hBq-sU-kB4"/>
+                <outlet property="loading" destination="e9a-9t-82H" id="Dam-x9-zVb"/>
+                <outlet property="noFavImg" destination="Fsz-GD-Ssd" id="J3p-DO-bw4"/>
+                <outlet property="noFavLabel" destination="pQS-vb-K49" id="JOS-Ly-5db"/>
+                <outlet property="noOrderImg" destination="A1B-HE-3Ai" id="bLc-cH-ZKI"/>
+                <outlet property="noOrdersLabel" destination="Eq3-e0-ofR" id="kfq-Qo-2YY"/>
                 <outlet property="orderTabelView" destination="vTl-6t-QZ3" id="Ddn-GY-VL9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="welcomeLabel" destination="7Vu-AT-ocz" id="oGO-CM-kHk"/>
@@ -69,6 +74,28 @@
                         <action selector="viewMoreOrder:" destination="-1" eventType="touchUpInside" id="RDD-CY-m5U"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data" translatesAutoresizingMaskIntoConstraints="NO" id="A1B-HE-3Ai">
+                    <rect key="frame" x="71" y="159" width="240" height="121"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="data" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-GD-Ssd">
+                    <rect key="frame" x="71" y="437" width="240" height="211"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No orders yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eq3-e0-ofR">
+                    <rect key="frame" x="8" y="288" width="377" height="26.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No products in Favourites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQS-vb-K49">
+                    <rect key="frame" x="8" y="673" width="377" height="26.333333333333371"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="0.01176470588" green="0.0" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="e9a-9t-82H">
+                    <rect key="frame" x="163" y="219" width="57" height="20"/>
+                    <color key="color" red="1" green="0.4549019608" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="L7e-VJ-aJw"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -76,29 +103,47 @@
                 <constraint firstItem="fKV-TK-aqu" firstAttribute="top" secondItem="7Vu-AT-ocz" secondAttribute="bottom" constant="20" id="08b-65-UzR"/>
                 <constraint firstItem="S0h-Ib-Zdb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="23v-EZ-zfr"/>
                 <constraint firstItem="AvW-Rf-tNi" firstAttribute="top" secondItem="vTl-6t-QZ3" secondAttribute="bottom" constant="15" id="8A5-ey-Dfh"/>
+                <constraint firstItem="Fsz-GD-Ssd" firstAttribute="top" secondItem="zxF-q2-KY8" secondAttribute="bottom" constant="3" id="8P8-fk-v1A"/>
+                <constraint firstItem="L7e-VJ-aJw" firstAttribute="trailing" secondItem="A1B-HE-3Ai" secondAttribute="trailing" constant="82" id="8kN-Hf-FEK"/>
+                <constraint firstItem="pQS-vb-K49" firstAttribute="top" secondItem="Fsz-GD-Ssd" secondAttribute="bottom" constant="25" id="93m-a4-K1H"/>
+                <constraint firstItem="A1B-HE-3Ai" firstAttribute="top" secondItem="1dh-Mu-FV3" secondAttribute="bottom" constant="3" id="AIw-aK-Ihv"/>
                 <constraint firstItem="zxF-q2-KY8" firstAttribute="top" secondItem="vTl-6t-QZ3" secondAttribute="bottom" constant="15" id="EtE-cO-gFH"/>
                 <constraint firstItem="S0h-Ib-Zdb" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="Ila-Fe-XlL"/>
                 <constraint firstItem="S0h-Ib-Zdb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Our-8N-Iez"/>
+                <constraint firstItem="Eq3-e0-ofR" firstAttribute="leading" secondItem="L7e-VJ-aJw" secondAttribute="leading" constant="8" id="QT5-Lg-q7N"/>
                 <constraint firstAttribute="trailing" secondItem="zxF-q2-KY8" secondAttribute="trailing" constant="15" id="Qwc-ul-6bm"/>
                 <constraint firstItem="7Vu-AT-ocz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="SFv-Zt-6Mv"/>
+                <constraint firstItem="L7e-VJ-aJw" firstAttribute="trailing" secondItem="e9a-9t-82H" secondAttribute="trailing" constant="173" id="VEk-gS-slI"/>
+                <constraint firstItem="L7e-VJ-aJw" firstAttribute="trailing" secondItem="Eq3-e0-ofR" secondAttribute="trailing" constant="8" id="Vcf-bD-AMp"/>
                 <constraint firstItem="S0h-Ib-Zdb" firstAttribute="top" secondItem="zxF-q2-KY8" secondAttribute="bottom" constant="10" id="YNr-T6-iWk"/>
                 <constraint firstItem="S0h-Ib-Zdb" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.3" id="ZGJ-V8-kS0"/>
+                <constraint firstItem="L7e-VJ-aJw" firstAttribute="trailing" secondItem="pQS-vb-K49" secondAttribute="trailing" constant="8" id="bYF-Vn-yTg"/>
                 <constraint firstItem="AvW-Rf-tNi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="eAu-rR-VnA"/>
                 <constraint firstItem="vTl-6t-QZ3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gob-jg-kRi"/>
                 <constraint firstItem="vTl-6t-QZ3" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.25" id="hu8-S3-BE4"/>
                 <constraint firstItem="1dh-Mu-FV3" firstAttribute="top" secondItem="7Vu-AT-ocz" secondAttribute="bottom" constant="20" id="i4z-fk-QY4"/>
+                <constraint firstItem="e9a-9t-82H" firstAttribute="leading" secondItem="L7e-VJ-aJw" secondAttribute="leading" constant="163" id="iWb-4h-Fk9"/>
+                <constraint firstItem="A1B-HE-3Ai" firstAttribute="leading" secondItem="L7e-VJ-aJw" secondAttribute="leading" constant="71" id="jI3-Gr-ZgE"/>
                 <constraint firstItem="vTl-6t-QZ3" firstAttribute="top" secondItem="1dh-Mu-FV3" secondAttribute="bottom" constant="15" id="lC9-yH-q4R"/>
                 <constraint firstItem="vTl-6t-QZ3" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="lD6-Td-ZGm"/>
+                <constraint firstItem="Fsz-GD-Ssd" firstAttribute="leading" secondItem="L7e-VJ-aJw" secondAttribute="leading" constant="71" id="oYQ-Vk-Kob"/>
                 <constraint firstItem="7Vu-AT-ocz" firstAttribute="top" secondItem="L7e-VJ-aJw" secondAttribute="top" constant="5" id="rLC-FI-mEc"/>
+                <constraint firstItem="e9a-9t-82H" firstAttribute="top" secondItem="7Vu-AT-ocz" secondAttribute="bottom" constant="118" id="uXB-nm-Gx9"/>
                 <constraint firstItem="S0h-Ib-Zdb" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="uy7-sB-7cl"/>
+                <constraint firstItem="Eq3-e0-ofR" firstAttribute="top" secondItem="A1B-HE-3Ai" secondAttribute="bottom" constant="8" symbolic="YES" id="vRq-Ob-Mpo"/>
+                <constraint firstItem="L7e-VJ-aJw" firstAttribute="trailing" secondItem="Fsz-GD-Ssd" secondAttribute="trailing" constant="82" id="vmg-85-eOf"/>
+                <constraint firstItem="pQS-vb-K49" firstAttribute="leading" secondItem="L7e-VJ-aJw" secondAttribute="leading" constant="8" id="vu6-tY-dsh"/>
                 <constraint firstAttribute="trailing" secondItem="7Vu-AT-ocz" secondAttribute="trailing" constant="8" id="xaC-1e-D5N"/>
                 <constraint firstAttribute="trailing" secondItem="1dh-Mu-FV3" secondAttribute="trailing" constant="15" id="xak-HK-Alk"/>
+                <constraint firstItem="L7e-VJ-aJw" firstAttribute="bottom" secondItem="Fsz-GD-Ssd" secondAttribute="bottom" constant="170" id="yOI-sj-2fA"/>
+                <constraint firstItem="AvW-Rf-tNi" firstAttribute="top" secondItem="A1B-HE-3Ai" secondAttribute="bottom" constant="119" id="yeE-Vv-M0A"/>
                 <constraint firstItem="fKV-TK-aqu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="yti-2f-eqr"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
+        <image name="data" width="626" height="626"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
