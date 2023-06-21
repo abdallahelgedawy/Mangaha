@@ -51,13 +51,23 @@ final class MockNetworkServicesTest: XCTestCase {
         }
     }
     func testGetOrders(){
+        let myExpectation = expectation(description: "waiting for api")
         MockNetworkService.getOrders(url: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0)){
             order,error  in
+            if let error = error {
+                      XCTFail("Error occurred: \(error.localizedDescription)")
+                      myExpectation.fulfill()
+                      return
+                  }
             guard let ordersList = order?.orders else{
                 XCTFail()
+                myExpectation.fulfill()
                 return
             }
             XCTAssertGreaterThan(ordersList.count, 0, "parseing Failed")
+            myExpectation.fulfill()
+            
         }
+        waitForExpectations(timeout: 10.0,handler: nil)
     }
 }
