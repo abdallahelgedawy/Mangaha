@@ -78,7 +78,7 @@ final class NetworkServicesTest: XCTestCase {
     }
     func testPostNewAddress(){
         let myExpectation = expectation(description: "Wait for the response")
-        let address = AddressModel(address: Address(address1: "smouha", city: "alex", phone: "01004643564", countryName: "Egypt", country: "Egypt"))
+        let address = AddressModel(address: Address(address1: "smouha", city: "alex", phone: "01004643544", countryName: "Egypt", country: "Egypt"))
         NetworkServices.postNewAddress(address: address) { customerAddress, error in
                    XCTAssertNotNil(customerAddress, "Customer address should not be nil")
                    XCTAssertNil(error, "Error should be nil")
@@ -91,7 +91,7 @@ final class NetworkServicesTest: XCTestCase {
           let myExpectation = expectation(description: "Make default addresses expectation")
 
 
-          let addressId = "9221130649886"
+          let addressId = Constant.getDefaultAddressId()
 
      
           NetworkServices.makeDeafultAddresses(adressId: addressId) { (customerAddress, error) in
@@ -108,7 +108,7 @@ final class NetworkServicesTest: XCTestCase {
       }
     func testDeleteAddress(){
         let myExpectation = expectation(description: "Wait For delete")
-        let addressId = "9221130649886"
+        let addressId = Constant.getDefaultAddressId()
         NetworkServices.deleteAddress(addressId: addressId) { address, error in
             XCTAssertNil(address, "Customer address should not be nil")
             XCTAssertNil(error, "Error should be nil")
@@ -123,6 +123,58 @@ final class NetworkServicesTest: XCTestCase {
         let myExpectation = expectation(description: "Wait for api")
         NetworkServices.getAddressDetails { customerAddress, error in
             XCTAssertNotNil(customerAddress, "Customer address should not be nil")
+            XCTAssertNil(error, "Error should be nil")
+            myExpectation.fulfill()
+        }
+
+      waitForExpectations(timeout: 10.0 , handler: nil)
+    }
+    func testGetProductInfo(){
+        let myExpectation = expectation(description: "Waiting for api")
+        NetworkServices.getProductInfo(baseUrl: Constant.productInfo(productId: 8398222688542)) { product in
+            XCTAssertNotNil(product, "product should not be nil")
+            myExpectation.fulfill()
+        }
+
+      waitForExpectations(timeout: 10.0 , handler: nil)
+    }
+    func testPostCustomer(){
+        let myExpectation = expectation(description: "Waiting for response")
+        let customer = userCustomer(customer: Customer(firstName: "abdallah", email: "gedo2@gmail.com", verifiedEmail: true, password: "12344567889", passwordConfirmation: "12344567889", sendEmailWelcome: true))
+        NetworkServices.postCustomer(customer: customer) { customerResponse, error in
+            XCTAssertNotNil(customerResponse, "Customer response should not be nil")
+            XCTAssertNil(error, "Error should be nil")
+            myExpectation.fulfill()
+        }
+
+      waitForExpectations(timeout: 10.0 , handler: nil)
+    }
+    func testPostDraftOrder(){
+        let myExpectation = expectation(description: "Waiting for response")
+        let lineItems = [LineItems(title: "aaa",price: "100",quantity: 1 , imageUrl: "aa")]
+        NetworkServices.postDraftOrder(products: lineItems) { draftOrderResponse, error in
+            XCTAssertNotNil(draftOrderResponse, "Draft order response should not be nil")
+            XCTAssertNil(error, "Error should be nil")
+            myExpectation.fulfill()
+        }
+
+      waitForExpectations(timeout: 10.0 , handler: nil)
+    }
+    func testGetDraftOrder(){
+        let myExpectation = expectation(description: "Waiting for api")
+        NetworkServices.getDraftOrder(id: 1119559778590) { draftOrderResponse, error in
+            XCTAssertNotNil(draftOrderResponse, "Draft order response should not be nil")
+            XCTAssertNil(error, "Error should be nil")
+            myExpectation.fulfill()
+        }
+
+      waitForExpectations(timeout: 10.0 , handler: nil)
+    }
+    func testPostOrder(){
+        let myExpectation = expectation(description: "Waiting for response")
+        let order = Order(line_items: [LineItem(title: "a", price: "100", quantity: 1)],customer: CustomerId(id:Int(Constant.getCurrentCustomerId())) , created_at: "12")
+        NetworkServices.postOrder(url: Constant.postOrder(), order: PostOrder(order: order)) { responseOrder, error in
+            XCTAssertNotNil(responseOrder, "Order response should not be nil")
             XCTAssertNil(error, "Error should be nil")
             myExpectation.fulfill()
         }
