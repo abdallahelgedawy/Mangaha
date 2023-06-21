@@ -40,4 +40,24 @@ final class MockNetworkServicesTest: XCTestCase {
         }
     }
     
+    func testGetAllAddressesForCustomer(){
+        MockNetworkService.getAllAddressesForCustomer(){
+            address,error  in
+            guard let addressList = address else{
+                XCTFail()
+                return
+            }
+            XCTAssertGreaterThan(addressList.count, 0, "parseing Failed")
+        }
+    }
+    func testGetOrders(){
+        MockNetworkService.getOrders(url: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0)){
+            order,error  in
+            guard let ordersList = order?.orders else{
+                XCTFail()
+                return
+            }
+            XCTAssertGreaterThan(ordersList.count, 0, "parseing Failed")
+        }
+    }
 }

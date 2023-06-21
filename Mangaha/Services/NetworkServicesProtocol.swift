@@ -11,4 +11,8 @@ protocol NetworkServiceProtocol{
     
     static func getProducts(baseUrl: String,completionHandler: @escaping (Product?) -> Void )
     
+    static func getAllAddressesForCustomer( compelitionHandler: @escaping ([CustomerAddress]?,Error?) -> Void)
+    
+    static func getOrders(url : String , completionHandler : @escaping (GetOrder? , Error?)->Void)
+    
 }
