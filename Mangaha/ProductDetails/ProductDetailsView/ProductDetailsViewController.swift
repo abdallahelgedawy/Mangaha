@@ -119,6 +119,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
             
         
         productDetailsViewModel?.getProductsInfo(baseUrl: Constant.productInfo(productId: productDetailsViewModel?.productId ?? 0))
+        print("id" , productDetailsViewModel?.productId)
     }
 
       
