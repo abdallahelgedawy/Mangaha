@@ -13,7 +13,7 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
     let dataBase = DataBase()
     var productDetailsViewModel : ProductDetailsViewModel?
     @IBOutlet weak var favBtn: UIButton!
-    let networkListener = NetworkListener()
+  //  let networkListener = NetworkListener()
     @IBOutlet weak var bagBtn: UIButton!
     var image:UIImage?
    
@@ -292,12 +292,12 @@ class ProductDetailsViewController: UIViewController , UICollectionViewDataSourc
         
         self.present(alertController, animated: true, completion: nil)
         }else {
-            if networkListener.isNetworkAvailable() {
+          //  if networkListener.isNetworkAvailable() {
                 setupFavouriteProduct()
                 favBtnBadge.badgeCount = dataBase.getCartCount()
-            }else{
-                self.present(Constant.NetworkAlert(),animated: true)
-            }
+          //  }else{
+              //  self.present(Constant.NetworkAlert(),animated: true)
+            //}
         }
         
     }
