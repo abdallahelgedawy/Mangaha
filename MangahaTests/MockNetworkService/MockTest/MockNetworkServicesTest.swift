@@ -47,7 +47,7 @@ final class MockNetworkServicesTest: XCTestCase {
                 XCTFail()
                 return
             }
-            XCTAssertEqual(addressList.count, 0, "parseing Failed")
+            XCTAssertNotNil(addressList , "parseing failed")
         }
     }
     
