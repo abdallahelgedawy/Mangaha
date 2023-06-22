@@ -68,4 +68,29 @@ class MockOrderResponse{
       ]
   }
 """
+    
+    static var draftOrder = """
+                   {
+                     "draft_order": {
+                       "id": 1053317318,
+                        "line_items": [
+                               {
+                                 "title": 1053317318,
+                                 "price": 207119551,
+                                 "quantity": "Samuel",
+                                 "sku": "Fancy Co.",
+                               }
+                             ]
+                     }
+                   }
+"""
+    
+    static var postOrder = """
+                   {
+                     "order": {
+                       "id": 1053317318,
+                        "createdAt": null,
+                     }
+                   }
+"""
 }

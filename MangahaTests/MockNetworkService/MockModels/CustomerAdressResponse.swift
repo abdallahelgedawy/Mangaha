@@ -8,22 +8,22 @@
 import Foundation
 class MockCustomerAdressResponse{
     static var customerAdressResponse = """
-{
-  "addresses": [
-
-  {
-        "id": 207119551,
-        "customerID": 207119551,
-        "firstName": null,
-        "address1": "Chestnut Street 92",
-        "city": "Louisville",
-        "country": "United States",
-        "phone": "555-625-1199",
-        "name": "",
-        "countryName": "United States",
-        "customerAddressDefault": true
-  }
-]
-}
+    {
+      "addresses": [
+        {
+          "id": 1053317318,
+          "customer_id": 207119551,
+          "first_name": "Samuel",
+          "company": "Fancy Co.",
+          "address1": "1 Rue des Carrieres",
+          "city": "Montreal",
+          "country": "Canada",
+          "phone": "819-555-5555",
+          "name": "Samuel de Champlain",
+          "country_name": "Canada",
+          "default": false
+        }
+      ]
+    }
 """
 }

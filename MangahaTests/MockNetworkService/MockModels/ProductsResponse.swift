@@ -48,4 +48,25 @@ class MockProductsResponse{
 }
 
 """
+    
+    static var productInfo = """
+        {
+            "product": {
+                    "id": 8398222688542,
+                    "title": "ADIDAS | CLASSIC BACKPACK",
+                    "body_html": "This women's backpack has a glam look, thanks to a faux-leather build with an allover fur print. The front zip pocket keeps small things within reach, while an interior divider reins in potential chaos.",
+                    "vendor": "ADIDAS",
+                    "product_type": "ACCESSORIES",
+                    "created_at": "2023-06-12T22:39:09-04:00",
+                    "handle": "adidas-classic-backpack",
+                    "updated_at": "2023-06-12T22:40:11-04:00",
+                    "published_at": "2023-06-12T22:39:09-04:00",
+
+                    "status": "active",
+                    "published_scope": "global",
+                    "tags": "adidas, backpack, egnition-sample-data",
+                    "admin_graphql_api_id": "gid://shopify/Product/8398222688542",
+                   }
+ }
+"""
 }

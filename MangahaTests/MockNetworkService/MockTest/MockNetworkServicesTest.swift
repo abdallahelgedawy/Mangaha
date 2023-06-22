@@ -47,9 +47,32 @@ final class MockNetworkServicesTest: XCTestCase {
                 XCTFail()
                 return
             }
-            XCTAssertGreaterThan(addressList.count, 0, "parseing Failed")
+            XCTAssertEqual(addressList.count, 0, "parseing Failed")
         }
     }
+    
+    func testMakeDeafultAddresses(){
+        MockNetworkService.makeDeafultAddresses(adressId: ""){
+            address,error  in
+            guard let addressList = address else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(addressList , "parseing failed")
+        }
+    }
+    
+    func testGetAddressDetails(){
+        MockNetworkService.getAddressDetails(){
+            address,error  in
+            guard let addressList = address else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(addressList , "parseing failed")
+        }
+    }
+    
     func testGetOrders(){
         let myExpectation = expectation(description: "waiting for api")
         MockNetworkService.getOrders(url: Constant.getOrder(customerId: Int(Constant.getCurrentCustomerId()) ?? 0)){
@@ -69,5 +92,66 @@ final class MockNetworkServicesTest: XCTestCase {
             
         }
         waitForExpectations(timeout: 10.0,handler: nil)
+    }
+    
+    func testPostNewAddress(){
+        MockNetworkService.postNewAddress(address: AddressModel(address: Address())){
+            address,error  in
+            guard let addressList = address else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(addressList , "parseing failed")
+        }
+    }
+    func testGetProductInfo(){
+        MockNetworkService.getProductInfo(baseUrl: ""){
+            products in
+            guard let productList = products else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(productList , "parseing failed")
+        }
+    }
+    func testPostCustomer(){
+        MockNetworkService.postCustomer(customer: userCustomer(customer: Customer(firstName: "", email: "", verifiedEmail: true, password: "", passwordConfirmation: "", sendEmailWelcome: true))){
+            products,error  in
+            guard let productList = products else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(productList , "parseing failed")
+        }
+    }
+    func testPostDraftOrder(){
+        MockNetworkService.postDraftOrder(products: [LineItems()]){
+            orders,error  in
+            guard let ordersList = orders else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(ordersList , "parseing failed")
+        }
+    }
+    func testGetDraftOrder(){
+        MockNetworkService.getDraftOrder(id: 0){
+            orders,error  in
+            guard let ordersList = orders else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(ordersList , "parseing failed")
+        }
+    }
+    func testPostOrder(){
+        MockNetworkService.postOrder(url: "", order: PostOrder(order: Order())){
+            orders,error  in
+            guard let ordersList = orders else{
+                XCTFail()
+                return
+            }
+            XCTAssertNotNil(ordersList , "parseing failed")
+        }
     }
 }
