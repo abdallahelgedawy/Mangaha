@@ -7,14 +7,19 @@
 
 import Foundation
 import Reachability
+import Lottie
 
 class ReachabilityManager {
     static let shared = ReachabilityManager()
+    let animationView = LottieAnimationView()
     
     private let reachability = try? Reachability()
     
     private init() {
         startListening()
+    }
+    func setupAnimation(){
+                
     }
     
     private func startListening() {
@@ -35,18 +40,36 @@ class ReachabilityManager {
         if reachability.connection != .unavailable {
             // Handle network unavailable
             print("there is internet connection")
+            if let alertView = UIApplication.shared.windows.first?.rootViewController?.view.viewWithTag(1234) {
+                       alertView.removeFromSuperview()
+                   }
             
-        } else {
-            let alertController = UIAlertController(title: "Internet Connection", message: "Check Your Internet Connection!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-            }
-            
-            alertController.addAction(okAction)
-            if let topViewController = UIApplication.shared.keyWindow?.rootViewController {
-                topViewController.present(alertController, animated: true, completion: nil)
+        }else{
+            print("no Internet")
+            let alertView = UIView(frame: UIScreen.main.bounds)
+            alertView.tag = 1234
+            alertView.backgroundColor = .black
+            animationView.animation = LottieAnimation.named("network")
+            animationView.contentMode = .scaleToFill
+            let animationScale: CGFloat = 1.5 // Adjust the scale factor as needed
+            animationView.transform = CGAffineTransform(scaleX: animationScale, y: animationScale)
+            animationView.loopMode = .loop
+            animationView.play()
+            animationView.translatesAutoresizingMaskIntoConstraints = false
+            // Center the animation view horizontally
+            alertView.addSubview(animationView)
+            NSLayoutConstraint.activate([
+                animationView.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+                animationView.centerYAnchor.constraint(equalTo: alertView.centerYAnchor)
+            ])
+
+            if let topViewController = UIApplication.shared.windows.first?.rootViewController {
+                topViewController.view.addSubview(alertView)
             }
         }
     }
+
+    
     
     deinit {
         reachability?.stopNotifier()

@@ -95,6 +95,7 @@
 		B80DE7D12A348EDF00C2F995 /* OrderSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DE7CB2A348EDF00C2F995 /* OrderSettingsCell.swift */; };
 		B80DE7D42A348F8500C2F995 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DE7D32A348F8500C2F995 /* UIView+RoundedCorners.swift */; };
 		B82134102A4593340088EFC5 /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821340F2A4593340088EFC5 /* NetworkConnection.swift */; };
+		B82134122A45BF900088EFC5 /* network.json in Resources */ = {isa = PBXBuildFile; fileRef = B82134112A45BF900088EFC5 /* network.json */; };
 		B829A4962A30770400A0A4D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829A4952A30770400A0A4D0 /* AppDelegate.swift */; };
 		B829A4982A30770400A0A4D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829A4972A30770400A0A4D0 /* SceneDelegate.swift */; };
 		B829A49A2A30770400A0A4D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829A4992A30770400A0A4D0 /* ViewController.swift */; };
@@ -245,6 +246,7 @@
 		B80DE7CB2A348EDF00C2F995 /* OrderSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSettingsCell.swift; sourceTree = "<group>"; };
 		B80DE7D32A348F8500C2F995 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		B821340F2A4593340088EFC5 /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
+		B82134112A45BF900088EFC5 /* network.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = network.json; sourceTree = "<group>"; };
 		B829A4922A30770400A0A4D0 /* Mangaha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mangaha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B829A4952A30770400A0A4D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B829A4972A30770400A0A4D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -831,6 +833,7 @@
 				B829A4A62A30770500A0A4D0 /* Info.plist */,
 				B86708A92A37DBCC00465879 /* GoogleService-Info.plist */,
 				B821340F2A4593340088EFC5 /* NetworkConnection.swift */,
+				B82134112A45BF900088EFC5 /* network.json */,
 			);
 			path = Mangaha;
 			sourceTree = "<group>";
@@ -1112,6 +1115,7 @@
 				448197E22A40890400EA416E /* OrderViewController.xib in Resources */,
 				B80DE7BD2A348EA700C2F995 /* AdressesCell.xib in Resources */,
 				B80DE7CD2A348EDF00C2F995 /* WishListCell.xib in Resources */,
+				B82134122A45BF900088EFC5 /* network.json in Resources */,
 				B829A4A22A30770500A0A4D0 /* Assets.xcassets in Resources */,
 				B80DE7BA2A348EA700C2F995 /* AddingAdressViewController.xib in Resources */,
 				44787E2D2A315A45008C0CBB /* HomeViewController.xib in Resources */,
