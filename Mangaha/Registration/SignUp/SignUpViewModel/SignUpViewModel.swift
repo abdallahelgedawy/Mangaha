@@ -42,13 +42,15 @@ class SignUpViewModel{
             self.db.collection("users").addDocument(data: ["id" : userId , "email" : email , "username" : username , "FavoriteId" : favoriteId , "CartId" : self.cartId])
         }
     }*/
-    func registerUser(customer : userCustomer){
+    func registerUser(customer : userCustomer , completionHandler : @escaping (String , Error?)->Void){
         var email  = customer.customer.email
         var password = customer.customer.password
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error == nil{
                 self.postCustomer(myuserCustomer: customer)
-             
+                completionHandler("done" , nil)
+            }else{
+                completionHandler("error",error)
             }
             
             
