@@ -17,7 +17,8 @@ class NetworkServices{
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request){ data,response , error in
             do{
-                let result = try JSONDecoder().decode(Brands.self, from: data!)
+                guard let data = data else{return}
+                let result = try JSONDecoder().decode(Brands.self, from: data)
                 completionHandler(result)
             }catch let error{
                 print(error.localizedDescription)
@@ -38,7 +39,8 @@ class NetworkServices{
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request){ data,response , error in
             do{
-                let result = try JSONDecoder().decode(Product.self, from: data!)
+                guard let data = data else{return}
+                let result = try JSONDecoder().decode(Product.self, from: data)
                 completionHandler(result)
             }catch let error{
                 print(error.localizedDescription)
