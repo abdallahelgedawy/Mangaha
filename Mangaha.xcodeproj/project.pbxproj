@@ -94,6 +94,7 @@
 		B80DE7D02A348EDF00C2F995 /* OrderSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80DE7CA2A348EDF00C2F995 /* OrderSettingsCell.xib */; };
 		B80DE7D12A348EDF00C2F995 /* OrderSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DE7CB2A348EDF00C2F995 /* OrderSettingsCell.swift */; };
 		B80DE7D42A348F8500C2F995 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DE7D32A348F8500C2F995 /* UIView+RoundedCorners.swift */; };
+		B82134102A4593340088EFC5 /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821340F2A4593340088EFC5 /* NetworkConnection.swift */; };
 		B829A4962A30770400A0A4D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829A4952A30770400A0A4D0 /* AppDelegate.swift */; };
 		B829A4982A30770400A0A4D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829A4972A30770400A0A4D0 /* SceneDelegate.swift */; };
 		B829A49A2A30770400A0A4D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B829A4992A30770400A0A4D0 /* ViewController.swift */; };
@@ -243,6 +244,7 @@
 		B80DE7CA2A348EDF00C2F995 /* OrderSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderSettingsCell.xib; sourceTree = "<group>"; };
 		B80DE7CB2A348EDF00C2F995 /* OrderSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSettingsCell.swift; sourceTree = "<group>"; };
 		B80DE7D32A348F8500C2F995 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
+		B821340F2A4593340088EFC5 /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
 		B829A4922A30770400A0A4D0 /* Mangaha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mangaha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B829A4952A30770400A0A4D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B829A4972A30770400A0A4D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -828,6 +830,7 @@
 				B829A4A32A30770500A0A4D0 /* LaunchScreen.storyboard */,
 				B829A4A62A30770500A0A4D0 /* Info.plist */,
 				B86708A92A37DBCC00465879 /* GoogleService-Info.plist */,
+				B821340F2A4593340088EFC5 /* NetworkConnection.swift */,
 			);
 			path = Mangaha;
 			sourceTree = "<group>";
@@ -1265,6 +1268,7 @@
 			files = (
 				448197E52A409A2E00EA416E /* OderViewModel.swift in Sources */,
 				8C3BD5E12A373BE3002A354E /* CurrencyCoverter.swift in Sources */,
+				B82134102A4593340088EFC5 /* NetworkConnection.swift in Sources */,
 				8CB0FE9D2A38E502002FAF5F /* AddressesListViewModel.swift in Sources */,
 				8C8B0E2E2A3B92CF00E8F7FA /* CoreDataProduct.swift in Sources */,
 				448A61742A3693EA001B9D2D /* ProductViewModel.swift in Sources */,
