@@ -69,7 +69,7 @@ brand or specific category.
 1. Clone the repository
 2. Open a new terminal in the project folder
 3. Run ``` pod install ``` in terminal
-4. Open the ``Biap.xcworkspace``
+4. Open the ``Mangaha.xcworkspace``
 5. Run the project on your iOS device or simulator with minimum deployment of 16.1
 
 ## Credits
