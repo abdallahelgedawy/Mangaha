@@ -117,10 +117,11 @@ extension CartViewController : UITableViewDelegate , UITableViewDataSource{
         let product = cartVM.getProductAtIndex(index: indexPath.row)
         cell?.productName.text = product.title
         cell?.productCount.text = product.quantity
+        let price : Double = (Double(product.price ?? "0.0") ?? 0.0) * 34.0
         if Constant.isEuroCurrency(){
             cell?.productPrice.text = (product.price ?? "0.0") + "  EUR"
         }else{
-            cell?.productPrice.text = (product.price ?? "0.0") + "   EGP"
+            cell?.productPrice.text = String(price) + "   EGP"
         }
         cell?.productImg.sd_setImage(with: URL(string: product.imageUrl ?? ""), placeholderImage: UIImage(named: "data"))
         cell?.productId = product.id

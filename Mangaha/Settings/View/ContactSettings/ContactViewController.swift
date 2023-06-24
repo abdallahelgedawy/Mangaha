@@ -99,15 +99,19 @@ class ContactViewController: UIViewController {
     }
     
     func setupDefaultAddressView(){
-        if Constant.isFirstAddress(){
+        if Constant.getDefaultAddressId() == "none" {
             viewAddressBtn.isHidden = true
             noAdressLabel.isHidden = false
             addNewAddressBtn.isHidden = false
+            loadingBar.isHidden = true
+            print("no adresses")
         }else{
+            print("adress is here")
             noAdressLabel.isHidden = true
             addNewAddressBtn.isHidden = true
             loadingBar.isHidden = false
             settingsVM.bindedResult={
+                self.viewAddressBtn.isHidden = false
                 self.loadingBar.isHidden = true
                 let defaultAddress = self.settingsVM.defaultAddress.first
                 self.cityNameLabel.text = defaultAddress?.city

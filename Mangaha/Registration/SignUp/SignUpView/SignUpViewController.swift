@@ -24,12 +24,16 @@ class SignUpViewController: UIViewController , UITextFieldDelegate {
         passwordTF.delegate = self
         confirmationPasswordTF.delegate = self
         strengthLabel.text = "Weak password!"
-            strengthLabel.textColor = .red
-            
-            matchLabel.text = "Doesn't Match!"
-            matchLabel.textColor = .red
+        strengthLabel.textColor = .red
+        
+        matchLabel.text = "Doesn't Match!"
+        matchLabel.textColor = .red
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        strengthLabel.isHidden = true
+        matchLabel.isHidden = true
+    }
+    
     @IBOutlet weak var strengthLabel: UILabel!
     @IBOutlet weak var registerBtn: UIButton!
     
@@ -54,46 +58,72 @@ class SignUpViewController: UIViewController , UITextFieldDelegate {
         }else{
             print("Weak Password")
         }
-            
+        
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let currentText = textField.text,
-                  let textRange = Range(range, in: currentText) else {
-                return true
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == confirmationPasswordTF{
+            if confirmationPasswordTF.text == passwordTF.text {
+                
+                matchLabel.text = "Matches!"
+                matchLabel.textColor = .green
+            }else{
+                matchLabel.textColor = .red
+                matchLabel.text = "Does not Match"
             }
+            matchLabel.isHidden = true
+        }else if textField == passwordTF {
+            if checkPasswordStrength(passwordTF.text ?? "") == "Strong" {
+                strengthLabel.textColor = .green
+                strengthLabel.text = "Strong password !"
+            }else{
+                strengthLabel.textColor = .red
+                strengthLabel.text = "Password should contain small and capital letters, symbols and numbers"
+            }
+            strengthLabel.isHidden = false
+        }
+    }
+    
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let currentText = passwordTF.text,
+              let textRange = Range(range, in: currentText) else {
+            return true
+        }
+        if textField == passwordTF {
             
             let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+            let passwordStrength = checkPasswordStrength(updatedText)
             
-            if textField == passwordTF {
-                let passwordStrength = checkPasswordStrength(updatedText)
-                
-                switch passwordStrength {
-                case "Weak":
-                    strengthLabel.text = "Weak password!"
-                    strengthLabel.textColor = .red
-                case "Strong":
-                    strengthLabel.text = "Strong password!"
-                    strengthLabel.textColor = .green
-                default:
-                    strengthLabel.text = ""
-                }
-            } else if textField == confirmationPasswordTF {
-                let passwordStrength = checkPasswordConfirmation(passwordTF.text ?? "", updatedText)
-                
-                switch passwordStrength {
-                case "Doesn't Match":
-                    matchLabel.text = "Doesn't Match!"
-                    matchLabel.textColor = .red
-                case "Match":
-                    matchLabel.text = "Match!"
-                    matchLabel.textColor = .green
-                default:
-                    matchLabel.text = ""
-                }
+            switch passwordStrength {
+            case "Weak":
+                strengthLabel.text = "Weak password!"
+                strengthLabel.textColor = .red
+            case "Strong":
+                strengthLabel.text = "Strong password!"
+                strengthLabel.textColor = .green
+            default:
+                strengthLabel.text = ""
             }
-            
-            return true
-       }
+        } else if textField == confirmationPasswordTF {
+            matchLabel.isHidden = true
+            let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+            let passwordStrength = checkPasswordConfirmation(passwordTF.text ?? "", updatedText)
+            switch passwordStrength {
+            case "Doesn't Match":
+                matchLabel.text = "Doesn't Match!"
+                matchLabel.textColor = .red
+            case "Match":
+                matchLabel.text = "Match!"
+                matchLabel.textColor = .green
+            default:
+                matchLabel.text = ""
+            }
+        }
+        
+    
+    return true
+}
     
     private func checkPasswordStrength(_ password: String) -> String {
         let lengthRequirement = password.count >= 8

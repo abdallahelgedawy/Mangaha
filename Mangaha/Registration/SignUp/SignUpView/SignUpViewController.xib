@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -126,14 +127,14 @@
                         <action selector="toggleBtnConfirm:" destination="-1" eventType="touchUpInside" id="wsc-S0-aiV"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weak Password!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2V-Jz-1lx">
-                    <rect key="frame" x="280.66666666666669" y="337.66666666666669" width="92.333333333333314" height="14.333333333333314"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doesn't Match!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6A-Cy-mQy">
+                    <rect key="frame" x="286.66666666666669" y="458.66666666666669" width="86.333333333333314" height="14.333333333333314"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" systemColor="systemRedColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doesn't Match!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6A-Cy-mQy">
-                    <rect key="frame" x="286.66666666666669" y="458.66666666666669" width="86.333333333333314" height="14.333333333333314"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password should contain small and capital letters, symbols and numbers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2V-Jz-1lx">
+                    <rect key="frame" x="48.333333333333343" y="344" width="335.66666666666663" height="28.666666666666686"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" systemColor="systemRedColor"/>
                     <nil key="highlightedColor"/>
@@ -153,12 +154,13 @@
                 <constraint firstItem="rgb-bH-l3T" firstAttribute="top" secondItem="RY9-OH-Cbc" secondAttribute="bottom" constant="50" id="EVh-x0-WbY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RY9-OH-Cbc" secondAttribute="trailing" constant="20" id="H3F-E1-CWM"/>
                 <constraint firstItem="sE5-Lt-xhQ" firstAttribute="top" secondItem="sJp-oh-WI7" secondAttribute="top" id="IzV-gN-Ey5"/>
-                <constraint firstItem="sJp-oh-WI7" firstAttribute="top" secondItem="G2V-Jz-1lx" secondAttribute="bottom" constant="58" id="JQa-ej-ibE"/>
+                <constraint firstItem="sJp-oh-WI7" firstAttribute="top" secondItem="G2V-Jz-1lx" secondAttribute="bottom" constant="37.333333333333314" id="JQa-ej-ibE"/>
                 <constraint firstItem="kBh-g9-nE3" firstAttribute="top" secondItem="rgb-bH-l3T" secondAttribute="top" id="KwZ-ZR-69c"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sJp-oh-WI7" secondAttribute="trailing" constant="20" id="QUg-pE-xFZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KG9-kS-WeB" secondAttribute="bottom" constant="120" id="Tpu-HV-cW7"/>
                 <constraint firstItem="1mH-q9-Idv" firstAttribute="top" secondItem="IGS-w1-NRI" secondAttribute="bottom" constant="63" id="W2a-gx-0CM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="P6A-Cy-mQy" secondAttribute="trailing" constant="20" id="WdR-tO-RHI"/>
+                <constraint firstItem="G2V-Jz-1lx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ZFS-Nc-MTP"/>
                 <constraint firstItem="KG9-kS-WeB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="ZWi-rv-uvu"/>
                 <constraint firstItem="0jv-eY-5H2" firstAttribute="top" secondItem="P6A-Cy-mQy" secondAttribute="bottom" constant="101" id="Zdh-Xf-DoK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rgb-bH-l3T" secondAttribute="trailing" constant="20" id="apE-7m-6FC"/>
@@ -169,7 +171,7 @@
                 <constraint firstItem="oHb-3Q-UlL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="gZb-ga-gWG"/>
                 <constraint firstItem="1mH-q9-Idv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="j5M-ig-4jq"/>
                 <constraint firstItem="sE5-Lt-xhQ" firstAttribute="bottom" secondItem="sJp-oh-WI7" secondAttribute="bottom" id="k8Z-iI-SNb"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="G2V-Jz-1lx" secondAttribute="trailing" constant="20" id="m3j-nb-IFx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="G2V-Jz-1lx" secondAttribute="trailing" constant="9" id="m3j-nb-IFx"/>
                 <constraint firstItem="Gfx-cu-7yR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="mWi-Tj-Ehb"/>
                 <constraint firstItem="sJp-oh-WI7" firstAttribute="leading" secondItem="oHb-3Q-UlL" secondAttribute="trailing" constant="20" id="n4Z-j8-gNK"/>
                 <constraint firstItem="aWB-z6-obC" firstAttribute="top" secondItem="Gfx-cu-7yR" secondAttribute="bottom" constant="56" id="nsF-Se-SRs"/>
@@ -184,7 +186,7 @@
                 <constraint firstItem="QHi-j8-5IV" firstAttribute="leading" secondItem="KG9-kS-WeB" secondAttribute="trailing" id="z0z-ME-STz"/>
                 <constraint firstItem="IGS-w1-NRI" firstAttribute="top" secondItem="sue-fZ-7cQ" secondAttribute="bottom" constant="54" id="z2B-OF-oFo"/>
             </constraints>
-            <point key="canvasLocation" x="48" y="21"/>
+            <point key="canvasLocation" x="46.564885496183201" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>

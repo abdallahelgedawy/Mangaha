@@ -20,7 +20,7 @@ class NewAddressViewModel{
     func addNewAddress(address:AddressModel){
         NetworkServices.postNewAddress(address: address) {[weak self] newAddress, error in
             if let newAddress = newAddress{
-                if Constant.isFirstAddress(){
+                if Constant.getDefaultAddressId() == "none"{
                     print("check first address : \(Constant.isFirstAddress())")
                     Constant.saveDefaultAddressId(id: String(newAddress.id))
                     Constant.firstAddedAddress(isFirstAdrees: false)
