@@ -8,7 +8,7 @@ Mangaha is a simple e-commerce application, using storyboards that uses [Shopify
 
 ## Description
 
-Mangaha is an iOS native mobile application that provides a seamless e-commerce experience to its users. With its simple interface and easy-to-use features, Mangaha is an ideal platform for businesses to sell their products to a wider audience. The application is built using storyboards and is integrated with the Shopify API, which provides a secure and reliable platform for transactions.
+Mangaha is an iOS native mobile application that provides a seamless e-commerce experience to its users. With its simple interface and easy-to-use features, Mangaha is an ideal platform for businesses to sell their products to a wider audience. The application is built using Nib files and is integrated with the Shopify API, which provides a secure and reliable platform for transactions.
 
 ### Features
 
