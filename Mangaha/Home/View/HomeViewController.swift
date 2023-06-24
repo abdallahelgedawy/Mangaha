@@ -62,7 +62,6 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-  
             homeViewModel?.getBrands(baseUrl: Constant.allBrands())
             homeViewModel?.bindBrandsListToHomeVC = {
                 DispatchQueue.main.async {
