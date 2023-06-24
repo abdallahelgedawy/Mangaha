@@ -20,8 +20,8 @@ class OrderViewController: UIViewController {
         orderViewModel = OrderViewModel()
         orderTableView.delegate = self
         orderTableView.dataSource = self
-        noordersIMG.isHidden = true
-        noOrderLabel.isHidden = true
+        noordersIMG.isHidden = false
+        noOrderLabel.isHidden = false
         
         orderTableView.register(UINib(nibName: "OrderSettingsCell", bundle: nil), forCellReuseIdentifier: "OrderCell")
         

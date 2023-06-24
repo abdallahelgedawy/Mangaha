@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func guestBtn(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to enter as a guest with limited features?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Guest Mode", message: "Are you sure you want to enter as a guest with limited features?", preferredStyle: .alert)
 
         let okAction = UIAlertAction(title: "Yes", style: .default) { (_) in
             self.isGuest = true
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
         guard let password = passwordTF.text else {return}
         Auth.auth().signIn(withEmail: email, password: password){ authresult , error in
             if let error = error{
-                let alertController = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Singn in error", message: error.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
                 }
                
@@ -107,7 +107,7 @@ class LoginViewController: UIViewController {
     @IBAction func forgotPassword(_ sender: UIButton) {
         Auth.auth().sendPasswordReset(withEmail: emailTF.text ?? ""){ error in
             if let error = error {
-                let alertController = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Forget password", message: error.localizedDescription, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
                 }
                
@@ -115,7 +115,7 @@ class LoginViewController: UIViewController {
                 
                 self.present(alertController, animated: true, completion: nil)
             } else {
-                let alertController = UIAlertController(title: "Alert", message: "Password reset email sent", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Forget password", message: "Password reset email sent", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
                 }
                

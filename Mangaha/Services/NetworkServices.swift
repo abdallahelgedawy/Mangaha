@@ -167,8 +167,11 @@ class NetworkServices{
                 }
                 let decoder = JSONDecoder()
                 let addresses = try decoder.decode(PostAdreesResponse.self, from: data)
+                let id = addresses.customerAddress.id
+                Constant.saveDefaultAddressId(id: String(id))
                 compelitionHandler(addresses.customerAddress,nil)
             } catch {
+                Constant.saveDefaultAddressId(id: "none")
                 compelitionHandler(nil, error)
             }
         }

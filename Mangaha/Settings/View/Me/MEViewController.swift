@@ -31,10 +31,15 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
         favTableView.dataSource = self
         favTableView.delegate = self
         setupNavigationBar()
-       // profileVM.getWishList()
-      
+        // profileVM.getWishList()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        if guest == false {
+            let userName = UserDefaults.standard.object(forKey: "CurrentUserName") ?? ""
+            welcomeLabel.text = "Wlecome \(userName) to Mangaha"
+        }
         noFavImg.isHidden = false
         noFavLabel.isHidden = false
         noOrderImg.isHidden = true
@@ -47,9 +52,6 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
             }
         }
         profileVM.getWishList()
-        
-        
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         print("did appear")
@@ -137,7 +139,7 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
         navigationItem.scrollEdgeAppearance = apperance
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "ME"
-            
+        
     }
     @objc func moveToSettings(){
         if guest == true{
@@ -210,27 +212,29 @@ class MEViewController: UIViewController, UINavigationControllerDelegate {
             self.tabBarController?.tabBar.isHidden = true
             self.tabBarController?.hidesBottomBarWhenPushed = true
             self.profileVM.bindedResult = {
+                UserDefaults.standard.set("none", forKey: Constant.defaultAdressIdKey)
                 UserDefaults.standard.set("Eur", forKey: Constant.currencyKey)
+                // self.navigationController?.popToRootViewController(animated: true)
                 let loginVC  = LoginViewController(nibName: "LoginViewController", bundle: nil)
                 self.navigationController?.pushViewController(loginVC, animated: true)
                 
             }
             self.profileVM.makeFavouritesDraftOrder()
         }
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.hidesBottomBarWhenPushed = true
-                self.profileVM.bindedResult = {
-                    self.profileVM.resetUserDefualtsCoupons()
-                    let loginVC  = LoginViewController(nibName: "LoginViewController", bundle: nil)
-                    self.navigationController?.pushViewController(loginVC, animated: true)
-                    
-                }
-                self.profileVM.makeFavouritesDraftOrder()
+        /*   self.tabBarController?.tabBar.isHidden = true
+         self.tabBarController?.hidesBottomBarWhenPushed = true
+         self.profileVM.bindedResult = {
+         self.profileVM.resetUserDefualtsCoupons()
+         let loginVC  = LoginViewController(nibName: "LoginViewController", bundle: nil)
+         self.navigationController?.pushViewController(loginVC, animated: true)
+         
+         }
+         self.profileVM.makeFavouritesDraftOrder()
+         }*/
     }
+    
+    
 }
-
-
-
 
 
 
@@ -244,6 +248,13 @@ extension MEViewController : UITableViewDataSource , UITableViewDelegate{
                 return 2
             }
         }else{
+            if profileVM.getOrderssCount() == 0 {
+                noOrderImg.isHidden = false
+                noOrdersLabel.isHidden = false
+            }else{
+                noOrderImg.isHidden = true
+                noOrdersLabel.isHidden = true
+            }
             if profileVM.getOrderssCount() <= 2 {
                 return profileVM.getOrderssCount()
             }else{
@@ -271,21 +282,22 @@ extension MEViewController : UITableViewDataSource , UITableViewDelegate{
             }
             cell?.productImg.sd_setImage(with: URL(string: favProduct.imageUrl ?? ""), placeholderImage: UIImage(named: "data"))
             return cell ?? UITableViewCell()
-        }else{
+        }else {
             if profileVM.getOrderssCount() == 0{
+                print(" no orders")
                 noOrderImg.isHidden = false
                 noOrdersLabel.isHidden = false
             }else{
+                print("order")
                 noOrderImg.isHidden = true
                 noOrdersLabel.isHidden = true
             }
-         let cell = orderTabelView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as? OrderSettingsCell
+            let cell = orderTabelView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as? OrderSettingsCell
             let order = profileVM.getOrdersAtIndex(index: indexPath.row)
             cell?.orderPriceLabel.text = order.line_items?[0].price
             cell?.orderDateLabel.text = order.created_at
             return cell ?? UITableViewCell()
         }
-        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == favTableView{

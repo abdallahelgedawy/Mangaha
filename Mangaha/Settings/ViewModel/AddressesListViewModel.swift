@@ -36,7 +36,6 @@ class AddressesListViewModel{
         NetworkServices.makeDeafultAddresses(adressId: String(addressId)) {[weak self] address, error in
             if let address = address{
                 let defaultAddressId = address.id
-                Constant.saveDefaultAddressId(id: String(defaultAddressId))
                 self?.defaultAddressMessage = "Address set as default successfully"
             }else{
                 self?.defaultAddressMessage = "Failed to set as default address"

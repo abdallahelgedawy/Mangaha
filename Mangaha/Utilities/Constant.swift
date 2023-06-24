@@ -85,7 +85,7 @@ class Constant{
     }
     
     static func getDefaultAddressId()->String{
-        return (UserDefaults.standard.object(forKey: defaultAdressIdKey) as? String ?? "")
+        return (UserDefaults.standard.object(forKey: defaultAdressIdKey) as? String ?? "none")
     }
     
     static func getAddressDetailsEndPoint()->String{
