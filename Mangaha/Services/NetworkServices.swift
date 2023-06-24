@@ -136,7 +136,7 @@ class NetworkServices{
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(GetAddressModel.self, from: data)
                 let addresses = result.addresses
-                print("all adreess : \(addresses?.count)")
+                //print("address id \(addresses?[1].id)")
                 compelitionHandler(addresses,nil)
             } catch {
                 print("all adresse error")

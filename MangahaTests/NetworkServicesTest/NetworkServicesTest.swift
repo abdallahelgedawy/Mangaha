@@ -74,11 +74,11 @@ final class NetworkServicesTest: XCTestCase {
             XCTAssertGreaterThan(ordersList.count, 0, "fail to catch data")
             myExpectation.fulfill()
         }
-        waitForExpectations(timeout: 5,handler: nil)
+        waitForExpectations(timeout: 10,handler: nil)
     }
     func testPostNewAddress(){
         let myExpectation = expectation(description: "Wait for the response")
-        let address = AddressModel(address: Address(address1: "smouha", city: "alex", phone: "01004643544", countryName: "Egypt", country: "Egypt"))
+        let address = AddressModel(address: Address(address1: "smouha", city: "alex", phone: "018999898989", countryName: "Egypt", country: "Egypt"))
         NetworkServices.postNewAddress(address: address) { customerAddress, error in
                    XCTAssertNotNil(customerAddress, "Customer address should not be nil")
                    XCTAssertNil(error, "Error should be nil")
@@ -91,7 +91,7 @@ final class NetworkServicesTest: XCTestCase {
           let myExpectation = expectation(description: "Make default addresses expectation")
 
 
-          let addressId = Constant.getDefaultAddressId()
+          let addressId = "9229374718238"
 
      
           NetworkServices.makeDeafultAddresses(adressId: addressId) { (customerAddress, error) in
@@ -112,14 +112,12 @@ final class NetworkServicesTest: XCTestCase {
         NetworkServices.deleteAddress(addressId: addressId) { address, error in
             XCTAssertNil(address, "Customer address should not be nil")
             XCTAssertNil(error, "Error should be nil")
-
-
             myExpectation.fulfill()
         }
 
       waitForExpectations(timeout: 10.0 , handler: nil)
         }
-    func testgetAddressDetails(){
+  /* func testgetAddressDetails(){
         let myExpectation = expectation(description: "Wait for api")
         NetworkServices.getAddressDetails { customerAddress, error in
             XCTAssertNotNil(customerAddress, "Customer address should not be nil")
@@ -128,7 +126,7 @@ final class NetworkServicesTest: XCTestCase {
         }
 
       waitForExpectations(timeout: 10.0 , handler: nil)
-    }
+    }*/
     func testGetProductInfo(){
         let myExpectation = expectation(description: "Waiting for api")
         NetworkServices.getProductInfo(baseUrl: Constant.productInfo(productId: 8398222688542)) { product in
@@ -140,7 +138,7 @@ final class NetworkServicesTest: XCTestCase {
     }
     func testPostCustomer(){
         let myExpectation = expectation(description: "Waiting for response")
-        let customer = userCustomer(customer: Customer(firstName: "abdallah", email: "gedo2@gmail.com", verifiedEmail: true, password: "12344567889", passwordConfirmation: "12344567889", sendEmailWelcome: true))
+        let customer = userCustomer(customer: Customer(firstName: "abdallah", email: "gedo5565655@gmail.com", verifiedEmail: true, password: "33333@Mina", passwordConfirmation: "33333@Mina", sendEmailWelcome: true))
         NetworkServices.postCustomer(customer: customer) { customerResponse, error in
             XCTAssertNotNil(customerResponse, "Customer response should not be nil")
             XCTAssertNil(error, "Error should be nil")

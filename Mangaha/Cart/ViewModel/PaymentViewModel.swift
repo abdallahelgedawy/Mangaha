@@ -76,7 +76,11 @@ class PaymentViewModel{
     
     private func calculateSubTotal(){
         for product in cartProducts{
-            subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 1)
+            if Constant.isEuroCurrency(){
+                subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 1)
+            }else{
+                subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 1) * 34.0
+            }
         }
     }
     

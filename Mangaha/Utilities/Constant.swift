@@ -55,10 +55,12 @@ class Constant{
     }
     
     static func getAllAddressesEndPoint()->String{
+        print(getCurrentCustomerId())
         return baseUrl + "customers/\(getCurrentCustomerId())/addresses.json"
     }
     
     static func defaultAddressEndPoint(addressId:String)->String{
+        
         return postBaseUrl + "customers/\(getCurrentCustomerId())/addresses/\(addressId)/default.json"
     }
     

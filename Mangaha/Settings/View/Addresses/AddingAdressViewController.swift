@@ -6,10 +6,10 @@
 //
 
 import UIKit
-
+import CoreLocation
 class AddingAdressViewController: UIViewController {
     let customOrange = UIColor(hex: 0xFF7466)
-   
+   let locationManger = CLLocationManager()
     @IBOutlet var phoneTF: UITextField!
     @IBOutlet var warningLabel: UILabel!
     @IBOutlet var streetTF: UITextField!
@@ -27,6 +27,11 @@ class AddingAdressViewController: UIViewController {
         setupNavigationBar()
     }
 
+    @IBAction func GPSpressed(_ sender: UIButton) {
+        locationManger.requestWhenInUseAuthorization()
+        setupLocationRequests()
+        locationManger.requestLocation()
+    }
     func setupNavigationBar(){
         navigationItem.setHidesBackButton(true, animated: true)
         let doneBarBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneNewAdress))
@@ -70,5 +75,41 @@ class AddingAdressViewController: UIViewController {
     }
     @objc func backToAdressesList(){
         navigationController?.popViewController(animated: true)
+    }
+    
+    
+}
+extension AddingAdressViewController:CLLocationManagerDelegate{
+    
+    func setupLocationRequests(){
+         locationManger.delegate = self
+            locationManger.desiredAccuracy = kCLLocationAccuracyBest
+            //locationManger.startUpdatingLocation()
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.last else{return}
+        let geocoder = CLGeocoder()
+                geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+                    if let error = error {
+                        print("Reverse geocoding failed with error: \(error.localizedDescription)")
+                        return
+                    }
+                    guard let placemark = placemarks?.first else { return }
+                    
+                    if let c = placemark.country{
+                        self.countryTF.text = c
+                    }
+                    if let city = placemark.locality{
+                        self.cityTF.text = city
+                    }
+                    if let street = placemark.subLocality{
+                        self.streetTF.text = street
+                    }
+                   // self.loadin.isHidden = true
+                  
+                }
+            }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

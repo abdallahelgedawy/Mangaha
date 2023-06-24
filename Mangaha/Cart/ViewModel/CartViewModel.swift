@@ -37,14 +37,17 @@ class CartViewModel{
     func getCartSubTotal()->String{
         var subTotal = 0.0
         for product in cartProducts {
-            print("price" + (product.price ?? "00") )
-            subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 0.0) 
+            if Constant.isEuroCurrency(){
+                subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 0.0)
+            }else{
+                subTotal += (Double(product.price ?? "0.0") ?? 0.0) * (Double(product.quantity ?? "0.0") ?? 0.0) * 34.0
+            }
         }
         
         return Constant.isEuroCurrency() ? String(subTotal) + "    EUR" : String(subTotal) + "    EGP"
     }
     func inistintiateProductDetVM(_ index : Int)->ProductDetailsViewModel{
-        var productDetVM = ProductDetailsViewModel()
+        let productDetVM = ProductDetailsViewModel()
         productDetVM.productId = Int(cartProducts[index].id ?? "")
         return productDetVM
     }

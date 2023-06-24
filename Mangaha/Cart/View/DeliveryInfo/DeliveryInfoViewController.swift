@@ -55,6 +55,7 @@ class DeliveryInfoViewController: UIViewController {
                 let paymentVC = PaymentViewController(nibName: "PaymentViewController", bundle: nil)
                 let address = CustomerAddress(id: 0, customerID: 0, firstName:"", address1: streetTf?.text ?? "", city: cityTf.text ?? "", phone: phoneNumberTf?.text ?? "", name: "", countryName: countryTF?.text ?? "", country: countryTF?.text ?? "", customerAddressDefault: false)
                 deliveryVM.defaultAddress = address
+                warningLabel.isHidden = true
                 paymentVC.paymentVM = deliveryVM.inistintiatePaymentViewModel()
                 navigationController?.pushViewController(paymentVC, animated: true)
             }
@@ -66,6 +67,7 @@ class DeliveryInfoViewController: UIViewController {
     }
     
     @IBAction func setAddressByGPS(_ sender: UIButton) {
+        loadin.isHidden = false
         locationManger.requestWhenInUseAuthorization()
         setupLocationRequests()
         locationManger.requestLocation()
@@ -131,10 +133,10 @@ extension DeliveryInfoViewController:CLLocationManagerDelegate{
                     if let city = placemark.locality{
                         self.cityTf.text = city
                     }
-                    if let street = placemark.subThoroughfare{
+                    if let street = placemark.subLocality{
                         self.streetTf.text = street
                     }
-                    
+                    self.loadin.isHidden = true
                   
                 }
             }
