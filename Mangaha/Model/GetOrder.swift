@@ -13,30 +13,30 @@ struct GetOrder : Decodable {
 struct OrderResult : Decodable {
     
         let id: Int
-        let createdAt: Date
-        let currentSubtotalPrice: String
-        let currentTotalDiscounts: String
-        let currentTotalPrice: String
-        let currentTotalTax: String
+        let created_at: Date
+        let current_subtotal_price: String
+        let current_total_discounts: String
+        let current_total_price: String
+        let current_total_tax: String
         let email: String
         let name: String
-        let number, orderNumber: Int
-        let orderStatusURL: String
+        let number, order_number: Int
+        let order_status_url: String
         let phone, poNumber: String
-        let processedAt: Date
+        let processed_at: Date
         let reference: String
-        let referringSite: String
-        let sourceIdentifier, sourceName: String
-        let subtotalPrice: String
+        let referring_site: String
+        let source_identifier, source_name: String
+        let subtotal_price: String
         let tags: String
-        let taxesIncluded, test: Bool
-        let token, totalDiscounts: String
-        let totalLineItemsPrice: String
-        let totalOutstanding, totalPrice: String
-        let totalTax: String
-        let totalTipReceived: String
-        let totalWeight: Int
-        let updatedAt: Date
+        let taxes_included, test: Bool
+        let token, total_discounts: String
+        let total_line_items_price: String
+        let total_outstanding, total_price: String
+        let total_tax: String
+        let total_tip_received: String
+        let total_weight: Int
+        let updated_at: Date
         let customer: Customer
-        let lineItems: [LineItem]
+        let line_items: [LineItem]
 }

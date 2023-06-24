@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Reachability
 
 class HomeViewController: UIViewController , UISearchBarDelegate {
     let dataBase = DataBase()
@@ -33,7 +34,6 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         networkIndecator.center = view.center
         networkIndecator.startAnimating()
         view.addSubview(networkIndecator)
-        
         brandsLabel.changeCornerRadius(corner: [.bottomLeft,.topRight], radius: 30)
         brandsLabel.layer.masksToBounds = true
         
@@ -47,23 +47,35 @@ class HomeViewController: UIViewController , UISearchBarDelegate {
         brandsCollection.dataSource = self
         
         startTimer()
-        
-        homeViewModel?.getBrands(baseUrl: Constant.allBrands())
-        homeViewModel?.bindBrandsListToHomeVC = {
-            DispatchQueue.main.async {
-                self.brandsCollection.reloadData()
-                self.networkIndecator.stopAnimating()
+            homeViewModel?.getBrands(baseUrl: Constant.allBrands())
+            homeViewModel?.bindBrandsListToHomeVC = {
+                DispatchQueue.main.async {
+                    self.brandsCollection.reloadData()
+                    self.networkIndecator.stopAnimating()
+                }
             }
-        }
+            
+            
+            pageControl.numberOfPages = adsImages.count
+            
+            //homeViewModel?.createUserDefualtsCoupons()
         
-        
-        pageControl.numberOfPages = adsImages.count
-      
-        //homeViewModel?.createUserDefualtsCoupons()
     }
     override func viewWillAppear(_ animated: Bool) {
-        setupNavigationController()
-        navigationItem.setHidesBackButton(true, animated: true)
+  
+            homeViewModel?.getBrands(baseUrl: Constant.allBrands())
+            homeViewModel?.bindBrandsListToHomeVC = {
+                DispatchQueue.main.async {
+                    self.brandsCollection.reloadData()
+                    self.networkIndecator.stopAnimating()
+                }
+            }
+            
+            
+            setupNavigationController()
+            navigationItem.setHidesBackButton(true, animated: true)
+            
+        
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {

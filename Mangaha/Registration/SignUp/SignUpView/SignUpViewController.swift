@@ -48,9 +48,22 @@ class SignUpViewController: UIViewController , UITextFieldDelegate {
         if lengthRequirement && formatRequirement {
             if(password == confirmPassword){
                 var customer = userCustomer(customer: Customer(firstName: username, email: email, verifiedEmail: true, password: password, passwordConfirmation: password, sendEmailWelcome: true))
-                signUpViewModel.registerUser(customer: customer)
-                let loginVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
-                self.navigationController?.pushViewController(loginVc, animated: true)
+                signUpViewModel.registerUser(customer: customer) { message  , error in
+                    if message == "error"{
+                            let alertController = UIAlertController(title: "Account Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                            }
+                           
+                            alertController.addAction(okAction)
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                    }
+                    else {
+                        let loginVc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+                        self.navigationController?.pushViewController(loginVc, animated: true)
+                    }
+                }
+                
                 
             }else{
                 print("Not matching Password")

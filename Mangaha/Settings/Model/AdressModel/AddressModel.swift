@@ -11,10 +11,10 @@ struct AddressModel: Codable {
 }
 
 struct Address: Codable {
-    let address1:String
-    let city:String
-    let  phone :String
-    let countryName , country :String
+    var address1:String?
+    var city:String?
+    var  phone :String?
+    var countryName , country :String?
     enum CodingKeys: String, CodingKey {
         case address1
         case city
